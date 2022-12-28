@@ -27,10 +27,12 @@ const imgAPI = {
     'https://via.placeholder.com/640x447/fdffc4/757575',
     'https://via.placeholder.com/1280x851/c4ffd7/757575',
     'https://via.placeholder.com/640x425/c4cdff/757575',
-  ],
-  profile: [
     'https://via.placeholder.com/1080x497/ffb2ad/757575',
     'https://via.placeholder.com/270x345/dedede/757575',
+  ],
+  profile: [
+    '/images/profile/1-l.png',
+    '/images/profile/2.png',
     '/images/profile/pc.jpg',
     'https://via.placeholder.com/400x400/4e5467/FFFFFF',
     'https://via.placeholder.com/400x266/2f5ef3/FFFFFF',

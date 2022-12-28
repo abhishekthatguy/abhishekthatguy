@@ -54,7 +54,10 @@ function BannerNav(props) {
                 </Typography>
                 <Typography variant="h2" className={text.title}>
                   {t('common:profile-landing.banner_me')}
-                  &nbsp;Jena, UI Designer
+                  &nbsp;Abhishek,
+                </Typography>
+                 <Typography variant="h4" className={text.title2}>
+                  Sr. software developer,
                 </Typography>
                 <Hidden smDown>
                   <Typography variant="h5" className={text.subtitle2}>

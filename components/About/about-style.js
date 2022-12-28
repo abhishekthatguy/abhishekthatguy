@@ -88,7 +88,7 @@ const aboutStyles = makeStyles(theme => ({
   },
   photo: {
     position: 'relative',
-    marginTop: -140,
+    marginTop: -105,
     background: theme.palette.common.white,
     width: 270,
     height: 345,

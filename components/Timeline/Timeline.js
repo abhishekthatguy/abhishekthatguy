@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import Grid from '@material-ui/core/Grid';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Hidden from '@material-ui/core/Hidden';
-import ScrollAnimation from 'react-scroll-animation-wrapper';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Typography from '@material-ui/core/Typography';
-import { withTranslation } from '~/i18n';
-import { useText } from '~/theme/common';
-import useStyles from './timeline-style';
-import brand from '~/public/text/brand';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTheme } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import Hidden from "@material-ui/core/Hidden";
+import ScrollAnimation from "react-scroll-animation-wrapper";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import Typography from "@material-ui/core/Typography";
+import { withTranslation } from "~/i18n";
+import { useText } from "~/theme/common";
+import useStyles from "./timeline-style";
+import brand from "~/public/text/brand";
+import specialization from "~/public/text/skills-expertise";
 
 function Timeline(props) {
   const classes = useStyles();
@@ -21,12 +23,14 @@ function Timeline(props) {
 
   const { t } = props;
 
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
   const [play, setPlay] = useState(false);
 
-  const handlePlay = visible => {
+  const handlePlay = (visible) => {
     if (visible.inViewport) {
-      setTimeout(() => { setPlay(true); }, 500);
+      setTimeout(() => {
+        setPlay(true);
+      }, 500);
     }
   };
 
@@ -44,11 +48,14 @@ function Timeline(props) {
           <Grid item container spacing={3} md={12} lg={10}>
             <Grid item md={5} sm={6} xs={12}>
               <div className={classes.history}>
-                <Typography variant="h5" className={clsx(classes.title, text.subtitle)}>
-                  {t('common:profile-landing.timeline_experience')}
+                <Typography
+                  variant="h5"
+                  className={clsx(classes.title, text.subtitle)}
+                >
+                  {t("common:profile-landing.timeline_experience")}
                 </Typography>
                 <ul>
-                  <li>
+                  {/* <li>
                     <ScrollAnimation
                       animateOnce
                       animateIn="fadeInLeftShort"
@@ -61,7 +68,7 @@ function Timeline(props) {
                         <Typography className={classes.time}>2015 - Present</Typography>
                       </div>
                     </ScrollAnimation>
-                  </li>
+                  </li> */}
                   <li>
                     <ScrollAnimation
                       animateOnce
@@ -71,9 +78,17 @@ function Timeline(props) {
                       duration={0.3}
                     >
                       <div>
-                        <Typography variant="h3" gutterBottom className={text.subtitle2}>Senior UI/UX Designer</Typography>
-                        <Typography gutterBottom>at Third Company</Typography>
-                        <Typography className={classes.time}>2013 - 2015</Typography>
+                        <Typography
+                          variant="h3"
+                          gutterBottom
+                          className={text.subtitle2}
+                        >
+                          Senior Software Developer
+                        </Typography>
+                        <Typography gutterBottom>at Policy Advisor</Typography>
+                        <Typography className={classes.time}>
+                          Nov 2021 - present
+                        </Typography>
                       </div>
                     </ScrollAnimation>
                   </li>
@@ -86,9 +101,17 @@ function Timeline(props) {
                       duration={0.3}
                     >
                       <div>
-                        <Typography variant="h3" gutterBottom className={text.subtitle2}>UI/UX Designer</Typography>
-                        <Typography gutterBottom>at Second Company</Typography>
-                        <Typography className={classes.time}>2012 - 2013</Typography>
+                        <Typography
+                          variant="h3"
+                          gutterBottom
+                          className={text.subtitle2}
+                        >
+                          Front End Developer
+                        </Typography>
+                        <Typography gutterBottom>at Accenture </Typography>
+                        <Typography className={classes.time}>
+                          Feb 2021 - Oct 2021
+                        </Typography>
                       </div>
                     </ScrollAnimation>
                   </li>
@@ -101,19 +124,73 @@ function Timeline(props) {
                       duration={0.3}
                     >
                       <div>
-                        <Typography variant="h3" gutterBottom className={text.subtitle2}>UI/UX Designer</Typography>
-                        <Typography gutterBottom>at First Company</Typography>
-                        <Typography className={classes.time}>2009 - 2011</Typography>
+                        <Typography
+                          variant="h3"
+                          gutterBottom
+                          className={text.subtitle2}
+                        >
+                          Web Developer
+                        </Typography>
+                        <Typography gutterBottom>
+                          at NKC Projects Pvt Ltd{" "}
+                        </Typography>
+                        <Typography className={classes.time}>
+                          Dec 2017 -Jan 2020
+                        </Typography>
                       </div>
                     </ScrollAnimation>
                   </li>
                 </ul>
               </div>
+              {specialization &&
+                specialization.technicalSkills.map((item) => (
+                  <div className={classes.history}>
+                    <Typography
+                      variant="h5"
+                      className={clsx(classes.title, text.subtitle)}
+                    >
+                      {/* {t('common:profile-landing.timeline_experience')} */}
+                      {item.title}
+                    </Typography>
+                    <ul>
+                      {item &&
+                        item.skills.map((skill) => (
+                          <li>
+                            <ScrollAnimation
+                              animateOnce
+                              animateIn="fadeInLeftShort"
+                              delay={200}
+                              duration={0.3}
+                            >
+                              <div>
+                                <Typography
+                                  variant="h3"
+                                  gutterBottom
+                                  className={text.subtitle2}
+                                >
+                                  {skill.title}
+                                </Typography>
+                                {skill &&
+                                  skill.skillList.map((x) => (
+                                    <>
+                                      <Button key={x.name}>{x.title} </Button>
+                                    </>
+                                  ))}
+                              </div>
+                            </ScrollAnimation>
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                ))}
             </Grid>
             <Grid item sm={6} xs={12}>
               <div className={classes.progress}>
-                <Typography variant="h5" className={clsx(classes.title, text.subtitle)}>
-                  {t('common:profile-landing.timeline_skill')}
+                <Typography
+                  variant="h5"
+                  className={clsx(classes.title, text.subtitle)}
+                >
+                  {t("common:profile-landing.timeline_skill")}
                 </Typography>
                 <ScrollAnimation
                   animateOnce
@@ -126,70 +203,128 @@ function Timeline(props) {
                     <li>
                       <div className={classes.textIcon}>
                         <i className="ion-ios-color-wand" />
-                        <Typography variant="h6" className={text.subtitle2}>UI Interface Design</Typography>
-                      </div>
-                      <LinearProgress
-                        variant="determinate"
-                        value={play ? 80 : 0}
-                        classes={{
-                          root: classes.progressBg,
-                          bar: classes.bar
-                        }}
-                      />
-                    </li>
-                    <li>
-                      <div className={classes.textIcon}>
-                        <i className="ion-logo-dribbble" />
-                        <Typography variant="h6" className={text.subtitle2}>Icon Design</Typography>
-                      </div>
-                      <LinearProgress
-                        variant="determinate"
-                        value={play ? 70 : 0}
-                        classes={{
-                          root: classes.progressBg,
-                          bar: classes.bar
-                        }}
-                      />
-                    </li>
-                    <li>
-                      <div className={classes.textIcon}>
-                        <i className="ion-ios-globe" />
-                        <Typography variant="h6" className={text.subtitle2}>HTML Prototyping</Typography>
-                      </div>
-                      <LinearProgress
-                        variant="determinate"
-                        value={play ? 60 : 0}
-                        classes={{
-                          root: classes.progressBg,
-                          bar: classes.bar
-                        }}
-                      />
-                    </li>
-                    <li>
-                      <div className={classes.textIcon}>
-                        <i className="ion-ios-camera" />
-                        <Typography variant="h6" className={text.subtitle2}>Photo Editing</Typography>
+                        <Typography variant="h6" className={text.subtitle2}>
+                          ERP Development
+                        </Typography>
                       </div>
                       <LinearProgress
                         variant="determinate"
                         value={play ? 90 : 0}
                         classes={{
                           root: classes.progressBg,
-                          bar: classes.bar
+                          bar: classes.bar,
                         }}
                       />
                     </li>
                     <li>
                       <div className={classes.textIcon}>
-                        <i className="ion-ios-snow" />
-                        <Typography variant="h6" className={text.subtitle2}>Graphic Illustrations</Typography>
+                        <i className="ion-ios-color-wand" />
+                        <Typography variant="h6" className={text.subtitle2}>
+                          Responisive User Interface Development
+                        </Typography>
+                      </div>
+                      <LinearProgress
+                        variant="determinate"
+                        value={play ? 90 : 0}
+                        classes={{
+                          root: classes.progressBg,
+                          bar: classes.bar,
+                        }}
+                      />
+                    </li>
+                    <li>
+                      <div className={classes.textIcon}>
+                        <i className="ion-logo-dribbble" />
+                        <Typography variant="h6" className={text.subtitle2}>
+                          Software Architecture Design
+                        </Typography>
                       </div>
                       <LinearProgress
                         variant="determinate"
                         value={play ? 80 : 0}
                         classes={{
                           root: classes.progressBg,
-                          bar: classes.bar
+                          bar: classes.bar,
+                        }}
+                      />
+                    </li>
+                    <li>
+                      <div className={classes.textIcon}>
+                        <i className="ion-ios-globe" />
+                        <Typography variant="h6" className={text.subtitle2}>
+                          Prototype and Wire Frame Development
+                        </Typography>
+                      </div>
+                      <LinearProgress
+                        variant="determinate"
+                        value={play ? 60 : 0}
+                        classes={{
+                          root: classes.progressBg,
+                          bar: classes.bar,
+                        }}
+                      />
+                    </li>
+                    <li>
+                      <div className={classes.textIcon}>
+                        <i className="ion-ios-camera" />
+                        <Typography variant="h6" className={text.subtitle2}>
+                          Cross Browser Compatabile Website Development{" "}
+                        </Typography>
+                      </div>
+                      <LinearProgress
+                        variant="determinate"
+                        value={play ? 90 : 0}
+                        classes={{
+                          root: classes.progressBg,
+                          bar: classes.bar,
+                        }}
+                      />
+                    </li>
+                    <li>
+                      <div className={classes.textIcon}>
+                        <i className="ion-ios-snow" />
+                        <Typography variant="h6" className={text.subtitle2}>
+                          Cloud Based Application Deployment & Maintainance
+                        </Typography>
+                      </div>
+                      <LinearProgress
+                        variant="determinate"
+                        value={play ? 80 : 0}
+                        classes={{
+                          root: classes.progressBg,
+                          bar: classes.bar,
+                        }}
+                      />
+                    </li>
+                    <li>
+                      <div className={classes.textIcon}>
+                        <i className="ion-ios-snow" />
+                        <Typography variant="h6" className={text.subtitle2}>
+                          CI & CD Integration
+                        </Typography>
+                      </div>
+                      <LinearProgress
+                        variant="determinate"
+                        value={play ? 80 : 0}
+                        classes={{
+                          root: classes.progressBg,
+                          bar: classes.bar,
+                        }}
+                      />
+                    </li>
+                    <li>
+                      <div className={classes.textIcon}>
+                        <i className="ion-ios-snow" />
+                        <Typography variant="h6" className={text.subtitle2}>
+                          3rd party tools & libraries integration
+                        </Typography>
+                      </div>
+                      <LinearProgress
+                        variant="determinate"
+                        value={play ? 80 : 0}
+                        classes={{
+                          root: classes.progressBg,
+                          bar: classes.bar,
                         }}
                       />
                     </li>
@@ -205,7 +340,7 @@ function Timeline(props) {
 }
 
 Timeline.propTypes = {
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
 };
 
-export default withTranslation(['profile-landing'])(Timeline);
+export default withTranslation(["profile-landing"])(Timeline);
