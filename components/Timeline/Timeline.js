@@ -144,7 +144,7 @@ function Timeline(props) {
               </div>
               {specialization &&
                 specialization.technicalSkills.map((item) => (
-                  <div className={classes.history}>
+                  <div className={classes.history} key={`item-${item.title}`}>
                     <Typography
                       variant="h5"
                       className={clsx(classes.title, text.subtitle)}
@@ -155,7 +155,7 @@ function Timeline(props) {
                     <ul>
                       {item &&
                         item.skills.map((skill) => (
-                          <li>
+                          <li key={`item-${item.title}`}>
                             <ScrollAnimation
                               animateOnce
                               animateIn="fadeInLeftShort"
@@ -172,9 +172,7 @@ function Timeline(props) {
                                 </Typography>
                                 {skill &&
                                   skill.skillList.map((x) => (
-                                    <>
-                                      <Button key={x.name}>{x.title} </Button>
-                                    </>
+                                    <Button key={x.name}>{x.title} </Button>
                                   ))}
                               </div>
                             </ScrollAnimation>

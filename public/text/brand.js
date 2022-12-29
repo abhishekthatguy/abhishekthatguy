@@ -12,7 +12,7 @@ const brand = {
     linkedin: '',
     github: '',
     youtube: '',
-    blog:'',
+    blog: '',
     desc: 'My name is Abhishek Singh I am a 26-year-old Sr. Software Developer based in Pune (India). ',
     prefix: 'Luxiren',
     footerText: 'Abhishek Singh website @ 2022',

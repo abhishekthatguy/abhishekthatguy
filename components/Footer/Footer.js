@@ -1,18 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Container from '@material-ui/core/Container';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import Divider from '@material-ui/core/Divider';
-import { withTranslation } from '~/i18n';
-import logo from '~/public/images/profile-logo.svg';
-import brand from '~/public/text/brand';
-import { useText } from '~/theme/common';
-import useStyles from './footer-style';
-import ContactForm from '../Contact/Form';
+import React from "react";
+import PropTypes from "prop-types";
+import Container from "@material-ui/core/Container";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTheme } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import Divider from "@material-ui/core/Divider";
+import Image from "next/image";
+import { withTranslation } from "~/i18n";
+import logo from "~/public/images/profile-logo.svg";
+import brand from "~/public/text/brand";
+import { useText } from "~/theme/common";
+import useStyles from "./footer-style";
+import ContactForm from "../Contact/Form";
 
 function Footer(props) {
   const classes = useStyles();
@@ -20,15 +21,19 @@ function Footer(props) {
   const { t } = props;
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <div className={classes.root}>
       <Container maxWidth="lg" component="footer">
-        <Grid container spacing={6} direction={isMobile ? 'column-reverse' : 'row'}>
+        <Grid
+          container
+          spacing={6}
+          direction={isMobile ? "column-reverse" : "row"}
+        >
           <Grid item xs={12} md={5}>
             <div className={classes.logo}>
-              <img src={logo} alt="logo" />
+              <Image src={logo} alt="logo" />
               <Typography variant="h3" className={text.title}>
                 {brand.profile.name}
               </Typography>
@@ -37,40 +42,67 @@ function Footer(props) {
               </Typography>
             </div>
             <div className={classes.socmed}>
-              <IconButton aria-label="Delete" className={classes.margin} size="small">
+              <IconButton
+                aria-label="Delete"
+                className={classes.margin}
+                size="small"
+              >
                 <i className="ion-logo-facebook" />
               </IconButton>
-              <IconButton aria-label="Delete" className={classes.margin} size="small">
+              <IconButton
+                aria-label="Delete"
+                className={classes.margin}
+                size="small"
+              >
                 <i className="ion-logo-instagram" />
               </IconButton>
-              <IconButton aria-label="Delete" className={classes.margin} size="small">
+              <IconButton
+                aria-label="Delete"
+                className={classes.margin}
+                size="small"
+              >
                 <i className="ion-logo-twitter" />
               </IconButton>
-              <IconButton aria-label="Delete" className={classes.margin} size="small">
+              <IconButton
+                aria-label="Delete"
+                className={classes.margin}
+                size="small"
+              >
                 <i className="ion-logo-linkedin" />
               </IconButton>
-               <IconButton aria-label="Delete" className={classes.margin} size="small">
+              <IconButton
+                aria-label="Delete"
+                className={classes.margin}
+                size="small"
+              >
                 <i className="ion-logo-youtube" />
               </IconButton>
-               <IconButton aria-label="Delete" className={classes.margin} size="small">
+              <IconButton
+                aria-label="Delete"
+                className={classes.margin}
+                size="small"
+              >
                 <i className="ion-logo-github" />
               </IconButton>
-               <IconButton aria-label="Delete" className={classes.margin} size="small">
+              <IconButton
+                aria-label="Delete"
+                className={classes.margin}
+                size="small"
+              >
                 <i className="ion-logo-skype" />
               </IconButton>
-
             </div>
             <div className={classes.contact}>
               <Typography className={text.paragraph}>
-                {t('common:profile-landing.footer_contact')}
+                {t("common:profile-landing.footer_contact")}
                 <br />
-                 {brand.profile.mobile}
+                {brand.profile.mobile}
               </Typography>
               <Divider className={classes.divider} />
               <Typography className={text.paragraph}>
-                {t('common:profile-landing.footer_hello')}
+                {t("common:profile-landing.footer_hello")}
                 <br />
-                 {brand.profile.mail}
+                {brand.profile.mail}
               </Typography>
             </div>
           </Grid>
@@ -84,7 +116,7 @@ function Footer(props) {
 }
 
 Footer.propTypes = {
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
 };
 
-export default withTranslation(['profile-landing'])(Footer);
+export default withTranslation(["profile-landing"])(Footer);

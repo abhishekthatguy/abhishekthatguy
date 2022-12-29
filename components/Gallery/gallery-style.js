@@ -1,38 +1,38 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
-const galleryStyles = makeStyles(theme => ({
+const galleryStyles = makeStyles((theme) => ({
   root: {
-    position: 'relative'
+    position: "relative",
   },
   loaded: {},
   selected: {},
   filter: {
-    position: 'relative',
+    position: "relative",
     zIndex: 20,
-    display: 'flex',
-    overflow: 'auto',
-    width: '100%',
+    display: "flex",
+    overflow: "auto",
+    width: "100%",
     padding: theme.spacing(3, 0),
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: 0
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: 0,
     },
-    '& > button': {
-      background: 'transparent',
+    "& > button": {
+      background: "transparent",
       borderRadius: 40,
       marginRight: theme.spacing(),
-      border: '1px solid rgba(0, 0, 0, 0.87)',
+      border: "1px solid rgba(0, 0, 0, 0.87)",
       color: theme.palette.text.primary,
-      whiteSpace: 'nowrap',
+      whiteSpace: "nowrap",
       minWidth: 100,
-      [theme.breakpoints.up('sm')]: {
+      [theme.breakpoints.up("sm")]: {
         padding: theme.spacing(1, 4),
         marginRight: theme.spacing(3),
       },
-      '&$selected': {
-        background: 'rgba(0, 0, 0, 0.87)',
-        color: theme.palette.common.white
-      }
-    }
+      "&$selected": {
+        background: "rgba(0, 0, 0, 0.87)",
+        color: theme.palette.common.white,
+      },
+    },
   },
   massonry: {
     columns: `${3} 300px`,
@@ -40,19 +40,19 @@ const galleryStyles = makeStyles(theme => ({
   },
   item: {
     marginBottom: theme.spacing(4),
-    breakInside: 'avoid',
+    breakInside: "avoid",
     opacity: 0,
-    position: 'relative',
+    position: "relative",
     paddingTop: 20,
-    '&$loaded': {
-      transition: 'all 0.3s ease-out',
+    "&$loaded": {
+      transition: "all 0.3s ease-out",
       opacity: 1,
       paddingTop: 0,
-    }
+    },
   },
   itemCarousel: {
-    position: 'relative'
-  }
+    position: "relative",
+  },
 }));
 
 export default galleryStyles;

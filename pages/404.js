@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import Head from "next/head";
 import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 import Error from "../components/Error";
 import brand from "../public/text/brand";
 import { withTranslation } from "../i18n";
@@ -22,13 +22,11 @@ function ErrorPage(props) {
   if (errorCode) {
     return (
       <Fragment>
-        <Head>
-          <title>
-            {brand.profile.name}
-            &nbsp; -&nbsp;
-            {errorCode}
-          </title>
-        </Head>
+        <Typography component="title">
+          {brand.profile.name}
+          &nbsp; -&nbsp;
+          {errorCode}
+        </Typography>
         <div className={classes.dedicatedPage}>
           <Error errorCode={errorCode} text={t("common:404")} />
         </div>
@@ -55,9 +53,5 @@ ErrorPage.defaultProps = {
   errorCode: "400",
   stars: 0,
 };
-
-ErrorPage.getInitialProps = async () => ({
-  namespacesRequired: ["common"],
-});
 
 export default withTranslation(["common"])(ErrorPage);

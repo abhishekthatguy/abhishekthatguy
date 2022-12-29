@@ -1,30 +1,30 @@
-const withImages = require('next-images');
-const ESLintPlugin = require('eslint-webpack-plugin');
+const withImages = require("next-images");
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 module.exports = withImages({
   TrailingSlash: true,
   images: {
-    disableStaticImages: true
+    disableStaticImages: true,
   },
-  exportPathMap: function() {
+  exportPathMap() {
     return {
-      '/': { page: '/' },
-      '/blank-page': { page: '/blank-page' },
+      "/": { page: "/" },
+      "/blank-page": { page: "/blank-page" },
     };
   },
   publicRuntimeConfig: {
-    localeSubpaths: typeof process.env.LOCALE_SUBPATHS === 'string'
-      ? process.env.LOCALE_SUBPATHS
-      : 'none',
+    localeSubpaths:
+      typeof process.env.LOCALE_SUBPATHS === "string"
+        ? process.env.LOCALE_SUBPATHS
+        : "none",
   },
   webpack: (config, options) => {
-    cssModules: true,
     config.plugins.push(
-      //      new ESLintPlugin({
-      //        exclude: ['node_modules']
-      //      })
+      new ESLintPlugin({
+        exclude: ["node_modules"],
+      })
     );
-    config.node = {}
+    config.node = {};
     return config;
   },
 });

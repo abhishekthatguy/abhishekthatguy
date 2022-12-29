@@ -1,75 +1,75 @@
-import React, { useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
-import Carousel from 'react-slick';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import clsx from 'clsx';
-import { withTranslation } from '~/i18n';
-import { useText } from '~/theme/common';
-import Title from '../Title';
-import IconTextCard from '../Cards/IconText';
-import useStyle from './services-style';
+import React, { useRef, useEffect } from "react";
+import PropTypes from "prop-types";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTheme } from "@material-ui/core/styles";
+import Carousel from "react-slick";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import clsx from "clsx";
+import { withTranslation } from "~/i18n";
+import { useText } from "~/theme/common";
+import Title from "../Title";
+import IconTextCard from "../Cards/IconText";
+import useStyle from "./services-style";
 
 const services = [
   {
-    icon: 'ion-ios-color-wand',
-    name: 'UI Interface Development',
-    desc: 'Pellentesque ac  vel blandit nulla.'
+    icon: "ion-ios-color-wand",
+    name: "UI Interface Development",
+    desc: "Pellentesque ac  vel blandit nulla.",
   },
   {
-    icon: 'ion-logo-dribbble',
-    name: 'ERP development ',
-    desc: 'Pellentesque ac  vel blandit nulla.'
-  },
-   {
-    icon: 'ion-logo-dribbble',
-    name: 'Progressive Web Aapplication development',
-    desc: 'Pellentesque ac  vel blandit nulla.'
+    icon: "ion-logo-dribbble",
+    name: "ERP development ",
+    desc: "Pellentesque ac  vel blandit nulla.",
   },
   {
-    icon: 'ion-ios-globe',
-    name: 'Architecture design & Prototyping',
-    desc: 'Pellentesque ac  vel blandit nulla.'
+    icon: "ion-logo-dribbble",
+    name: "Progressive Web Aapplication development",
+    desc: "Pellentesque ac  vel blandit nulla.",
   },
   {
-    icon: 'ion-ios-camera',
-    name: 'Website development',
-    desc: 'Pellentesque ac  vel blandit nulla.'
+    icon: "ion-ios-globe",
+    name: "Architecture design & Prototyping",
+    desc: "Pellentesque ac  vel blandit nulla.",
   },
   {
-    icon: 'ion-ios-snow',
-    name: 'UI refactoring and project enhancement',
-    desc: 'Pellentesque ac  vel blandit nulla.'
+    icon: "ion-ios-camera",
+    name: "Website development",
+    desc: "Pellentesque ac  vel blandit nulla.",
   },
   {
-    icon: 'ion-ios-snow',
-    name: 'Sales force integration setup',
-    desc: 'Pellentesque ac  vel blandit nulla.'
+    icon: "ion-ios-snow",
+    name: "UI refactoring and project enhancement",
+    desc: "Pellentesque ac  vel blandit nulla.",
   },
   {
-    icon: 'ion-ios-snow',
-    name: 'Blog setup & development',
-    desc: 'Pellentesque ac  vel blandit nulla.'
+    icon: "ion-ios-snow",
+    name: "Sales force integration setup",
+    desc: "Pellentesque ac  vel blandit nulla.",
   },
   {
-    icon: 'ion-ios-snow',
-    name: 'CI/Cd setup & Automation',
-    desc: 'Pellentesque ac  vel blandit nulla.'
+    icon: "ion-ios-snow",
+    name: "Blog setup & development",
+    desc: "Pellentesque ac  vel blandit nulla.",
   },
-   {
-    icon: 'ion-ios-snow',
-    name: 'CMS & 3rd party tools integration',
-    desc: 'Pellentesque ac  vel blandit nulla.'
-  }
+  {
+    icon: "ion-ios-snow",
+    name: "CI/Cd setup & Automation",
+    desc: "Pellentesque ac  vel blandit nulla.",
+  },
+  {
+    icon: "ion-ios-snow",
+    name: "CMS & 3rd party tools integration",
+    desc: "Pellentesque ac  vel blandit nulla.",
+  },
 ];
 
 function Services(props) {
   const classes = useStyle();
   const text = useText();
   const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
   const { t } = props;
 
   const slider = useRef(null);
@@ -82,29 +82,33 @@ function Services(props) {
     arrows: false,
     variableWidth: true,
     pauseOnHover: true,
-    responsive: [{
-      breakpoint: 960,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 1
-      }
-    }, {
-      breakpoint: 800,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1
-      }
-    }, {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }]
+    responsive: [
+      {
+        breakpoint: 960,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   useEffect(() => {
-    if (theme.direction === 'rtl') {
+    if (theme.direction === "rtl") {
       const lastSlide = Math.floor(services.length - 2);
       slider.current.slickGoTo(lastSlide);
     }
@@ -114,12 +118,10 @@ function Services(props) {
     <div className={classes.root}>
       <div className={classes.floatingTitle}>
         <Title>
-          <strong>
-            {t('common:profile-landing.services_title')}
-          </strong>
+          <strong>{t("common:profile-landing.services_title")}</strong>
         </Title>
         <Typography className={text.paragraph}>
-          {t('common:profile-landing.services_desc')}
+          {t("common:profile-landing.services_desc")}
         </Typography>
       </div>
       <div className={classes.sliderWrap}>
@@ -164,7 +166,7 @@ function Services(props) {
 }
 
 Services.propTypes = {
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
 };
 
-export default withTranslation(['profile-landing'])(Services);
+export default withTranslation(["profile-landing"])(Services);

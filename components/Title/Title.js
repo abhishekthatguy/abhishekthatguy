@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import Typography from '@material-ui/core/Typography';
-import useStyles from './title-style';
+import React from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import Typography from "@material-ui/core/Typography";
+import useStyles from "./title-style";
 
 export default function Title(props) {
   const classes = useStyles();
@@ -10,9 +10,7 @@ export default function Title(props) {
 
   return (
     <div className={clsx(classes.title, dark && classes.dark)}>
-      <Typography variant="h4">
-        {children}
-      </Typography>
+      <Typography variant="h4">{children}</Typography>
     </div>
   );
 }
