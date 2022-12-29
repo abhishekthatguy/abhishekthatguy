@@ -14,67 +14,81 @@ import useStyle from './gallery-style';
 
 const portfolio = [
   {
-    img: imgAPI.profile[4],
-    title: 'Aenean facilisis vitae purus',
-    link: 'linkofthisitem.com',
-    size: 'short',
-    category: 'cat1'
-  },
-  {
-    img: imgAPI.profile[3],
-    title: 'Aenean facilisis vitae purus',
-    link: 'linkofthisitem.com',
-    size: 'long',
-    category: 'cat2'
-  },
-  {
-    img: imgAPI.profile[5],
-    title: 'Aenean facilisis vitae purus',
-    link: 'linkofthisitem.com',
-    size: 'short',
-    category: 'cat3'
-  },
-  {
-    img: imgAPI.profile[6],
-    title: 'Aenean facilisis vitae purus',
-    link: 'linkofthisitem.com',
+    img: imgAPI.portfolio[6],
+    title: 'Policyadvisor Broker Flow',
+    link: 'https://www.policyadvisor.com/app/select-product/.com',
     size: 'long',
     category: 'cat1'
   },
   {
-    img: imgAPI.profile[8],
-    title: 'Aenean facilisis vitae purus',
-    link: 'linkofthisitem.com',
-    size: 'short',
-    category: 'cat2'
+    img: imgAPI.portfolio[0],
+    title: 'Policy advisor website refactoring and enhancement',
+    link: 'https://policyadvisor.com/.com',
+    size: 'long',
+    category: 'website-development'
   },
   {
-    img: imgAPI.profile[7],
-    title: 'Aenean facilisis vitae purus',
-    link: 'linkofthisitem.com',
+    img: imgAPI.portfolio[4],
+    title: 'Nygss- Automation suit',
+    link: 'https://nyggs.com/nyggs/',
     size: 'short',
-    category: 'cat3'
+    category: 'erp'
   },
   {
-    img: imgAPI.profile[3],
-    title: 'Aenean facilisis vitae purus',
-    link: 'linkofthisitem.com',
+    img: imgAPI.portfolio[7],
+    title: 'Roost',
+    link: '#',
     size: 'short',
     category: 'cat1'
   },
   {
-    img: imgAPI.profile[5],
-    title: 'Aenean facilisis vitae purus',
-    link: 'linkofthisitem.com',
+    img: imgAPI.portfolio[2],
+    title: 'Watsoo express website enhancement',
+    link: 'https://www.watsooexpress.com/.com',
     size: 'short',
-    category: 'cat2'
+    category: 'website-development'
   },
   {
-    img: imgAPI.profile[4],
-    title: 'Aenean facilisis vitae purus',
+    img: imgAPI.portfolio[5],
+    title: 'Nygss Store',
+    link: 'https://store.nkcproject.com/',
+    size: 'short',
+    category: 'erp'
+  },
+  {
+    img: imgAPI.portfolio[10],
+    title: 'Nygss Billing',
     link: 'linkofthisitem.com',
+    size: 'short',
+    category: 'erp'
+  },
+  {
+    img: imgAPI.portfolio[9],
+    title: 'Myorderbooks',
+    link: 'myorderbooks.com',
+    size: 'short',
+    category: 'cat1'
+  },
+  {
+    img: imgAPI.portfolio[3],
+    title: 'GS1 website development project ',
+    link: 'https://globalsoft1.com/.com',
+    size: 'short',
+    category: 'website-development'
+  },
+  {
+    img: imgAPI.portfolio[1],
+    title: 'Accredo,UI refactoring and enhancement',
+    link: 'https://www.accredo.com/.com',
     size: 'long',
-    category: 'cat2'
+    category: 'website-development'
+  },
+  {
+    img: imgAPI.portfolio[8],
+    title: 'Nygss HRMS',
+    link: 'linkofthisitem.com',
+    size: 'short',
+    category: 'erp'
   },
 ];
 
@@ -133,32 +147,32 @@ function Gallery(props) {
             onClick={() => filterChildren('cat1')}
             className={filter === 'cat1' ? classes.selected : ''}
           >
-            Category 1
+            Web Application & software
           </Button>
           <Button
-            onClick={() => filterChildren('cat2')}
-            className={filter === 'cat2' ? classes.selected : ''}
+            onClick={() => filterChildren('website-development')}
+            className={filter === 'website-development' ? classes.selected : ''}
           >
-            Category 2
+            Website enhancement & development
           </Button>
           <Button
-            onClick={() => filterChildren('cat3')}
-            className={filter === 'cat3' ? classes.selected : ''}
+            onClick={() => filterChildren('erp')}
+            className={filter === 'erp' ? classes.selected : ''}
           >
-            Category 3
+            ERP and Automation suite development
           </Button>
           <Button
             onClick={() => filterChildren('cat4')}
             className={filter === 'cat4' ? classes.selected : ''}
           >
-            Category 4
+            Blog & tools integration
           </Button>
-          <Button
+          {/* <Button
             onClick={() => filterChildren('cat5')}
             className={filter === 'cat5' ? classes.selected : ''}
           >
             Category 5
-          </Button>
+          </Button> */}
         </div>
         <Hidden xsDown>
           <div className={classes.massonry}>

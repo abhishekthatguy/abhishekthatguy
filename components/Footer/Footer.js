@@ -49,18 +49,28 @@ function Footer(props) {
               <IconButton aria-label="Delete" className={classes.margin} size="small">
                 <i className="ion-logo-linkedin" />
               </IconButton>
+               <IconButton aria-label="Delete" className={classes.margin} size="small">
+                <i className="ion-logo-youtube" />
+              </IconButton>
+               <IconButton aria-label="Delete" className={classes.margin} size="small">
+                <i className="ion-logo-github" />
+              </IconButton>
+               <IconButton aria-label="Delete" className={classes.margin} size="small">
+                <i className="ion-logo-skype" />
+              </IconButton>
+
             </div>
             <div className={classes.contact}>
               <Typography className={text.paragraph}>
                 {t('common:profile-landing.footer_contact')}
                 <br />
-                +12 345 678 90
+                 {brand.profile.mobile}
               </Typography>
               <Divider className={classes.divider} />
               <Typography className={text.paragraph}>
                 {t('common:profile-landing.footer_hello')}
                 <br />
-                jenadoe.skype
+                 {brand.profile.mail}
               </Typography>
             </div>
           </Grid>

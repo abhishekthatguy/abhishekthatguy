@@ -112,9 +112,9 @@ function Landing(props) {
             <div className={classes.bottomDeco}>
               <Decoration />
             </div>
-            <section id="blog" className={classes.spaceTopShort}>
+            {/* <section id="blog" className={classes.spaceTopShort}>
               <Blog />
-            </section>
+            </section> */}
             <section id="contact" className={classes.spaceTop}>
               <Footer />
             </section>

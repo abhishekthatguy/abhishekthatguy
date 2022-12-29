@@ -15,27 +15,52 @@ import useStyle from './services-style';
 const services = [
   {
     icon: 'ion-ios-color-wand',
-    name: 'UI Interface Design',
+    name: 'UI Interface Development',
     desc: 'Pellentesque ac  vel blandit nulla.'
   },
   {
     icon: 'ion-logo-dribbble',
-    name: 'Icon Design',
+    name: 'ERP development ',
+    desc: 'Pellentesque ac  vel blandit nulla.'
+  },
+   {
+    icon: 'ion-logo-dribbble',
+    name: 'Progressive Web Aapplication development',
     desc: 'Pellentesque ac  vel blandit nulla.'
   },
   {
     icon: 'ion-ios-globe',
-    name: 'HTML Prototyping',
+    name: 'Architecture design & Prototyping',
     desc: 'Pellentesque ac  vel blandit nulla.'
   },
   {
     icon: 'ion-ios-camera',
-    name: 'Photo Editing',
+    name: 'Website development',
     desc: 'Pellentesque ac  vel blandit nulla.'
   },
   {
     icon: 'ion-ios-snow',
-    name: 'Graphic Illustrations',
+    name: 'UI refactoring and project enhancement',
+    desc: 'Pellentesque ac  vel blandit nulla.'
+  },
+  {
+    icon: 'ion-ios-snow',
+    name: 'Sales force integration setup',
+    desc: 'Pellentesque ac  vel blandit nulla.'
+  },
+  {
+    icon: 'ion-ios-snow',
+    name: 'Blog setup & development',
+    desc: 'Pellentesque ac  vel blandit nulla.'
+  },
+  {
+    icon: 'ion-ios-snow',
+    name: 'CI/Cd setup & Automation',
+    desc: 'Pellentesque ac  vel blandit nulla.'
+  },
+   {
+    icon: 'ion-ios-snow',
+    name: 'CMS & 3rd party tools integration',
     desc: 'Pellentesque ac  vel blandit nulla.'
   }
 ];

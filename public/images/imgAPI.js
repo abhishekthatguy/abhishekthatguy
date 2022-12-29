@@ -41,7 +41,19 @@ const imgAPI = {
     'https://via.placeholder.com/400x400/b79136/FFFFFF',
     'https://via.placeholder.com/400x266/94fbf7/757575',
     '/images/profile/pc-dark.jpg',
-  ]
+  ],
+    portfolio: [
+      '/images/portfolio/PA-website.png',
+      '/images/portfolio/accredo-website.png',
+      '/images/portfolio/watsoo-website.png',
+      '/images/portfolio/gs1-website.png',
+      '/images/portfolio/nyggs-website.png',
+      '/images/portfolio/store.png',
+      '/images/portfolio/PA-broker.png',
+      '/images/portfolio/roost.png',
+      '/images/portfolio/hrms.png',
+        '/images/portfolio/ob.png',
+  ],
 };
 
 export default imgAPI;
