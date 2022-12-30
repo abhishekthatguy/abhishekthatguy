@@ -3,7 +3,8 @@
     "eslint-config-airbnb",
     "plugin:flowtype/recommended",
     "plugin:react/recommended",
-    "prettier"
+    "airbnb",
+    "plugin:prettier/recommended"
   ],
   "parserOptions": {
     "ecmaVersion": 2018,
@@ -16,7 +17,8 @@
   "env": {
     "browser": true,
     "node": true,
-    "mocha": true
+    "mocha": true,
+    "es6": true
   },
   "parser": "@babel/eslint-parser",
   "rules": {
@@ -40,6 +42,7 @@
     "import/newline-after-import": 0,
     "import/extensions": 0,
     "prefer-template": 0,
+    "prettier/prettier": ["error", { "singleQuote": true }],
     "max-len": 0,
     "react/prefer-stateless-function": 0,
     "react/forbid-prop-types": 0,
@@ -54,20 +57,6 @@
     "jsx-a11y/anchor-is-valid": 0,
     "react/default-props-match-prop-types": 0,
     "arrow-parens": 0,
-    "no-unused-vars": 0,
-    "react/jsx-one-expression-per-line": 0,
-    "react/jsx-wrap-multilines": 0,
-    "singleQuote": 0,
-    "strict": 0,
-    "no-param-reassign": 0,
-    "brace-style": [2, "1tbs", { "allowSingleLine": true }],
-    "quotes": [
-      1,
-      "double",
-      {
-        "avoidEscape": true
-      }
-    ],
     "jsx-a11y/label-has-for": [
       2,
       {
@@ -76,16 +65,15 @@
         }
       }
     ],
-    "linebreak-style": 0
+    "linebreak-style": 0,
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-wrap-multilines": "off"
   },
-  "plugins": ["react", "import", "flowtype"],
+  "plugins": ["react", "import", "flowtype", "eslint-plugin-prettier"],
   "settings": {
     "import/parser": "babel-eslint",
     "import/resolve": {
       "moduleDirectory": ["node_modules", "src"]
-    },
-    "react": {
-      "version": "latest"
     }
   },
   "globals": {

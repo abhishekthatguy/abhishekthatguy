@@ -1,27 +1,27 @@
-import { makeStyles } from "@material-ui/core/styles";
-import imgAPI from "~/public/images/imgAPI";
+import { makeStyles } from '@material-ui/core/styles';
+import imgAPI from '~/public/images/imgAPI';
 
 const timelineStyles = makeStyles((theme) => ({
   root: {
-    position: "relative",
-    [theme.breakpoints.up("sm")]: {
+    position: 'relative',
+    [theme.breakpoints.up('sm')]: {
       background: `url(${
-        theme.palette.type === "dark" ? imgAPI.profile[9] : imgAPI.profile[2]
+        theme.palette.type === 'dark' ? imgAPI.profile[9] : imgAPI.profile[2]
       }) no-repeat bottom right`,
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down('md')]: {
       paddingTop: theme.spacing(5),
     },
   },
   nameDeco: {
     margin: 0,
     padding: 0,
-    transform: "rotate(-90deg)",
-    transformOrigin: "top center",
+    transform: 'rotate(-90deg)',
+    transformOrigin: 'top center',
     letterSpacing: -10,
-    position: "absolute",
+    position: 'absolute',
     fontWeight: theme.typography.fontWeightRegular,
-    textTransform: "uppercase",
+    textTransform: 'uppercase',
     color: theme.palette.common.black,
     top: theme.spacing(30),
     left: theme.spacing(-5),
@@ -30,76 +30,76 @@ const timelineStyles = makeStyles((theme) => ({
     zIndex: 20,
   },
   title: {
-    textTransform: "uppercase",
+    textTransform: 'uppercase',
     marginBottom: theme.spacing(3),
     color:
-      theme.palette.type === "dark"
+      theme.palette.type === 'dark'
         ? theme.palette.secondary.light
         : theme.palette.secondary.dark,
   },
   time: {},
   history: {
-    borderLeft: "2px solid",
-    position: "relative",
+    borderLeft: '2px solid',
+    position: 'relative',
     padding: theme.spacing(5, 4, 10),
     borderImageSource: `linear-gradient(190deg, ${theme.palette.secondary.main}, ${theme.palette.primary.main})`,
     borderImageSlice: 1,
     borderTop: 0,
     borderRight: 0,
     borderBottom: 0,
-    [theme.breakpoints.down("md")]: {
-      border: "none",
+    [theme.breakpoints.down('md')]: {
+      border: 'none',
     },
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down('xs')]: {
       padding: theme.spacing(0, 0, 5),
     },
-    "& h3": {
+    '& h3': {
       fontWeight: theme.typography.fontWeightBold,
-      [theme.breakpoints.down("xs")]: {
-        width: "100%",
+      [theme.breakpoints.down('xs')]: {
+        width: '100%',
       },
     },
-    "& p": {
-      [theme.breakpoints.down("xs")]: {
-        display: "inline-block",
+    '& p': {
+      [theme.breakpoints.down('xs')]: {
+        display: 'inline-block',
         marginRight: theme.spacing(2),
       },
     },
-    "& ul": {
+    '& ul': {
       margin: 0,
       padding: 0,
-      "& li": {
-        listStyle: "none",
+      '& li': {
+        listStyle: 'none',
         marginBottom: theme.spacing(5),
-        position: "relative",
-        [theme.breakpoints.down("sm")]: {
+        position: 'relative',
+        [theme.breakpoints.down('sm')]: {
           paddingLeft: 45,
         },
-        "&:last-child": {
+        '&:last-child': {
           marginBottom: 0,
         },
-        "&:before": {
+        '&:before': {
           content: '""',
-          borderRadius: "50%",
+          borderRadius: '50%',
           width: 24,
           height: 24,
           background:
-            theme.palette.type === "dark"
+            theme.palette.type === 'dark'
               ? theme.palette.primary.main
               : theme.palette.primary.dark,
           border: `4px solid ${
-            theme.palette.type === "dark"
+            theme.palette.type === 'dark'
               ? theme.palette.background.default
               : theme.palette.background.paper
           }`,
-          position: "absolute",
+          position: 'absolute',
           left: -45,
           top: 4,
-          [theme.breakpoints.down("sm")]: {
+          [theme.breakpoints.down('sm')]: {
             left: 0,
           },
         },
-        "& $time": {
+        '& $time': {
           color: theme.palette.text.secondary,
         },
       },
@@ -107,19 +107,19 @@ const timelineStyles = makeStyles((theme) => ({
   },
   progress: {
     paddingBottom: theme.spacing(8),
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(5, 0, 10),
     },
-    "& ul": {
+    '& ul': {
       margin: 0,
       padding: 0,
-      "& li": {
-        listStyle: "none",
+      '& li': {
+        listStyle: 'none',
         marginBottom: theme.spacing(5),
-        "&:last-child": {
+        '&:last-child': {
           marginBottom: 0,
         },
-        "& h6": {
+        '& h6': {
           fontWeight: theme.typography.fontWeightBold,
         },
       },
@@ -127,13 +127,13 @@ const timelineStyles = makeStyles((theme) => ({
   },
   textIcon: {
     marginBottom: theme.spacing(1),
-    display: "flex",
-    alignItems: "center",
-    "& i": {
+    display: 'flex',
+    alignItems: 'center',
+    '& i': {
       color: theme.palette.text.secondary,
       fontSize: 28,
     },
-    "& h6": {
+    '& h6': {
       marginLeft: theme.spacing(),
     },
   },

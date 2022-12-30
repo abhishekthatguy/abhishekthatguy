@@ -1,15 +1,15 @@
-import React, { Fragment } from "react";
-import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Error from "../components/Error";
-import brand from "../public/text/brand";
-import { withTranslation } from "../i18n";
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Error from '../components/Error';
+import brand from '../public/text/brand';
+import { withTranslation } from '../i18n';
 
 const useStyles = makeStyles((theme) => ({
   dedicatedPage: {
     background:
-      theme.palette.type === "dark"
+      theme.palette.type === 'dark'
         ? theme.palette.background.default
         : theme.palette.background.paper,
   },
@@ -28,7 +28,7 @@ function ErrorPage(props) {
           {errorCode}
         </Typography>
         <div className={classes.dedicatedPage}>
-          <Error errorCode={errorCode} text={t("common:404")} />
+          <Error errorCode={errorCode} text={t('common:404')} />
         </div>
       </Fragment>
     );
@@ -36,7 +36,7 @@ function ErrorPage(props) {
 
   return (
     <div className={classes.dedicatedPage}>
-      {t("description")}
+      {t('description')}
       Next stars:&nbsp;
       {stars}
     </div>
@@ -50,8 +50,8 @@ ErrorPage.propTypes = {
 };
 
 ErrorPage.defaultProps = {
-  errorCode: "400",
+  errorCode: '400',
   stars: 0,
 };
 
-export default withTranslation(["common"])(ErrorPage);
+export default withTranslation(['common'])(ErrorPage);

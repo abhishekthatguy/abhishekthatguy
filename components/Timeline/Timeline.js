@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import clsx from "clsx";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { useTheme } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import Hidden from "@material-ui/core/Hidden";
-import ScrollAnimation from "react-scroll-animation-wrapper";
-import LinearProgress from "@material-ui/core/LinearProgress";
-import Typography from "@material-ui/core/Typography";
-import { withTranslation } from "~/i18n";
-import { useText } from "~/theme/common";
-import useStyles from "./timeline-style";
-import brand from "~/public/text/brand";
-import specialization from "~/public/text/skills-expertise";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import clsx from 'clsx';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import Hidden from '@material-ui/core/Hidden';
+import ScrollAnimation from 'react-scroll-animation-wrapper';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Typography from '@material-ui/core/Typography';
+import { withTranslation } from '~/i18n';
+import { useText } from '~/theme/common';
+import useStyles from './timeline-style';
+import brand from '~/public/text/brand';
+import specialization from '~/public/text/skills-expertise';
 
 function Timeline(props) {
   const classes = useStyles();
@@ -23,7 +23,7 @@ function Timeline(props) {
 
   const { t } = props;
 
-  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
   const [play, setPlay] = useState(false);
 
   const handlePlay = (visible) => {
@@ -52,7 +52,7 @@ function Timeline(props) {
                   variant="h5"
                   className={clsx(classes.title, text.subtitle)}
                 >
-                  {t("common:profile-landing.timeline_experience")}
+                  {t('common:profile-landing.timeline_experience')}
                 </Typography>
                 <ul>
                   {/* <li>
@@ -132,7 +132,7 @@ function Timeline(props) {
                           Web Developer
                         </Typography>
                         <Typography gutterBottom>
-                          at NKC Projects Pvt Ltd{" "}
+                          at NKC Projects Pvt Ltd{' '}
                         </Typography>
                         <Typography className={classes.time}>
                           Dec 2017 -Jan 2020
@@ -188,7 +188,7 @@ function Timeline(props) {
                   variant="h5"
                   className={clsx(classes.title, text.subtitle)}
                 >
-                  {t("common:profile-landing.timeline_skill")}
+                  {t('common:profile-landing.timeline_skill')}
                 </Typography>
                 <ScrollAnimation
                   animateOnce
@@ -266,7 +266,7 @@ function Timeline(props) {
                       <div className={classes.textIcon}>
                         <i className="ion-ios-camera" />
                         <Typography variant="h6" className={text.subtitle2}>
-                          Cross Browser Compatabile Website Development{" "}
+                          Cross Browser Compatabile Website Development{' '}
                         </Typography>
                       </div>
                       <LinearProgress
@@ -341,4 +341,4 @@ Timeline.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default withTranslation(["profile-landing"])(Timeline);
+export default withTranslation(['profile-landing'])(Timeline);

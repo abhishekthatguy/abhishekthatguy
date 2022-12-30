@@ -22,8 +22,9 @@ const brand = {
     img: '/images/profile-logo.png',
     avatar: imgAPI.profile[1],
     cover: imgAPI.profile[0],
-    notifMsg: 'Interested in working with me? Get in touch and I’d be happy to talk to you.'
-  }
+    notifMsg:
+      'Interested in working with me? Get in touch and I’d be happy to talk to you.',
+  },
 };
 
 export default brand;

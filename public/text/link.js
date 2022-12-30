@@ -1,7 +1,7 @@
 const link = {
   profile: {
-    home: '/'
-  }
+    home: '/',
+  },
 };
 
 export default link;

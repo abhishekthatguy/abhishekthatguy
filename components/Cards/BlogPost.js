@@ -1,12 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
-import Image from "next/image";
-import { withTranslation } from "~/i18n";
-import { useText } from "~/theme/common";
-import useStyles from "./cards-style";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import { withTranslation } from '~/i18n';
+import { useText } from '~/theme/common';
+import useStyles from './cards-style';
 
 function BlogPost(props) {
   const classes = useStyles();
@@ -16,7 +15,7 @@ function BlogPost(props) {
   return (
     <Paper className={classes.post}>
       <figure>
-        <Image src={img} alt="thumb" />
+        <img src={img} alt="thumb" />
       </figure>
       <div className={classes.text}>
         <Typography variant="h5" className={text.subtitle2}>
@@ -35,7 +34,7 @@ function BlogPost(props) {
           text: classes.textReadmore,
         }}
       >
-        {t("common:profile-landing.read_more")}
+        {t('common:profile-landing.read_more')}
       </Button>
     </Paper>
   );
@@ -48,4 +47,4 @@ BlogPost.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default withTranslation(["profile-landing"])(BlogPost);
+export default withTranslation(['profile-landing'])(BlogPost);

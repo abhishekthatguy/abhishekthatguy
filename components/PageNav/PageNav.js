@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import clsx from "clsx";
-import AnchorLink from "react-anchor-link-smooth-scroll";
-import Scrollspy from "react-scrollspy";
-import Fab from "@material-ui/core/Fab";
-import ArrowIcon from "@material-ui/icons/ArrowUpward";
-import Tooltip from "@material-ui/core/Tooltip";
-import { withTranslation } from "~/i18n";
-import navMenu from "../SideNavigation/menu";
-import useStyles from "./pagenav-style";
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import clsx from 'clsx';
+import AnchorLink from 'react-anchor-link-smooth-scroll';
+import Scrollspy from 'react-scrollspy';
+import Fab from '@material-ui/core/Fab';
+import ArrowIcon from '@material-ui/icons/ArrowUpward';
+import Tooltip from '@material-ui/core/Tooltip';
+import { withTranslation } from '~/i18n';
+import navMenu from '../SideNavigation/menu';
+import useStyles from './pagenav-style';
 
 function createData(id, name, url) {
   return {
@@ -38,18 +38,18 @@ function PageNav(props) {
     }
   };
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
     console.log();
   }, []);
   const classes = useStyles();
   const [menuList] = useState([
-    createData(1, navMenu[0], "#" + navMenu[0].replace(/ /g, "_")),
-    createData(2, navMenu[1], "#" + navMenu[1].replace(/ /g, "_")),
-    createData(3, navMenu[2], "#" + navMenu[2].replace(/ /g, "_")),
-    createData(4, navMenu[3], "#" + navMenu[3].replace(/ /g, "_")),
-    createData(4, navMenu[4], "#" + navMenu[4].replace(/ /g, "_")),
-    createData(4, navMenu[5], "#" + navMenu[5].replace(/ /g, "_")),
-    createData(4, navMenu[6], "#" + navMenu[6].replace(/ /g, "_")),
+    createData(1, navMenu[0], '#' + navMenu[0].replace(/ /g, '_')),
+    createData(2, navMenu[1], '#' + navMenu[1].replace(/ /g, '_')),
+    createData(3, navMenu[2], '#' + navMenu[2].replace(/ /g, '_')),
+    createData(4, navMenu[3], '#' + navMenu[3].replace(/ /g, '_')),
+    createData(4, navMenu[4], '#' + navMenu[4].replace(/ /g, '_')),
+    createData(4, navMenu[5], '#' + navMenu[5].replace(/ /g, '_')),
+    createData(4, navMenu[6], '#' + navMenu[6].replace(/ /g, '_')),
   ]);
   return (
     <div className={clsx(classes.pageNav, show && classes.show)}>
@@ -63,7 +63,7 @@ function PageNav(props) {
             >
               <Tooltip
                 // eslint-disable-next-line
-                title={t("common:profile-landing.header_" + item.name)}
+                title={t('common:profile-landing.header_' + item.name)}
                 placement="left"
                 classes={{
                   tooltip: classes.tooltip,
@@ -100,4 +100,4 @@ PageNav.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default withTranslation(["profile-landing"])(PageNav);
+export default withTranslation(['profile-landing'])(PageNav);

@@ -1,7 +1,7 @@
-import React from "react";
-import clsx from "clsx";
-import { Parallax, ParallaxProvider } from "react-scroll-parallax";
-import useStyles from "./parallax-style";
+import React from 'react';
+import clsx from 'clsx';
+import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
+import useStyles from './parallax-style';
 
 export default function ParallaxDeco() {
   const classes = useStyles();
@@ -26,7 +26,7 @@ export default function ParallaxDeco() {
               height={1042}
               className={clsx(
                 classes.parallaxVertical,
-                classes.parallaxTriangle
+                classes.parallaxTriangle,
               )}
             >
               <use xlinkHref="/images/decoration/triangle-deco.svg#triangle" />

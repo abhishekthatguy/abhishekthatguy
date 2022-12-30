@@ -1,8 +1,7 @@
-import React from "react";
-import Document, { Html, Main, NextScript } from "next/document";
-import Image from "next/image";
-import { ServerStyleSheets } from "@material-ui/core/styles";
-import HeadComponent from "../components/head";
+import React from 'react';
+import Document, { Html, Main, NextScript } from 'next/document';
+import { ServerStyleSheets } from '@material-ui/core/styles';
+import HeadComponent from '../components/head';
 
 class MyDocument extends Document {
   render() {
@@ -13,19 +12,19 @@ class MyDocument extends Document {
           <div
             id="preloader"
             style={{
-              position: "fixed",
+              position: 'fixed',
               zIndex: 10000,
-              background: "#fafafa",
-              width: "100%",
-              height: "100%",
+              background: '#fafafa',
+              width: '100%',
+              height: '100%',
             }}
           >
-            <Image
+            <img
               style={{
                 opacity: 0.5,
-                position: "fixed",
-                top: "calc(50% - 50px)",
-                left: "calc(50% - 50px)",
+                position: 'fixed',
+                top: 'calc(50% - 50px)',
+                left: 'calc(50% - 50px)',
               }}
               src="/images/loading.gif"
               alt="loading"
@@ -76,11 +75,11 @@ MyDocument.getInitialProps = async (ctx) => {
 
   return {
     ...initialProps,
-    namespacesRequired: ["profile-landing", "common"],
+    namespacesRequired: ['profile-landing', 'common'],
     // Styles fragment is rendered after the app and page rendering finish.
     styles: [
       ...React.Children.toArray(initialProps.styles),
-      process.env.NODE_ENV === "development" && sheets.getStyleElement(),
+      process.env.NODE_ENV === 'development' && sheets.getStyleElement(),
     ],
   };
 };

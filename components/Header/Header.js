@@ -1,22 +1,21 @@
-import React, { useState, useEffect, Fragment } from "react";
-import PropTypes from "prop-types";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { useTheme } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Link from "next/link";
-import clsx from "clsx";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import Container from "@material-ui/core/Container";
-import Image from "next/image";
-import AnchorLink from "react-anchor-link-smooth-scroll";
-import Fade from "@material-ui/core/Fade";
-import { withTranslation } from "~/i18n";
-import logo from "~/public/images/profile-logo.svg";
-import routeLink from "~/public/text/link";
-import useStyles from "./header-style";
-import Settings from "../Settings";
-import navMenu from "../SideNavigation/menu";
+import React, { useState, useEffect, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Link from 'next/link';
+import clsx from 'clsx';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import Container from '@material-ui/core/Container';
+import AnchorLink from 'react-anchor-link-smooth-scroll';
+import Fade from '@material-ui/core/Fade';
+import { withTranslation } from '~/i18n';
+import logo from '~/public/images/profile-logo.svg';
+import routeLink from '~/public/text/link';
+import useStyles from './header-style';
+import Settings from '../Settings';
+import navMenu from '../SideNavigation/menu';
 
 let counter = 0;
 function createData(name, url, offset) {
@@ -31,8 +30,8 @@ function createData(name, url, offset) {
 function Header(props) {
   // Theme breakpoints
   const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const [fixed, setFixed] = useState(false);
   let flagFixed = false;
@@ -47,19 +46,19 @@ function Header(props) {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
   }, []);
 
   const classes = useStyles();
   const { onToggleDark, onToggleDir, invert, t } = props;
   const [menuList] = useState([
-    createData(navMenu[0], "#" + navMenu[0]),
-    createData(navMenu[1], "#" + navMenu[1], -100),
-    createData(navMenu[2], "#" + navMenu[2]),
-    createData(navMenu[3], "#" + navMenu[3], -40),
-    createData(navMenu[4], "#" + navMenu[4], -40),
-    createData(navMenu[5], "#" + navMenu[5], -40),
-    createData(navMenu[6], "#" + navMenu[6]),
+    createData(navMenu[0], '#' + navMenu[0]),
+    createData(navMenu[1], '#' + navMenu[1], -100),
+    createData(navMenu[2], '#' + navMenu[2]),
+    createData(navMenu[3], '#' + navMenu[3], -40),
+    createData(navMenu[4], '#' + navMenu[4], -40),
+    createData(navMenu[5], '#' + navMenu[5], -40),
+    createData(navMenu[6], '#' + navMenu[6]),
   ]);
   const [openDrawer, setOpenDrawer] = useState(false);
   const handleOpenDrawer = () => {
@@ -78,8 +77,8 @@ function Header(props) {
         id="header"
         className={clsx(
           classes.header,
-          invert || fixed || isMobile ? classes.fixed : "",
-          openDrawer && classes.openDrawer
+          invert || fixed || isMobile ? classes.fixed : '',
+          openDrawer && classes.openDrawer,
         )}
       >
         <Container fixed={isDesktop}>
@@ -88,25 +87,25 @@ function Header(props) {
               <IconButton
                 onClick={handleOpenDrawer}
                 className={clsx(
-                  "hamburger hamburger--squeeze",
+                  'hamburger hamburger--squeeze',
                   classes.mobileMenu,
-                  openDrawer && "is-active"
+                  openDrawer && 'is-active',
                 )}
               >
                 <span className="hamburger-box">
-                  <span className={clsx(classes.bar, "hamburger-inner")} />
+                  <span className={clsx(classes.bar, 'hamburger-inner')} />
                 </span>
               </IconButton>
               <div className={classes.logo}>
                 {invert ? (
                   <Link href={routeLink.profile.home}>
                     <a>
-                      <Image src={logo} alt="logo" />
+                      <img src={logo} alt="logo" />
                     </a>
                   </Link>
                 ) : (
                   <AnchorLink href="#home">
-                    <Image src={logo} alt="logo" />
+                    <img src={logo} alt="logo" />
                   </AnchorLink>
                 )}
               </div>
@@ -127,12 +126,12 @@ function Header(props) {
                 {menuList.map((item, index) => (
                   <li
                     key={item.id.toString()}
-                    style={{ animationDuration: index * 0.15 + "s" }}
+                    style={{ animationDuration: index * 0.15 + 's' }}
                   >
                     {invert ? (
                       // eslint-disable-next-line
-                      <Button href={"/" + item.url}>
-                        {t("common:profile-landing.header_" + item.name)}
+                      <Button href={'/' + item.url}>
+                        {t('common:profile-landing.header_' + item.name)}
                       </Button>
                     ) : (
                       // eslint-disable-next-line
@@ -142,7 +141,7 @@ function Header(props) {
                         offset={item.offset || 0}
                         href={item.url}
                       >
-                        {t("common:profile-landing.header_" + item.name)}
+                        {t('common:profile-landing.header_' + item.name)}
                       </Button>
                     )}
                   </li>
@@ -167,4 +166,4 @@ Header.defaultProps = {
   invert: false,
 };
 
-export default withTranslation(["profile-landing"])(Header);
+export default withTranslation(['profile-landing'])(Header);

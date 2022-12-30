@@ -1,11 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import clsx from "clsx";
-import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
-import Paper from "@material-ui/core/Paper";
-import { useText } from "~/theme/common";
-import useStyles from "./cards-style";
+import React from 'react';
+import PropTypes from 'prop-types';
+import clsx from 'clsx';
+import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
+import Paper from '@material-ui/core/Paper';
+import { useText } from '~/theme/common';
+import useStyles from './cards-style';
 
 export default function ImageThumb(props) {
   const classes = useStyles();
@@ -14,9 +14,9 @@ export default function ImageThumb(props) {
 
   const setSize = (sizePaper) => {
     switch (sizePaper) {
-      case "short":
+      case 'short':
         return classes.short;
-      case "long":
+      case 'long':
         return classes.long;
       default:
         return classes.medium;

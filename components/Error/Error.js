@@ -1,11 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import { withTranslation } from "~/i18n";
-import useStyles from "./error-style";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import { withTranslation } from '~/i18n';
+import useStyles from './error-style';
 
 function Error(props) {
   const classes = useStyles();
@@ -24,14 +24,14 @@ function Error(props) {
           <Grid item md={6} xs={12}>
             <div className={classes.text}>
               <Typography variant="h4">{text}</Typography>
-              <Typography>{t("common:404_subtitle")}</Typography>
+              <Typography>{t('common:404_subtitle')}</Typography>
               <Button
                 variant="contained"
                 color="primary"
                 href="/"
                 className={classes.button}
               >
-                {t("common:back")}
+                {t('common:back')}
               </Button>
             </div>
           </Grid>
@@ -48,8 +48,8 @@ Error.propTypes = {
 };
 
 Error.defaultProps = {
-  errCode: "404",
-  text: "",
+  errCode: '404',
+  text: '',
 };
 
-export default withTranslation(["common"])(Error);
+export default withTranslation(['common'])(Error);

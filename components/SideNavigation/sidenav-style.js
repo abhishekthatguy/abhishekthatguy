@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 
 const sideNavStyles = makeStyles((theme) => ({
   navigation: {},
@@ -7,9 +7,9 @@ const sideNavStyles = makeStyles((theme) => ({
   bar: {},
   mobileMenu: {
     marginRight: theme.spacing(),
-    "& $bar": {
+    '& $bar': {
       backgroundColor: theme.palette.text.secondary,
-      "&:after, &:before": {
+      '&:after, &:before': {
         backgroundColor: theme.palette.text.secondary,
       },
     },
@@ -20,56 +20,56 @@ const sideNavStyles = makeStyles((theme) => ({
     padding: theme.spacing(10, 2, 4),
   },
   logo: {
-    display: "block",
+    display: 'block',
     margin: theme.spacing(3, 0, 1),
-    position: "relative",
+    position: 'relative',
     padding: theme.spacing(0, 2),
-    "& img": {
+    '& img': {
       height: theme.spacing(10),
     },
   },
   text: {
-    "& span": {
+    '& span': {
       fontSize: 18,
-      textTransform: "Capitalize",
+      textTransform: 'Capitalize',
       fontWeight: theme.typography.fontWeightBold,
     },
   },
   link: {},
   active: {},
   menu: {
-    "& ul": {
+    '& ul': {
       padding: 0,
       margin: 0,
     },
-    "& $link": {
+    '& $link': {
       margin: theme.spacing(2, 0),
       paddingTop: 0,
       paddingBottom: 0,
-      background: "none !important",
-      "&:before": {
+      background: 'none !important',
+      '&:before': {
         content: '""',
-        position: "absolute",
+        position: 'absolute',
         left: theme.spacing(-2),
         top: 5,
         opacity: 0.2,
         background: `linear-gradient(120deg, ${theme.palette.secondary.main}, ${theme.palette.primary.main})`,
-        height: "75%",
+        height: '75%',
         width: 0,
-        transition: "all 0.2s cubic-bezier(0, 0, 0.14, 0.97)",
+        transition: 'all 0.2s cubic-bezier(0, 0, 0.14, 0.97)',
       },
-      "&:hover": {
-        "&:before": {
-          width: "110%",
+      '&:hover': {
+        '&:before': {
+          width: '110%',
         },
-        "& $text": {
+        '& $text': {
           color: theme.palette.primary.main,
         },
       },
     },
-    "& $text": {
-      transition: "all 0.3s ease-in",
-      position: "relative",
+    '& $text': {
+      transition: 'all 0.3s ease-in',
+      position: 'relative',
     },
   },
 }));

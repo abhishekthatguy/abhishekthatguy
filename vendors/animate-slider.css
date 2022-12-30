@@ -10,7 +10,7 @@
 }
 
 .slide::before {
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   width: 100%;
@@ -26,7 +26,7 @@
   top: 40%;
   transform: translateY(-50%);
   z-index: 10;
-  background: url("http://svgshare.com/i/41_.svg") no-repeat center center /
+  background: url('http://svgshare.com/i/41_.svg') no-repeat center center /
     16px;
   width: 32px;
   height: 32px;
@@ -36,7 +36,7 @@
 
 .previousButton:hover,
 .nextButton:hover {
-  background: url("http://svgshare.com/i/41_.svg") no-repeat center center /
+  background: url('http://svgshare.com/i/41_.svg') no-repeat center center /
     16px;
 }
 

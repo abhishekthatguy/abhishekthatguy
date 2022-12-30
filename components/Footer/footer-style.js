@@ -1,23 +1,23 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 
 const footerStyles = makeStyles((theme) => ({
   root: {
-    textAlign: "center",
+    textAlign: 'center',
     paddingBottom: theme.spacing(5),
   },
   decoration: {},
   logo: {
     color: theme.palette.text.secondary,
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down('md')]: {
       marginTop: theme.spacing(5),
     },
-    "& img": {
-      filter: "grayscale(1) contrast(0.5) brightness(1.5)",
+    '& img': {
+      filter: 'grayscale(1) contrast(0.5) brightness(1.5)',
       width: 80,
       marginBottom: theme.spacing(2),
     },
-    "& h4": {
-      textTransform: "uppercase",
+    '& h4': {
+      textTransform: 'uppercase',
     },
   },
   margin: {
@@ -25,18 +25,18 @@ const footerStyles = makeStyles((theme) => ({
   },
   socmed: {
     margin: theme.spacing(3, 0),
-    "& button": {
+    '& button': {
       margin: theme.spacing(),
       width: 36,
       height: 36,
-      "& i": {
+      '& i': {
         color:
-          theme.palette.type === "dark"
+          theme.palette.type === 'dark'
             ? theme.palette.primary.light
             : theme.palette.primary.dark,
       },
     },
-    "& i": {
+    '& i': {
       fontSize: 24,
     },
   },
@@ -45,8 +45,8 @@ const footerStyles = makeStyles((theme) => ({
   },
   divider: {
     margin: theme.spacing(1.5),
-    border: "none",
-    background: "none",
+    border: 'none',
+    background: 'none',
   },
 }));
 

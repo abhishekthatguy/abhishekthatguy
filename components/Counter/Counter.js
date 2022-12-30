@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import CountUp from "react-countup";
-import ScrollAnimation from "react-scroll-animation-wrapper";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
-import { withTranslation } from "~/i18n";
-import { useText } from "~/theme/common";
-import useStyles from "./counter-style";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import CountUp from 'react-countup';
+import ScrollAnimation from 'react-scroll-animation-wrapper';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import { withTranslation } from '~/i18n';
+import { useText } from '~/theme/common';
+import useStyles from './counter-style';
 
 function Counter(props) {
   const classes = useStyles();
@@ -52,7 +52,7 @@ function Counter(props) {
                   </Typography>
                 </div>
                 <Typography variant="h6" className={text.subtitle2}>
-                  {t("common:profile-landing.counter_completed")}
+                  {t('common:profile-landing.counter_completed')}
                 </Typography>
               </div>
             </ScrollAnimation>
@@ -66,7 +66,7 @@ function Counter(props) {
                 </Typography>
               </div>
               <Typography variant="h6" className={text.subtitle2}>
-                {t("common:profile-landing.counter_hour")}
+                {t('common:profile-landing.counter_hour')}
               </Typography>
             </div>
           </Grid>
@@ -79,7 +79,7 @@ function Counter(props) {
                 </Typography>
               </div>
               <Typography variant="h6" className={text.subtitle2}>
-                {t("common:profile-landing.counter_happy")}
+                {t('common:profile-landing.counter_happy')}
               </Typography>
             </div>
           </Grid>
@@ -93,4 +93,4 @@ Counter.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default withTranslation(["profile-landing"])(Counter);
+export default withTranslation(['profile-landing'])(Counter);

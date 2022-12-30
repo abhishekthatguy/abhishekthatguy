@@ -10,7 +10,7 @@ const imgAPI = {
     '/images/avatars/pp_boy2.svg',
     '/images/avatars/pp_boy3.svg',
     '/images/avatars/pp_boy4.svg',
-    '/images/avatars/pp_boy5.svg'
+    '/images/avatars/pp_boy5.svg',
   ],
   photo: [
     'https://via.placeholder.com/675x900/e1ad92/fff',
@@ -42,17 +42,17 @@ const imgAPI = {
     'https://via.placeholder.com/400x266/94fbf7/757575',
     '/images/profile/pc-dark.jpg',
   ],
-    portfolio: [
-      '/images/portfolio/PA-website.png',
-      '/images/portfolio/accredo-website.png',
-      '/images/portfolio/watsoo-website.png',
-      '/images/portfolio/gs1-website.png',
-      '/images/portfolio/nyggs-website.png',
-      '/images/portfolio/store.png',
-      '/images/portfolio/PA-broker.png',
-      '/images/portfolio/roost.png',
-      '/images/portfolio/hrms.png',
-        '/images/portfolio/ob.png',
+  portfolio: [
+    '/images/portfolio/PA-website.png',
+    '/images/portfolio/accredo-website.png',
+    '/images/portfolio/watsoo-website.png',
+    '/images/portfolio/gs1-website.png',
+    '/images/portfolio/nyggs-website.png',
+    '/images/portfolio/store.png',
+    '/images/portfolio/PA-broker.png',
+    '/images/portfolio/roost.png',
+    '/images/portfolio/hrms.png',
+    '/images/portfolio/ob.png',
   ],
 };
 

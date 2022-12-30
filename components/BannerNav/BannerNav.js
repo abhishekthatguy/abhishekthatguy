@@ -1,25 +1,24 @@
-import React from "react";
-import PropTypes from "prop-types";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { useTheme } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import Hidden from "@material-ui/core/Hidden";
-import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import Image from "next/image";
-import SideNavigation from "../SideNavigation";
-import brand from "~/public/text/brand";
-import { withTranslation } from "~/i18n";
-import { useText } from "~/theme/common";
-import Settings from "../Settings";
-import useStyles from "./banner-style";
+import React from 'react';
+import PropTypes from 'prop-types';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import Hidden from '@material-ui/core/Hidden';
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import SideNavigation from '../SideNavigation';
+import brand from '~/public/text/brand';
+import { withTranslation } from '~/i18n';
+import { useText } from '~/theme/common';
+import Settings from '../Settings';
+import useStyles from './banner-style';
 
 function BannerNav(props) {
   const theme = useTheme();
   const text = useText();
   const classes = useStyles();
-  const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
   const { t } = props;
   const { onToggleDark, onToggleDir } = props;
 
@@ -36,7 +35,7 @@ function BannerNav(props) {
             <div className={classes.banner}>
               <div className={classes.cover}>
                 <div className={classes.figure}>
-                  <Image src={brand.profile.cover} alt="cover" />
+                  <img src={brand.profile.cover} alt="cover" />
                   <div className={classes.overlay} />
                 </div>
               </div>
@@ -47,10 +46,10 @@ function BannerNav(props) {
               </Hidden>
               <div className={classes.text}>
                 <Typography variant="h4" className={text.title2}>
-                  {t("common:profile-landing.banner_greeting")},
+                  {t('common:profile-landing.banner_greeting')},
                 </Typography>
                 <Typography variant="h2" className={text.title}>
-                  {t("common:profile-landing.banner_me")}
+                  {t('common:profile-landing.banner_me')}
                   &nbsp;Abhishek,
                 </Typography>
                 <Typography variant="h4" className={text.title2}>
@@ -58,7 +57,7 @@ function BannerNav(props) {
                 </Typography>
                 <Hidden smDown>
                   <Typography variant="h5" className={text.subtitle2}>
-                    {t("common:profile-landing.banner_desc")}
+                    {t('common:profile-landing.banner_desc')}
                   </Typography>
                   <div className={classes.socmed}>
                     <IconButton
@@ -106,4 +105,4 @@ BannerNav.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export default withTranslation(["profile-landing"])(BannerNav);
+export default withTranslation(['profile-landing'])(BannerNav);

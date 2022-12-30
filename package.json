@@ -81,5 +81,11 @@
   },
   "peerDependencies": {
     "postcss": "8.3.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "airbnb"
+    ]
   }
 }

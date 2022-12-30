@@ -1,33 +1,33 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Head from "next/head";
-import { makeStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Hidden from "@material-ui/core/Hidden";
-import clsx from "clsx";
-import Header from "../components/Header";
-import BannerNav from "../components/BannerNav";
-import About from "../components/About";
-import Timeline from "../components/Timeline";
-import Counter from "../components/Counter";
-import Services from "../components/Services";
-import Gallery from "../components/Gallery";
-import Testimonials from "../components/Testimonials";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Head from 'next/head';
+import { makeStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Hidden from '@material-ui/core/Hidden';
+import clsx from 'clsx';
+import Header from '../components/Header';
+import BannerNav from '../components/BannerNav';
+import About from '../components/About';
+import Timeline from '../components/Timeline';
+import Counter from '../components/Counter';
+import Services from '../components/Services';
+import Gallery from '../components/Gallery';
+import Testimonials from '../components/Testimonials';
 // import Blog from '../components/Blog';
-import Footer from "../components/Footer";
-import PageNav from "../components/PageNav";
-import Decoration from "../components/Parallax/Decoration";
-import Notification from "../components/Notification";
-import brand from "../public/text/brand";
+import Footer from '../components/Footer';
+import PageNav from '../components/PageNav';
+import Decoration from '../components/Parallax/Decoration';
+import Notification from '../components/Notification';
+import brand from '../public/text/brand';
 
 const sectionMargin = (margin) => margin * 20;
 const useStyles = makeStyles((theme) => ({
   mainWrap: {
-    position: "relative",
-    width: "100%",
-    overflow: "hidden",
+    position: 'relative',
+    width: '100%',
+    overflow: 'hidden',
     background:
-      theme.palette.type === "dark"
+      theme.palette.type === 'dark'
         ? theme.palette.background.dark
         : theme.palette.background.paper,
   },
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   spaceBottom: {
     marginBottom: sectionMargin(6),
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: sectionMargin(theme.spacing() / 2),
     },
   },
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
   spaceTop: {
     marginTop: sectionMargin(6),
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: sectionMargin(3),
     },
   },
@@ -54,18 +54,18 @@ const useStyles = makeStyles((theme) => ({
   },
   containerWrap: {
     marginTop: -40,
-    "& > section": {
-      position: "relative",
+    '& > section': {
+      position: 'relative',
     },
   },
   parallaxWrap: {
-    position: "relative",
+    position: 'relative',
   },
   bottomDeco: {
     top: -200,
-    position: "absolute",
-    width: "100%",
-    height: "calc(100% + 200px)",
+    position: 'absolute',
+    width: '100%',
+    height: 'calc(100% + 200px)',
   },
 }));
 
@@ -132,7 +132,7 @@ function Landing(props) {
 }
 
 Landing.getInitialProps = async () => ({
-  namespacesRequired: ["common", "profile-landing"],
+  namespacesRequired: ['common', 'profile-landing'],
 });
 
 Landing.propTypes = {
