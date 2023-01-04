@@ -1,10 +1,10 @@
 import React from 'react';
-import { Head } from 'next/document';
+// import { Head } from 'next/document';
 import theme from '../theme/palette';
 import brand from '../public/text/brand';
 
 const HeadComponent = () => (
-  <Head>
+  <>
     <meta charSet="utf-8" />
     {/* Use minimum-scale=1 to enable GPU rasterization */}
     <meta name="description" content={brand.profile.desc} />
@@ -129,7 +129,7 @@ const HeadComponent = () => (
     <meta property="og:image" content={brand.profile.img} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-  </Head>
+  </>
 );
 
 export default HeadComponent;

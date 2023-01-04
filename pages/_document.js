@@ -1,5 +1,5 @@
 import React from 'react';
-import Document, { Html, Main, NextScript } from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import HeadComponent from '../components/head';
 
@@ -7,7 +7,9 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang="en" dir="ltr">
-        <HeadComponent />
+        <Head>
+          <HeadComponent />
+        </Head>
         <body>
           <div
             id="preloader"

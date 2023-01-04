@@ -4,7 +4,8 @@
     "plugin:flowtype/recommended",
     "plugin:react/recommended",
     "airbnb",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:@next/next/recommended"
   ],
   "parserOptions": {
     "ecmaVersion": 2018,
