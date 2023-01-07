@@ -83,8 +83,3 @@ go to front-end
 yarn develop
 
 ```
-
-strapi root user :
-
-user: kashyapabhi688@gmail.com
-psw : Avii1994
