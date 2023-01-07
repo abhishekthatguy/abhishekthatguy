@@ -88,5 +88,8 @@
       "react-app",
       "airbnb"
     ]
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
