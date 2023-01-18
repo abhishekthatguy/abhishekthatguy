@@ -7,7 +7,9 @@ import Hidden from '@material-ui/core/Hidden';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+import Link from 'next/link';
 import SideNavigation from '../SideNavigation';
+// import SocialProfile from '../SocialProflie/SocialProfile';
 import brand from '~/public/text/brand';
 import { withTranslation } from '~/i18n';
 import { useText } from '~/theme/common';
@@ -60,35 +62,75 @@ function BannerNav(props) {
                     {t('common:profile-landing.banner_desc')}
                   </Typography>
                   <div className={classes.socmed}>
-                    <IconButton
-                      aria-label="Delete"
-                      className={classes.margin}
-                      size="small"
+                    <Link href={brand?.socialProfile?.facebook} target="_blank">
+                      <IconButton
+                        aria-label="Delete"
+                        className={classes.margin}
+                        size="small"
+                        link
+                      >
+                        <i className="ion-logo-facebook" />
+                      </IconButton>
+                    </Link>
+                    <Link
+                      href={brand?.socialProfile?.instagram}
+                      target="_blank"
                     >
-                      <i className="ion-logo-facebook" />
-                    </IconButton>
-                    <IconButton
-                      aria-label="Delete"
-                      className={classes.margin}
-                      size="small"
-                    >
-                      <i className="ion-logo-twitter" />
-                    </IconButton>
-                    <IconButton
-                      aria-label="Delete"
-                      className={classes.margin}
-                      size="small"
-                    >
-                      <i className="ion-logo-instagram" />
-                    </IconButton>
-                    <IconButton
-                      aria-label="Delete"
-                      className={classes.margin}
-                      size="small"
-                    >
-                      <i className="ion-logo-linkedin" />
-                    </IconButton>
+                      <IconButton
+                        aria-label="Delete"
+                        className={classes.margin}
+                        size="small"
+                      >
+                        <i className="ion-logo-instagram" />
+                      </IconButton>
+                    </Link>
+                    <Link href={brand?.socialProfile?.twitter} target="_blank">
+                      <IconButton
+                        aria-label="Delete"
+                        className={classes.margin}
+                        size="small"
+                      >
+                        <i className="ion-logo-twitter" />
+                      </IconButton>
+                    </Link>
+                    <Link href={brand?.socialProfile?.linkedin} target="_blank">
+                      <IconButton
+                        aria-label="Delete"
+                        className={classes.margin}
+                        size="small"
+                      >
+                        <i className="ion-logo-linkedin" />
+                      </IconButton>
+                    </Link>
+                    <Link href={brand?.socialProfile?.youtube} target="_blank">
+                      <IconButton
+                        aria-label="Delete"
+                        className={classes.margin}
+                        size="small"
+                      >
+                        <i className="ion-logo-youtube" />
+                      </IconButton>
+                    </Link>
+                    <Link href={brand?.socialProfile?.github} target="_blank">
+                      <IconButton
+                        aria-label="Delete"
+                        className={classes.margin}
+                        size="small"
+                      >
+                        <i className="ion-logo-github" />
+                      </IconButton>
+                    </Link>
+                    <Link href={brand?.socialProfile?.skype} target="_blank">
+                      <IconButton
+                        aria-label="Delete"
+                        className={classes.margin}
+                        size="small"
+                      >
+                        <i className="ion-logo-skype" />
+                      </IconButton>
+                    </Link>
                   </div>
+                  {/* <SocialProfile /> */}
                 </Hidden>
               </div>
             </div>
