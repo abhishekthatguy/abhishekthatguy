@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import * as ApiContext from './APIContext';
 function Store({ children }) {
   const [users, setUsers] = useState([]);
+  const memoizedValue = useMemo(() => [users, setUsers], [users]);
+
   useEffect(() => {
     axios
       .get('https://jsonplaceholder.typicode.com/users')
@@ -14,9 +17,11 @@ function Store({ children }) {
       });
   }, []);
   return (
-    <ApiContext.Provider value={[users, setUsers]}>
-      {children}
-    </ApiContext.Provider>
+    <ApiContext.Provider value={memoizedValue}>{children}</ApiContext.Provider>
   );
 }
+Store.propTypes = {
+  children: PropTypes.any.isRequired,
+};
+
 export default Store;
