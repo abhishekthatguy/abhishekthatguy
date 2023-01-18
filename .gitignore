@@ -27,7 +27,8 @@ build
 .vercel
 
 # Local environment variables
-.env
+*.env
+.env.local
 
 # Next.js cache
 .next

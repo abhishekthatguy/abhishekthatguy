@@ -1,0 +1,8 @@
+{
+  "google": {
+    "clientId": "945623834308-v6a1nuq91qnludsnkulpvd01fpqjgedl.apps.googleusercontent.com",
+    "clientSecret": "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",
+    "redirectUri": "https://aviibuzz.in",
+    "spreadSheetId": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQDzWX6Bj2YLjT12Vzmm-piM3rH8IDfgGipjvTO1SSV9RQXVlFeln9oEe8cE5wK-PXCrkj_RZQZq2-U/pubhtml?gid=0&single=true"
+  }
+}

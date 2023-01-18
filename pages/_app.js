@@ -13,8 +13,12 @@ import { PageTransition } from 'next-page-transitions';
 import rtl from 'jss-rtl';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import LoadingBar from 'react-top-loading-bar';
+// import axios from 'axios';
 import { i18n, appWithTranslation } from '../i18n';
 import appTheme from '../theme/appTheme';
+// import Error from './_error';
+import { ApiContext } from '../Context/APIContext';
+
 /* import css vendors */
 import '~/vendors/hamburger-menu.css';
 import 'animate.css/animate.css';
@@ -32,6 +36,9 @@ if (typeof Storage !== 'undefined') {
 
 function MyApp(props) {
   const [loading, setLoading] = useState(0);
+  // const [data, setData] = useState(null);
+  // const [dataFetching, setDataFetching] = useState(false);
+  // const [error, setError] = useState(null);
   const [theme, setTheme] = useState({
     ...appTheme('violet', themeType),
     direction: i18n.language === 'ara' ? 'rtl' : 'ltr',
@@ -61,6 +68,22 @@ function MyApp(props) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
   }, []);
+  // fetch API data
+  // const fetchData1 = async () => {
+  //   setLoading(true);
+  //   try {
+  //     const res = await axios.get('http://localhost:1337/api/profile');
+  //     console.log(res.data);
+  //     if (res && res?.data) setData(res.data);
+  //   } catch (err) {
+  //     setError(err);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+  useEffect(() => {
+    // fetchData1();
+  }, []);
 
   const toggleDarkTheme = () => {
     const newPaletteType = theme.palette.type === 'light' ? 'dark' : 'light';
@@ -88,6 +111,9 @@ function MyApp(props) {
   const muiTheme = createTheme(theme);
   const { Component, pageProps, router } = props; // eslint-disable-line
   const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
+  // if (error) {
+  //   return <Error message={error.message} />;
+  // }
   return (
     <div>
       <Head>
@@ -107,12 +133,14 @@ function MyApp(props) {
           />
           <div id="main-wrap">
             <PageTransition timeout={300} classNames="page-fade-transition">
-              <Component
-                {...pageProps}
-                onToggleDark={toggleDarkTheme}
-                onToggleDir={toggleDirection}
-                key={router.route}
-              />
+              <ApiContext.Provider value="data-context">
+                <Component
+                  {...pageProps}
+                  onToggleDark={toggleDarkTheme}
+                  onToggleDir={toggleDirection}
+                  key={router.route}
+                />
+              </ApiContext.Provider>
             </PageTransition>
           </div>
         </ThemeProvider>

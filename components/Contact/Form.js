@@ -7,20 +7,27 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Snackbar from '@material-ui/core/Snackbar';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import axios from 'axios';
 import { withTranslation } from '~/i18n';
 import { useText } from '~/theme/common';
 import useStyles from './contact-style';
+// import { fetchData } from '../../services/api';
+import Error from '../Error';
 
 function Form(props) {
   const classes = useStyles();
   const text = useText();
   const { t } = props;
+  const apiUrl = `https://content.abhishek.world/api/website-leads`;
+  const [error, setError] = useState(null);
+  // const [loading, setLoading] = useState(null);
   const [values, setValues] = useState({
     name: '',
     email: '',
-    phone: '',
-    company: '',
     message: '',
+    // createdAt: new Date(),
+    // updatedAt: new Date(),
+    // publishedAt: new Date(),
   });
 
   const [openNotif, setNotif] = useState(false);
@@ -31,11 +38,37 @@ function Form(props) {
 
   const handleSubmit = () => {
     setNotif(true);
+    // setLoading(true);
+    const headers = {
+      'Content-Type': 'application/json',
+      // Authorization: 'Bearer YOUR_JWT_TOKEN',
+    };
+
+    const options = {
+      headers,
+      data: { ...values },
+    };
+    axios
+      .post(apiUrl, options)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+        setError(err);
+      });
   };
 
   const handleClose = () => {
     setNotif(false);
   };
+  if (error) {
+    <Error message={error.message} />;
+  }
+
+  // if (loading) {
+  //   return <p>Loading...</p>;
+  // }
 
   return (
     <div className={classes.formWrap}>

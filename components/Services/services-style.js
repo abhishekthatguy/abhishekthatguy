@@ -11,10 +11,20 @@ const testiStyles = makeStyles((theme) => ({
     },
   },
   props: {
-    width: 240,
-    height: 240,
+    width: 500,
+    height: 500,
     '&:focus': {
       outline: 'none',
+    },
+  },
+  highLightText: {
+    textAlign: 'center',
+    padding: theme.spacing(2, 2),
+    width: '50%',
+    margin: '0px auto 10px',
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      margin: '20px auto',
     },
   },
   floatingTitle: {
@@ -23,7 +33,7 @@ const testiStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       position: 'absolute',
       left: theme.spacing(8),
-      top: theme.spacing(5),
+      top: theme.spacing(8),
       width: 240,
     },
   },
@@ -33,6 +43,7 @@ const testiStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(3),
     },
   },
+  servicesContainer: {},
   item: {
     padding: theme.spacing(0, 1),
     marginBottom: theme.spacing(),

@@ -8,7 +8,7 @@ import Carousel from 'react-slick';
 import clsx from 'clsx';
 import imgAPI from '~/public/images/imgAPI';
 import { withTranslation } from '~/i18n';
-import ImageThumbCard from '../Cards/ImageThumb';
+import ImageThumb from '../Cards/ImageThumb';
 import Title from '../Title';
 import useStyle from './gallery-style';
 
@@ -84,7 +84,7 @@ const portfolio = [
     category: 'website-development',
   },
   {
-    img: imgAPI.portfolio[8],
+    img: imgAPI.portfolio[1],
     title: 'Nygss HRMS',
     link: 'linkofthisitem.com',
     size: 'short',
@@ -180,11 +180,11 @@ function Gallery(props) {
                 key={index.toString()}
                 style={{ transitionDuration: index / 4 + 's' }}
               >
-                <ImageThumbCard
-                  img={item.img}
-                  title={item.title}
-                  link={item.link}
-                  size={item.size}
+                <ImageThumb
+                  img={item?.img}
+                  title={item?.title}
+                  link={item?.link}
+                  size={item?.size}
                 />
               </div>
             ))}
@@ -199,11 +199,11 @@ function Gallery(props) {
           <Carousel {...settings}>
             {data.map((item, index) => (
               <div className={classes.itemCarousel} key={index.toString()}>
-                <ImageThumbCard
-                  img={item.img}
-                  title={item.title}
-                  link={item.link}
-                  size={item.size}
+                <ImageThumb
+                  img={item?.img}
+                  title={item?.title}
+                  link={item?.link}
+                  size={item?.size}
                 />
               </div>
             ))}

@@ -68,7 +68,8 @@
     ],
     "linebreak-style": 0,
     "react/jsx-one-expression-per-line": "off",
-    "react/jsx-wrap-multilines": "off"
+    "react/jsx-wrap-multilines": "off",
+    "import/prefer-default-export": 0
   },
   "plugins": ["react", "import", "flowtype", "eslint-plugin-prettier"],
   "settings": {

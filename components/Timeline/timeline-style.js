@@ -146,6 +146,17 @@ const timelineStyles = makeStyles((theme) => ({
     borderRadius: 10,
     backgroundImage: `linear-gradient(120deg, ${theme.palette.secondary.main}, ${theme.palette.primary.main});`,
   },
+  section: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'block',
+      '& li': {
+        // fontSize: 18,
+        // lineHeight: '28px',
+        paddingLeft: '0 !important',
+        // marginTop: theme.spacing(0),
+      },
+    },
+  },
 }));
 
 export default timelineStyles;

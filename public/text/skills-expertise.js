@@ -283,6 +283,33 @@ const specialization = {
               url: '',
               icon: '/images/profile-logo.png',
             },
+            {
+              name: 'vercel',
+              title: 'Vercel',
+              hintText:
+                'Since Html Css javascript are fudamentals so i did my expertise into these ',
+              logoText: 'vuecli-icon',
+              url: '',
+              icon: '/images/profile-logo.png',
+            },
+            {
+              name: 'husky',
+              title: 'Husky',
+              hintText:
+                'Since Html Css javascript are fudamentals so i did my expertise into these ',
+              logoText: 'vuecli-icon',
+              url: '',
+              icon: '/images/profile-logo.png',
+            },
+            {
+              name: 'lint',
+              title: 'Eslint & Prettier',
+              hintText:
+                'Since Html Css javascript are fudamentals so i did my expertise into these ',
+              logoText: 'vuecli-icon',
+              url: '',
+              icon: '/images/profile-logo.png',
+            },
           ],
         },
       ],

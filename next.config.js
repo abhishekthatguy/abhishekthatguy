@@ -7,8 +7,16 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = withImages({
   TrailingSlash: true,
+  reactStrictMode: true,
   images: {
     disableStaticImages: true,
+    loader: 'default',
+    domains: [
+      'localhost',
+      'https://www.content.abhishek.world',
+      'localhost',
+      'https://content.abhishek.world',
+    ],
   },
   exportPathMap() {
     return {

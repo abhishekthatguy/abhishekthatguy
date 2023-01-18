@@ -23,6 +23,22 @@ const aboutStyles = makeStyles((theme) => ({
       '& > h5': {
         fontSize: 18,
         lineHeight: '28px',
+        // marginTop: theme.spacing(0),
+      },
+    },
+  },
+  about2: {
+    display: 'flex',
+    flexDirection: 'column-reverse',
+    [theme.breakpoints.up('md')]: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    [theme.breakpoints.down('sm')]: {
+      textAlign: 'center',
+      '& > h5': {
+        fontSize: 18,
+        lineHeight: '28px',
         marginTop: theme.spacing(7),
       },
     },
@@ -40,6 +56,37 @@ const aboutStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('md')]: {
       display: 'none',
     },
+  },
+  line2: {
+    borderTop: 0,
+    borderLeft: 0,
+    height: 60,
+    width: 'calc(100% - 130px)',
+    border: '2px solid',
+    borderImageSource: `linear-gradient(120deg, ${theme.palette.secondary.main}, ${theme.palette.primary.main})`,
+    borderImageSlice: 1,
+    position: 'relative',
+    marginTop: '0px',
+    [theme.breakpoints.down('md')]: {
+      display: 'none',
+    },
+    transform: 'translateX(-7.5%)',
+  },
+  lineReverse: {
+    borderTop: 0,
+    borderLeft: 0,
+    height: 40,
+    width: 'calc(100% - 130px)',
+    border: '2px solid',
+    borderImageSource: `linear-gradient(120deg, ${theme.palette.secondary.main}, ${theme.palette.primary.main})`,
+    borderImageSlice: 1,
+    position: 'relative',
+    marginRight: -30,
+    marginTop: theme.spacing(0),
+    [theme.breakpoints.down('md')]: {
+      display: 'none',
+    },
+    transform: 'rotateX(180deg) translateX(-7.5%)',
   },
   reward: {
     flex: 1,
@@ -93,7 +140,7 @@ const aboutStyles = makeStyles((theme) => ({
   },
   photo: {
     position: 'relative',
-    marginTop: -105,
+    // marginTop: -105,
     background: theme.palette.common.white,
     width: 270,
     height: 345,
@@ -104,6 +151,30 @@ const aboutStyles = makeStyles((theme) => ({
       height: 'auto',
       marginLeft: 'auto',
       marginRight: 'auto',
+      margin: '20px auto',
+    },
+    '& figure': {
+      margin: 0,
+      '& img': {
+        width: '100%',
+        minHeight: '100%',
+      },
+    },
+  },
+  photoReverse: {
+    position: 'relative',
+    marginTop: 0,
+    background: theme.palette.common.white,
+    width: 270,
+    height: 345,
+    zIndex: 1,
+    [theme.breakpoints.down('sm')]: {
+      width: 200,
+      minHeight: 200,
+      height: 'auto',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      margin: '20px auto',
     },
     '& figure': {
       margin: 0,
@@ -130,7 +201,7 @@ const aboutStyles = makeStyles((theme) => ({
     margin: `${theme.spacing(4)}px auto`,
     maxWidth: 600,
     '& button': {
-      margin: theme.spacing(1, 2),
+      margin: theme.spacing(0, 2),
       width: 36,
       height: 36,
       '& i': {
