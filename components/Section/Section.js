@@ -55,24 +55,30 @@ function Section() {
               delay={200}
               duration={0.3}
             >
-              <div>
-                <Typography
-                  variant="h3"
-                  gutterBottom
-                  className={text.subtitle2}
-                >
-                  Basic Information
-                </Typography>
-                <Typography gutterBottom>Name :{brand.profile.name}</Typography>
-                <Typography gutterBottom>
-                  Designation :{brand.profile.title}
-                </Typography>
-                <Typography gutterBottom>
-                  Email :{brand.profile.mail}
-                </Typography>
-                <Typography gutterBottom>
-                  Phone :{brand.profile.mobile}
-                </Typography>
+              <div className={classes.about2}>
+                <div className={classes.reward}>
+                  <div className={classes.item}>
+                    <Typography
+                      variant="h3"
+                      gutterBottom
+                      className={text.subtitle2}
+                    >
+                      Basic Information
+                    </Typography>
+                    <Typography gutterBottom component="p">
+                      Name :{brand.profile.name}
+                    </Typography>
+                    <Typography gutterBottom component="p">
+                      Designation :{brand.profile.title}
+                    </Typography>
+                    <Typography gutterBottom component="p">
+                      Email :{brand.profile.mail}
+                    </Typography>
+                    <Typography gutterBottom component="p">
+                      Phone :{brand.profile.mobile}
+                    </Typography>
+                  </div>
+                </div>
               </div>
             </ScrollAnimation>
           </Grid>

@@ -151,6 +151,7 @@ const aboutStyles = makeStyles((theme) => ({
       height: 'auto',
       marginLeft: 'auto',
       marginRight: 'auto',
+      margin: '20px auto',
     },
     '& figure': {
       margin: 0,
@@ -173,6 +174,7 @@ const aboutStyles = makeStyles((theme) => ({
       height: 'auto',
       marginLeft: 'auto',
       marginRight: 'auto',
+      margin: '20px auto',
     },
     '& figure': {
       margin: 0,

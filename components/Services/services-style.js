@@ -22,6 +22,10 @@ const testiStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 2),
     width: '50%',
     margin: '0px auto 10px',
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      margin: '20px auto',
+    },
   },
   floatingTitle: {
     textAlign: 'center',
