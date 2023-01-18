@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core/styles';
 import { create } from 'jss';
 import { PageTransition } from 'next-page-transitions';
+import { Analytics } from '@vercel/analytics/react';
 import rtl from 'jss-rtl';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import LoadingBar from 'react-top-loading-bar';
@@ -140,6 +141,7 @@ function MyApp(props) {
                   onToggleDir={toggleDirection}
                   key={router.route}
                 />
+                <Analytics />
               </ApiContext.Provider>
             </PageTransition>
           </div>
