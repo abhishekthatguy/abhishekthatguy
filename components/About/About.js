@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import brand from '~/public/text/brand';
 import { withTranslation } from '~/i18n';
 import { useText } from '~/theme/common';
@@ -19,6 +20,7 @@ function About(props) {
   const text = useText();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { t } = props;
+  const [showMore, setShowMore] = useState(false);
   return (
     <div className={classes.root}>
       <Container maxWidth={isMobile ? 'sm' : 'lg'}>
@@ -28,39 +30,25 @@ function About(props) {
             <div className={classes.about}>
               <div className={classes.reward}>
                 <div className={classes.item}>
-                  <figure>
-                    <img src="/images/profile/reward1.svg" alt="badge" />
-                  </figure>
-                  <Typography component="p" className={text.paragraph}>
-                    Special Mention
-                  </Typography>
                   <Typography variant="h5" className={text.subtitle}>
-                    Awards
+                    {brand.profile.aboutusTitle}
                   </Typography>
-                </div>
-                <div className={classes.item}>
-                  <figure>
-                    <img src="/images/profile/reward2.svg" alt="badge" />
-                  </figure>
                   <Typography component="p" className={text.paragraph}>
-                    100k videos
-                  </Typography>
-                  <Typography variant="h5" className={text.subtitle}>
-                    Subscriber
-                  </Typography>
-                </div>
-                <div className={classes.item}>
-                  <figure>
-                    <img src="/images/profile/reward3.svg" alt="badge" />
-                  </figure>
-                  <Typography component="p" className={text.paragraph}>
-                    Best Filmography
-                  </Typography>
-                  <Typography variant="h5" className={text.subtitle}>
-                    Footage
+                    {brand.profile.aboutusParagraph}
+                    <Button
+                      variant="outlined-rounded"
+                      color="primary"
+                      onClick={() => {
+                        setShowMore(!showMore);
+                      }}
+                      className={classes.button}
+                    >
+                      {!showMore ? 'Read more' : 'Read less'}
+                    </Button>
                   </Typography>
                 </div>
               </div>
+
               <Hidden mdUp>
                 <div className={classes.socmed}>
                   <IconButton

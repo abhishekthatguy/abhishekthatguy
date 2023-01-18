@@ -5,11 +5,14 @@ const cardsStyles = makeStyles((theme) => ({
     position: 'relative',
     textAlign: 'center',
     padding: theme.spacing(2),
-    width: 240,
-    height: 200,
+    width: 400,
+    height: 300,
     transition: 'all 0.3s ease-out',
     overflow: 'hidden',
     [theme.breakpoints.down(1500)]: {
+      width: 300,
+    },
+    [theme.breakpoints.down('md')]: {
       width: 200,
     },
     '&:hover': {

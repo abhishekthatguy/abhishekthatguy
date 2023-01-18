@@ -15,6 +15,7 @@ import { useText } from '~/theme/common';
 import useStyles from './timeline-style';
 import brand from '~/public/text/brand';
 import specialization from '~/public/text/skills-expertise';
+import Section from '../Section/Section';
 
 function Timeline(props) {
   const classes = useStyles();
@@ -46,6 +47,15 @@ function Timeline(props) {
             </Hidden>
           </Grid>
           <Grid item container spacing={3} md={12} lg={10}>
+            <Grid item xs={12}>
+              <div className={classes.history}>
+                <ul>
+                  <li>
+                    <Section />
+                  </li>
+                </ul>
+              </div>
+            </Grid>
             <Grid item md={5} sm={6} xs={12}>
               <div className={classes.history}>
                 <Typography
@@ -66,6 +76,7 @@ function Timeline(props) {
                         <Typography variant="h3" gutterBottom className={text.subtitle2}>Creative Director</Typography>
                         <Typography gutterBottom>at Fourth Company</Typography>
                         <Typography className={classes.time}>2015 - Present</Typography>
+                       
                       </div>
                     </ScrollAnimation>
                   </li> */}
@@ -155,7 +166,7 @@ function Timeline(props) {
                     <ul>
                       {item &&
                         item.skills.map((skill) => (
-                          <li key={`item-${item.title}`}>
+                          <li key={`item-${item}-${skill.title}`}>
                             <ScrollAnimation
                               animateOnce
                               animateIn="fadeInLeftShort"
@@ -200,7 +211,23 @@ function Timeline(props) {
                   <ul>
                     <li>
                       <div className={classes.textIcon}>
-                        <i className="ion-ios-color-wand" />
+                        <i className="ion-ios-code" />
+                        <Typography variant="h6" className={text.subtitle2}>
+                          Website & Web Application Development
+                        </Typography>
+                      </div>
+                      <LinearProgress
+                        variant="determinate"
+                        value={play ? 80 : 0}
+                        classes={{
+                          root: classes.progressBg,
+                          bar: classes.bar,
+                        }}
+                      />
+                    </li>
+                    <li>
+                      <div className={classes.textIcon}>
+                        <i className="ion-ios-desktop" />
                         <Typography variant="h6" className={text.subtitle2}>
                           ERP Development
                         </Typography>
@@ -216,7 +243,7 @@ function Timeline(props) {
                     </li>
                     <li>
                       <div className={classes.textIcon}>
-                        <i className="ion-ios-color-wand" />
+                        <i className="ion-ios-phone-landscape" />
                         <Typography variant="h6" className={text.subtitle2}>
                           Responisive User Interface Development
                         </Typography>
@@ -232,23 +259,7 @@ function Timeline(props) {
                     </li>
                     <li>
                       <div className={classes.textIcon}>
-                        <i className="ion-logo-dribbble" />
-                        <Typography variant="h6" className={text.subtitle2}>
-                          Software Architecture Design
-                        </Typography>
-                      </div>
-                      <LinearProgress
-                        variant="determinate"
-                        value={play ? 80 : 0}
-                        classes={{
-                          root: classes.progressBg,
-                          bar: classes.bar,
-                        }}
-                      />
-                    </li>
-                    <li>
-                      <div className={classes.textIcon}>
-                        <i className="ion-ios-globe" />
+                        <i className="ion-ios-laptop" />
                         <Typography variant="h6" className={text.subtitle2}>
                           Prototype and Wire Frame Development
                         </Typography>
@@ -264,7 +275,7 @@ function Timeline(props) {
                     </li>
                     <li>
                       <div className={classes.textIcon}>
-                        <i className="ion-ios-camera" />
+                        <i className="ion-ios-globe" />
                         <Typography variant="h6" className={text.subtitle2}>
                           Cross Browser Compatabile Website Development{' '}
                         </Typography>
@@ -280,7 +291,7 @@ function Timeline(props) {
                     </li>
                     <li>
                       <div className={classes.textIcon}>
-                        <i className="ion-ios-snow" />
+                        <i className="ion-ios-cloudy" />
                         <Typography variant="h6" className={text.subtitle2}>
                           Cloud Based Application Deployment & Maintainance
                         </Typography>
@@ -296,7 +307,7 @@ function Timeline(props) {
                     </li>
                     <li>
                       <div className={classes.textIcon}>
-                        <i className="ion-ios-snow" />
+                        <i className="ion-ios-infinite" />
                         <Typography variant="h6" className={text.subtitle2}>
                           CI & CD Integration
                         </Typography>
@@ -312,7 +323,7 @@ function Timeline(props) {
                     </li>
                     <li>
                       <div className={classes.textIcon}>
-                        <i className="ion-ios-snow" />
+                        <i className="ion-ios-settings" />
                         <Typography variant="h6" className={text.subtitle2}>
                           3rd party tools & libraries integration
                         </Typography>

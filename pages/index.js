@@ -4,15 +4,16 @@ import Head from 'next/head';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Hidden from '@material-ui/core/Hidden';
-import clsx from 'clsx';
+// import clsx from 'clsx';
 import Header from '../components/Header';
 import BannerNav from '../components/BannerNav';
 import About from '../components/About';
 import Timeline from '../components/Timeline';
 import Counter from '../components/Counter';
+import SectionColored from '../components/SectionColored';
 import Services from '../components/Services';
-import Gallery from '../components/Gallery';
-import Testimonials from '../components/Testimonials';
+// import Gallery from '../components/Gallery';
+// import Testimonials from '../components/Testimonials';
 // import Blog from '../components/Blog';
 import Footer from '../components/Footer';
 import PageNav from '../components/PageNav';
@@ -98,16 +99,19 @@ function Landing(props) {
             <section id="services">
               <Services />
             </section>
-            <section
+            <section id="highlights">
+              <SectionColored />
+            </section>
+            {/* <section
               id="my-work"
               className={clsx(classes.spaceTopShort, classes.spaceBottomShort)}
             >
               <Gallery />
-            </section>
+            </section> */}
           </div>
-          <section id="testimonials">
+          {/* <section id="testimonials">
             <Testimonials />
-          </section>
+          </section> */}
           <div className={classes.parallaxWrap}>
             <div className={classes.bottomDeco}>
               <Decoration />
