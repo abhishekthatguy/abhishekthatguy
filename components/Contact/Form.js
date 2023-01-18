@@ -25,7 +25,9 @@ function Form(props) {
     name: '',
     email: '',
     message: '',
-    // date: new Date(),
+    // createdAt: new Date(),
+    // updatedAt: new Date(),
+    // publishedAt: new Date(),
   });
 
   const [openNotif, setNotif] = useState(false);
@@ -37,7 +39,13 @@ function Form(props) {
   const handleSubmit = () => {
     setNotif(true);
     // setLoading(true);
+    const headers = {
+      'Content-Type': 'application/json',
+      // Authorization: 'Bearer YOUR_JWT_TOKEN',
+    };
+
     const options = {
+      headers,
       data: { ...values },
     };
     axios
