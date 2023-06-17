@@ -3,7 +3,9 @@
 /* eslint no-unused-vars: "off" */
 
 const withImages = require('next-images');
-const ESLintPlugin = require('eslint-webpack-plugin');
+const path = require('path');
+
+// const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = withImages({
   TrailingSlash: true,
@@ -21,6 +23,7 @@ module.exports = withImages({
   exportPathMap() {
     return {
       '/': { page: '/' },
+      '/about-page': { page: '/about-page' },
       '/blank-page': { page: '/blank-page' },
     };
   },
@@ -32,12 +35,13 @@ module.exports = withImages({
   },
   webpack: (config, options) => {
     true,
-      config.plugins.push(
-        new ESLintPlugin({
-          exclude: ['node_modules'],
-        }),
-      );
-    config.node = {};
+      // config.plugins.push(
+      //   new ESLintPlugin({
+      //     exclude: ['node_modules'],
+      //   }),
+      // );
+      (config.node = {});
+
     return config;
   },
 });
