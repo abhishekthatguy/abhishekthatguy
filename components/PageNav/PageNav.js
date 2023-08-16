@@ -18,9 +18,9 @@ function createData(id, name, url) {
   };
 }
 
-const LinkBtn = React.forwardRef(function LinkBtn(props) {
+const LinkBtn = React.forwardRef(function LinkBtn(props, ref) {
   // eslint-disable-line
-  return <AnchorLink to={props.to} {...props} />; // eslint-disable-line
+  return <AnchorLink to={props.to} {...props} ref={ref} />; // eslint-disable-line
 });
 
 function PageNav(props) {

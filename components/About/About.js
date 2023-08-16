@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import Image from 'next/image';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
+// import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+// import { Image } from '@material-ui/icons';
 import brand from '~/public/text/brand';
 import { withTranslation } from '~/i18n';
 import { useText } from '~/theme/common';
 import useStyles from './about-style';
+import SocialMedia from '../SocialMedia/SocialMedia';
 
 function About(props) {
   const theme = useTheme();
@@ -36,7 +39,7 @@ function About(props) {
                   <Typography component="p" className={text.paragraph}>
                     {brand.profile.aboutusParagraph}
                     <Button
-                      variant="outlined-rounded"
+                      // variant="outlined-rounded"
                       color="primary"
                       onClick={() => {
                         setShowMore(!showMore);
@@ -50,7 +53,8 @@ function About(props) {
               </div>
 
               <Hidden mdUp>
-                <div className={classes.socmed}>
+                <SocialMedia color="purple" />
+                {/* <div className={classes.socmed}>
                   <IconButton
                     aria-label="Delete"
                     className={classes.margin}
@@ -79,14 +83,18 @@ function About(props) {
                   >
                     <i className="ion-logo-linkedin" />
                   </IconButton>
-                </div>
-                <Typography variant="h5">
+                </div> */}
+                <Typography className={classes.ban_desc} variant="h5">
                   {t('common:profile-landing.banner_desc')}
                 </Typography>
               </Hidden>
               <Paper className={classes.photo}>
                 <figure>
-                  <img src={brand.profile.avatar} alt="avatar" />
+                  <Image
+                    layout="fill"
+                    src={brand.profile.avatar}
+                    alt="avatar"
+                  />
                 </figure>
                 <span className={classes.frame} />
               </Paper>

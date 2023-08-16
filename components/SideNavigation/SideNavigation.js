@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import Image from 'next/image';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -33,13 +34,14 @@ function SideNavigation(props) {
     createData(navMenu[4], '#' + navMenu[4]),
     createData(navMenu[5], '#' + navMenu[5]),
     createData(navMenu[6], '#' + navMenu[6]),
+    createData(navMenu[7], '#' + navMenu[7]),
   ]);
   return (
     <div className={classes.navigation}>
       <Container fixed>
         <nav className={classes.navMenu}>
           <AnchorLink href="#home" className={classes.logo}>
-            <img src={logo} alt="logo" />
+            <Image layout="fill" src={logo} alt="logo" />
           </AnchorLink>
           <List component="nav" className={classes.menu}>
             <Scrollspy items={navMenu} currentClassName="active">

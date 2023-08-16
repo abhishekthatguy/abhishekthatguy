@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -15,7 +16,7 @@ function BlogPost(props) {
   return (
     <Paper className={classes.post}>
       <figure>
-        <img src={img} alt="thumb" />
+        <Image layout="fill" src={img} alt="thumb" />
       </figure>
       <div className={classes.text}>
         <Typography variant="h5" className={text.subtitle2}>
