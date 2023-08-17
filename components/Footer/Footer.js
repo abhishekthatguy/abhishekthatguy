@@ -44,10 +44,7 @@ function Footer(props) {
                 {brand.profile.title}
               </Typography>
             </div>
-            <div>
-              <SocialMedia color="purple" />
-            </div>
-            {/* <SocialMedia color="purple" /> */}
+            <SocialMedia color="purple" />
             {/* <div className={classes.socmed}>
               <Link href={brand?.socialProfile?.facebook} target="_blank">
                 <IconButton
