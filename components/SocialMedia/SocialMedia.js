@@ -14,45 +14,73 @@ function SocialMedia({ color }) {
   const getIconColor = () => {
     if (color === 'purple') {
       return theme.palette.type === 'dark'
-        ? theme.palette.primary.dark // Dark theme
-        : theme.palette.common.white; // Light theme
+        ? theme.palette.primary.light
+        : theme.palette.primary.dark;
     }
-    return alpha(theme.palette.common.white, 0.75); // Other color on both themes
+    return alpha(theme.palette.common.white, 0.75);
   };
 
   return (
     <div className={classes.socmed}>
-      <a rel="noopener noreferrer" target="_blank" href={brand?.socialProfile?.facebook}>
+      <a
+        rel="noopener noreferrer"
+        target="_blank"
+        href={brand?.socialProfile?.facebook}
+      >
         <IconButton aria-label="Delete" className={classes.margin} size="small">
           <i style={{ color: getIconColor() }} className="ion-logo-facebook" />
         </IconButton>
       </a>
-      <a rel="noopener noreferrer" href={brand?.socialProfile?.instagram} target="_blank">
+      <a
+        rel="noopener noreferrer"
+        href={brand?.socialProfile?.instagram}
+        target="_blank"
+      >
         <IconButton aria-label="Delete" className={classes.margin} size="small">
           <i style={{ color: getIconColor() }} className="ion-logo-instagram" />
         </IconButton>
       </a>
-      <a rel="noopener noreferrer" href={brand?.socialProfile?.twitter} target="_blank">
+      <a
+        rel="noopener noreferrer"
+        href={brand?.socialProfile?.twitter}
+        target="_blank"
+      >
         <IconButton aria-label="Delete" className={classes.margin} size="small">
           <i style={{ color: getIconColor() }} className="ion-logo-twitter" />
         </IconButton>
       </a>
-      <a rel="noopener noreferrer" href={brand?.socialProfile?.linkedin} target="_blank">
+      <a
+        rel="noopener noreferrer"
+        href={brand?.socialProfile?.linkedin}
+        target="_blank"
+      >
         <IconButton aria-label="Delete" className={classes.margin} size="small">
           <i style={{ color: getIconColor() }} className="ion-logo-linkedin" />
         </IconButton>
       </a>
-      <a rel="noopener noreferrer" href={brand?.socialProfile?.youtube} target="_blank">
+      <a
+        rel="noopener noreferrer"
+        href={brand?.socialProfile?.youtube}
+        target="_blank"
+      >
         <IconButton aria-label="Delete" className={classes.margin} size="small">
           <i style={{ color: getIconColor() }} className="ion-logo-youtube" />
         </IconButton>
       </a>
-      <a rel="noopener noreferrer" href={brand?.socialProfile?.github} target="_blank">
+      <a
+        rel="noopener noreferrer"
+        href={brand?.socialProfile?.github}
+        target="_blank"
+      >
         <IconButton aria-label="Delete" className={classes.margin} size="small">
           <i style={{ color: getIconColor() }} className="ion-logo-github" />
         </IconButton>
       </a>
-      <a rel="noopener noreferrer" href={brand?.socialProfile?.skype} target="_blank">
+      <a
+        rel="noopener noreferrer"
+        href={brand?.socialProfile?.skype}
+        target="_blank"
+      >
         <IconButton aria-label="Delete" className={classes.margin} size="small">
           <i style={{ color: getIconColor() }} className="ion-logo-skype" />
         </IconButton>
