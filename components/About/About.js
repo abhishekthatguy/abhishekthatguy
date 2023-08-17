@@ -39,12 +39,12 @@ function About(props) {
                   <Typography component="p" className={text.paragraph}>
                     {brand.profile.aboutusParagraph}
                     <Button
+                      style={{ color: 'black' }}
                       // variant="outlined-rounded"
                       color="primary"
                       onClick={() => {
                         setShowMore(!showMore);
                       }}
-                      className={classes.button}
                     >
                       {!showMore ? 'Read more' : 'Read less'}
                     </Button>

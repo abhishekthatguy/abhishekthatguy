@@ -117,7 +117,10 @@ function Section() {
             duration={0.3}
           >
             <Grid item xs={12}>
-              <SocialMedia color="purple" />
+              <div className={classes.socmedSpace}>
+                <SocialMedia color="purple" />
+              </div>
+              {/* <SocialMedia color="purple" /> */}
               {/* <div className={classes.socmed}>
                 <Link href={brand?.socialProfile?.facebook} target="_blank">
                   <IconButton
