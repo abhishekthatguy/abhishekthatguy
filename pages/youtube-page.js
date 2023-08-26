@@ -145,7 +145,7 @@ function YouTubePage(props) {
                                   item?.snippet?.thumbnails?.medium?.height
                                 }
                                 src={item?.snippet?.thumbnails?.medium?.url}
-                                alt={item.snippet.title}
+                                alt={item?.snippet?.title}
                               />
                             </Link>
                           </CardMedia>
@@ -154,7 +154,7 @@ function YouTubePage(props) {
                             className={classes.cardText}
                             variant="body2"
                           >
-                            {item.snippet.title}
+                            {item?.snippet?.title}
                           </Typography>
                           <Typography
                             className={classes.countDays}
