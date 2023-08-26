@@ -60,7 +60,7 @@ function Header(props) {
     createData(navMenu[4], '#' + navMenu[4], -40),
     createData(navMenu[5], '#' + navMenu[5], -40),
     createData(navMenu[6], '#' + navMenu[6]),
-    createData(navMenu[7], '#' + navMenu[7]),
+    // createData(navMenu[7], '#' + navMenu[7]),
   ]);
   const [openDrawer, setOpenDrawer] = useState(false);
   const handleOpenDrawer = () => {

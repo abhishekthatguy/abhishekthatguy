@@ -49,8 +49,8 @@ const brand = {
     github: 'https://github.com/abhishekthatguy',
     youtube: 'https://www.youtube.com/@developerwhotravels',
     blog: 'https://abhishekthatguy.medium.com/',
-    // skype: 'live:25e678fec67a5015',
-    skype: 'https://blog.abhishek.world',
+    skype: 'skype:live:25e678fec67a5015?chat',
+    // skype: 'https://blog.abhishek.world',
   },
   services: [
     {

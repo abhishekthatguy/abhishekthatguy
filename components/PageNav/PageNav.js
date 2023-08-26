@@ -49,7 +49,7 @@ function PageNav(props) {
     createData(4, navMenu[3], '#' + navMenu[3].replace(/ /g, '_')),
     createData(4, navMenu[4], '#' + navMenu[4].replace(/ /g, '_')),
     createData(4, navMenu[5], '#' + navMenu[5].replace(/ /g, '_')),
-    createData(4, navMenu[6], '#' + navMenu[6].replace(/ /g, '_')),
+    // createData(4, navMenu[6], '#' + navMenu[6].replace(/ /g, '_')),
   ]);
   return (
     <div className={clsx(classes.pageNav, show && classes.show)}>
