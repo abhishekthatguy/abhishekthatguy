@@ -65,8 +65,9 @@ function Header(props) {
   const [openDrawer, setOpenDrawer] = useState(false);
   const handleOpenDrawer = () => {
     setOpenDrawer(!openDrawer);
+    console.log('handle click drawer----', openDrawer);
   };
-
+  console.log('open drawer----', openDrawer);
   const handleCloseDrawer = () => {
     setOpenDrawer(false);
   };
