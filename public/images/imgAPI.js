@@ -67,7 +67,7 @@ const imgAPI = {
     '/images/slider/6.jpg',
     '/images/logos/prev.png',
     '/images/logos/next.png',
-  ]
+  ],
 };
 
 export default imgAPI;
