@@ -58,6 +58,16 @@ const imgAPI = {
     '/images/portfolio/hrms.png',
     '/images/portfolio/ob.png',
   ],
+  slider: [
+    '/images/slider/1.jpg',
+    '/images/slider/2.jpg',
+    '/images/slider/3.jpg',
+    '/images/slider/7.jpg',
+    '/images/slider/5.jpg',
+    '/images/slider/6.jpg',
+    '/images/logos/prev.png',
+    '/images/logos/next.png',
+  ]
 };
 
 export default imgAPI;
