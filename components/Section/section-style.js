@@ -195,26 +195,26 @@ const aboutStyles = makeStyles((theme) => ({
     borderImageSlice: 1,
     zIndex: 10,
   },
-  socmed: {
-    display: 'flex',
-    justifyContent: 'space-evenly',
-    margin: `${theme.spacing(4)}px auto`,
-    maxWidth: 600,
-    '& button': {
-      margin: theme.spacing(0, 2),
-      width: 36,
-      height: 36,
-      '& i': {
-        color:
-          theme.palette.type === 'dark'
-            ? theme.palette.primary.light
-            : theme.palette.primary.dark,
-      },
-    },
-    '& i': {
-      fontSize: 22,
-    },
-  },
+  // socmed: {
+  //   display: 'flex',
+  //   justifyContent: 'space-evenly',
+  //   margin: `${theme.spacing(4)}px auto`,
+  //   maxWidth: 600,
+  //   '& button': {
+  //     margin: theme.spacing(0, 2),
+  //     width: 36,
+  //     height: 36,
+  //     '& i': {
+  //       color:
+  //         theme.palette.type === 'dark'
+  //           ? theme.palette.primary.light
+  //           : theme.palette.primary.dark,
+  //     },
+  //   },
+  //   '& i': {
+  //     fontSize: 22,
+  //   },
+  // },
 }));
 
 export default aboutStyles;

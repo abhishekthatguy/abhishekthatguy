@@ -6,6 +6,7 @@ const menu = [
   'testimonials',
   'blog',
   'contact',
+  'youtube',
 ];
 
 export default menu;

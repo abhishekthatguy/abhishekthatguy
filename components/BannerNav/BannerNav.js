@@ -5,9 +5,7 @@ import { useTheme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Hidden from '@material-ui/core/Hidden';
 import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import Link from 'next/link';
 import SideNavigation from '../SideNavigation';
 // import SocialProfile from '../SocialProflie/SocialProfile';
 import brand from '~/public/text/brand';
@@ -15,6 +13,7 @@ import { withTranslation } from '~/i18n';
 import { useText } from '~/theme/common';
 import Settings from '../Settings';
 import useStyles from './banner-style';
+import SocialMedia from '../SocialMedia/SocialMedia';
 
 function BannerNav(props) {
   const theme = useTheme();
@@ -61,7 +60,8 @@ function BannerNav(props) {
                   <Typography variant="h5" className={text.subtitle2}>
                     {t('common:profile-landing.banner_desc')}
                   </Typography>
-                  <div className={classes.socmed}>
+                  <SocialMedia color="white" />
+                  {/* <div className={classes.socmed}>
                     <Link href={brand?.socialProfile?.facebook} target="_blank">
                       <IconButton
                         aria-label="Delete"
@@ -129,7 +129,7 @@ function BannerNav(props) {
                         <i className="ion-logo-skype" />
                       </IconButton>
                     </Link>
-                  </div>
+                  </div> */}
                   {/* <SocialProfile /> */}
                 </Hidden>
               </div>

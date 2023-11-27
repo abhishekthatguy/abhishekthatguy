@@ -91,6 +91,13 @@ const aboutStyles = makeStyles((theme) => ({
       },
     },
   },
+  ban_desc: {
+    [theme.breakpoints.up('xs')]: {
+      margin: theme.spacing(0, 5),
+      padding: 0,
+      textAlign: 'left',
+    },
+  },
   photo: {
     position: 'relative',
     marginTop: -105,
@@ -127,7 +134,7 @@ const aboutStyles = makeStyles((theme) => ({
   socmed: {
     display: 'flex',
     justifyContent: 'space-evenly',
-    margin: `${theme.spacing(4)}px auto`,
+    margin: `${theme.spacing(2, 0)}px auto`,
     maxWidth: 600,
     '& button': {
       margin: theme.spacing(1, 2),

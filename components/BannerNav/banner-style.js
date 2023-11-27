@@ -77,6 +77,7 @@ const bannerStyles = makeStyles((theme) => ({
       marginBottom: theme.spacing(3),
     },
   },
+
   socmed: {
     marginBottom: theme.spacing(3),
     '& button': {

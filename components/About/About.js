@@ -4,7 +4,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -13,6 +12,7 @@ import brand from '~/public/text/brand';
 import { withTranslation } from '~/i18n';
 import { useText } from '~/theme/common';
 import useStyles from './about-style';
+import SocialMedia from '../SocialMedia/SocialMedia';
 
 function About(props) {
   const theme = useTheme();
@@ -50,7 +50,7 @@ function About(props) {
               </div>
 
               <Hidden mdUp>
-                <div className={classes.socmed}>
+                {/* <div className={classes.socmed}>
                   <IconButton
                     aria-label="Delete"
                     className={classes.margin}
@@ -79,8 +79,9 @@ function About(props) {
                   >
                     <i className="ion-logo-linkedin" />
                   </IconButton>
-                </div>
-                <Typography variant="h5">
+                </div> */}
+                <SocialMedia color="purple" />
+                <Typography className={classes.ban_desc} variant="h5">
                   {t('common:profile-landing.banner_desc')}
                 </Typography>
               </Hidden>
