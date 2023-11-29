@@ -60,7 +60,7 @@ const aboutStyles = makeStyles((theme) => ({
   line2: {
     borderTop: 0,
     borderLeft: 0,
-    height: 60,
+    height: 100,
     width: 'calc(100% - 130px)',
     border: '2px solid',
     borderImageSource: `linear-gradient(120deg, ${theme.palette.secondary.main}, ${theme.palette.primary.main})`,

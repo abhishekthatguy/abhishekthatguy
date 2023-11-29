@@ -5,32 +5,32 @@ const brand = {
     name: 'Abhishek Singh',
     title: 'Sr. Software developer',
     mobile: '(+91)962-148-2434',
-    mail: 'hello@abhishek.world',
+    mail: 'hello@abhishekthatguy.com',
     desc: 'My name is Abhishek Singh I am a 26-year-old Sr. Software Developer based in Pune (India). ',
     prefix: 'Abhishek',
     aboutusTitle: 'About Me',
     aboutusParagraph:
-      'As a Front-End Development and DevOps expert, I am skilled in designing and implementing visually appealing and user-friendly interfaces for websites and web applications. I excel at bridging the gap between design and technical implementation, ensuring that the final product not only looks great but also functions seamlessly.',
+      'As a specialist in Front-End Development and DevOps, I possess expertise in crafting visually captivating and user-friendly interfaces for websites and web applications. My strength lies in seamlessly connecting design with technical implementation, guaranteeing that the end result not only boasts an impressive appearance but also operates flawlessly.',
     aboutusDescription: '',
     aboutusTitle1: 'Personal Info',
     aboutusParagraph1:
-      "Abhishek Singh is a Senior Software Developer based in Pune, Maharashtra, India. He boasts a wealth of experience and expertise in the IT industry, honed through his journey starting as a Junior Web Developer. Born in Ballia district, Uttar Pradesh.Abhishek's passion for technology led him to pursue a career in this field, even though he had completed his general competitive preparation in Patna.",
+      'I am Abhishek Singh, a seasoned Senior Software Developer located in Pune, Maharashtra, India. My extensive experience and expertise in the IT industry have evolved from my initial role as a Junior Web Developer. Born in the Ballia district of Uttar Pradesh, my dedication to technology inspired me to pursue a career in this field, despite completing my general competitive preparation in Patna.',
     aboutusDescription1:
-      'He is dedicated to delivering high-quality work and is always seeking to improve his skills and stay up-to-date with the latest advancements in the field. His strong work ethic, coupled with his passion for technology, makes him a valuable asset to any team.',
+      'I am dedicated to delivering high-quality work and am always seeking to improve my skills and stay up-to-date with the latest advancements in the field. My strong work ethic, coupled with my passion for technology, makes me a valuable asset to any team.',
     aboutusTitle2: 'Facts & Skill set',
     aboutusParagraph2:
-      'As a Senior Front-End Developer and DevOps Engineer, I bring a wealth of knowledge and experience to the field of IT. My main areas of expertise are in Front-End Development and DevOps technology stacks, and I am adept at bridging the gap between design and technical implementation.I work closely with the UX design team and backend developers to create responsive web applications, and I am well-versed in project management and collaboration with mentors to ensure successful delivery.',
+      "With over 5 years of comprehensive experience, I've transitioned into the role of a Full Stack Developer, currently leading a dynamic Front-End team. As a Senior Front-End Developer and DevOps Engineer, I bring a deep well of expertise to the IT landscape. My primary focus spans Front-End Development and DevOps technology stacks, where I excel not only in crafting seamless connections between design and technical implementation but also in leading critical aspects like code reviews, deployments, and establishing robust code architectures for collaborative work. This involves hands-on collaboration with the UX design team and backend developers to produce responsive web applications. My role also extends to strong project management, ensuring effective collaboration with mentors and successful project delivery",
     aboutusDescription2:
-      'I have a thorough understanding of software development lifecycle processes, including experience working with both Agile and Waterfall methodologies. I am able to work effectively in large-scale projects with dispersed teams, both onshore and offshore. My skillset and experience as a bridge between the front-end and back-end code, also allows me to populate data from the back-end to the front-end for user-interference. Furthermore, I have a strong emphasis on data validation, before submitting to the back-end, which ensures the applications I develop are robust and secure. I am passionate about technology and dedicated to delivering high-quality work.',
+      'I possess a comprehensive grasp of software development lifecycle processes, with hands-on experience in navigating both Agile and Waterfall methodologies. My capabilities extend to effective collaboration in large-scale projects, managing dispersed teams across onshore and offshore locations. Serving as a bridge between front-end and back-end code, I proficiently facilitate the transfer of data from the back-end to the front-end, enhancing user interaction. Additionally, I place a strong emphasis on data validation, ensuring rigorous scrutiny before submission to the back-end, thereby fortifying the robustness and security of the applications I develop. My passion for technology is reflected in my unwavering dedication to delivering work of the highest quality',
     hobbies: 'Hobbies * intrests',
     hobbiesParagraph:
-      'In addition to my job, I enjoy creating and contributing to open-source projects. This allows me to learn new skills, grow as a developer, and support other open-source projects. I take pleasure in helping individuals establish a digital presence for their business, personal brand, or portfolio.',
+      'Beyond my professional responsibilities, I find fulfillment in both creating and actively contributing to open-source projects. This not only serves as a means for me to acquire new skills and evolve as a developer but also allows me to contribute support to various open-source initiatives. I derive joy from assisting individuals in establishing a digital presence for their businesses, personal brands, or portfolios.Outside of work, my interests extend to diverse pursuits. I actively contribute to the tech community by writing technical blogs, sharing insights, and staying abreast of the latest developments in the industry.',
     hobbiesDescription:
-      'When I am not working, you can find me exploring the mountains, visiting historical sites, or attending local events. I love to discover and explore new places, and connecting with people, which enhances my learning experience. Traveling and sharing my experiences with others is a new hobby that I have discovered.',
+      "On the adventurous side, I indulge my love for exploration by not only navigating mountainous terrains but also seeking out serene beaches and other captivating locations. My travel experiences span from the majestic Himalayas to the southernmost tip of India at Kanyakumari, and from the shores of the Arabian Sea to the vast expanse of the Indian Ocean. Covering the spectrum from Kashmir to Dhanushkodi, I've embraced the richness and diversity of landscapes across the subcontinent. These journeys not only fuel my sense of adventure but also provide a unique perspective that I enjoy sharing with others.",
     footerText: `Abhishek Singh website @`,
     logoText: 'Abhishek Profile',
     projectName: 'Profile',
-    url: 'https://www.abhishek.world',
+    url: 'https://www.abhishekthatguy.com',
     img: '/images/profile-logo.png',
     avatar: imgAPI.profile[1],
     avatar2: imgAPI.profile[3],
@@ -42,15 +42,15 @@ const brand = {
       'Interested in working with me? Get in touch and I’d be happy to talk to you.',
   },
   socialProfile: {
-    facebook: 'https://www.facebook.com/developerwhotravels',
-    instagram: 'https://www.instagram.com/developerwhotravels',
+    facebook: 'https://www.facebook.com/abhishekthatguy',
+    instagram: 'https://www.instagram.com/abhishekthatguy',
     twitter: 'https://twitter.com/abhishekthatguy',
-    linkedin: 'https://www.linkedin.com/in/aviibuzz/',
+    linkedin: 'https://www.linkedin.com/in/abhishekthatguy',
     github: 'https://github.com/abhishekthatguy',
-    youtube: 'https://www.youtube.com/@developerwhotravels',
+    youtube: 'https://www.youtube.com/abhishekthatguy',
     blog: 'https://abhishekthatguy.medium.com/',
     // skype: 'live:25e678fec67a5015',
-    skype: 'https://blog.abhishek.world',
+    skype: 'https://join.skype.com/invite/XOZYnW9jkfUz',
   },
   services: [
     {

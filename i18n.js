@@ -17,4 +17,6 @@ module.exports = new NextI18Next({
     prt: 'pt',
     zho: 'zh',
   },
+  // Add this middleware configuration
+  //  ignoreRoutes: ['/api/send-email'],
 });

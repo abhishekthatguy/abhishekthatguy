@@ -248,6 +248,15 @@ const specialization = {
               icon: '/images/profile-logo.png',
             },
             {
+              name: 'wordpress',
+              title: 'Word Press',
+              hintText:
+                'Since Html Css javascript are fudamentals so i did my expertise into these ',
+              logoText: 'vuecli-icon',
+              url: '',
+              icon: '/images/profile-logo.png',
+            },
+            {
               name: 'launchDarkly',
               title: 'Launch Darkly',
               hintText:

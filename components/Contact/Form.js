@@ -18,13 +18,15 @@ function Form(props) {
   const classes = useStyles();
   const text = useText();
   const { t } = props;
-  const apiUrl = `https://content.abhishek.world/api/website-leads`;
+  // const apiUrl = `https://content.abhishek.world/api/website-leads`;
+  const apiUrl = `http://localhost:3001/send-email`;
   const [error, setError] = useState(null);
   // const [loading, setLoading] = useState(null);
   const [values, setValues] = useState({
     name: '',
     email: '',
     message: '',
+    to: 'kashyapabhi688@gmail.com',
     // createdAt: new Date(),
     // updatedAt: new Date(),
     // publishedAt: new Date(),
@@ -46,7 +48,7 @@ function Form(props) {
 
     const options = {
       headers,
-      data: { ...values },
+      ...values,
     };
     axios
       .post(apiUrl, options)
