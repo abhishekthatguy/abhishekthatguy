@@ -36,7 +36,7 @@ function About(props) {
                   <Typography component="p" className={text.paragraph}>
                     {brand.profile.aboutusParagraph}
                     <Button
-                      variant="outlined-rounded"
+                      // variant="outlined-rounded"
                       color="primary"
                       onClick={() => {
                         setShowMore(!showMore);
