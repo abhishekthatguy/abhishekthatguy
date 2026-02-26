@@ -169,6 +169,8 @@ This repository is the source for **[abhishekthatguy.in](https://abhishekthatguy
 
 ### How to Start
 
+**Requirements:** Node.js **20+** (LTS). Use `.nvmrc` / `.node-version` for nvm/fnm (`nvm use` or `fnm use`).
+
 **Development**
 
 ```bash
