@@ -47,7 +47,7 @@ export default function AboutPage() {
               <span className={effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'}>Me</span>
             </motion.h1>
             <p className={`text-xl ${themeStyles.descriptionText} max-w-2xl mx-auto transition-colors duration-500`}>
-              Learn more about my journey, expertise, and passion for building exceptional digital experiences
+              AI systems engineer & full-stack architect — building intelligent automation, RAG, and multi-agent systems
             </p>
           </motion.div>
 
@@ -90,7 +90,7 @@ export default function AboutPage() {
                 >
                   <Image
                     src="/about_profile.png"
-                    alt="Abhishek Singh - Senior Frontend Architect"
+                    alt="Abhishek Singh - AI Systems Engineer & Full-Stack Architect"
                     fill
                     className="object-contain object-center"
                     priority
@@ -127,15 +127,15 @@ export default function AboutPage() {
                   }}
                   animate={gradientAnimation}
                 >
-                  Senior Frontend
+                  AI Systems Engineer
                 </motion.span>{' '}
-                <span className={effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'}>Architect</span>
+                <span className={effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'}> & Full-Stack Architect</span>
               </motion.h2>
               <p className={`text-lg ${themeStyles.descriptionText} leading-relaxed transition-colors duration-500`}>
-                As a <span className={`${effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'} font-semibold transition-colors duration-500`}>Senior Frontend Architect</span>, my specialty is twofold: leading high-performing front-end teams and designing high-performance, scalable UI architecture. I have a deep, technical focus on performance optimization, mastering <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>Core Web Vitals</span> and profiling techniques to achieve top-tier PageSpeed scores.
+                I design and build intelligent automation systems that scale. With <span className={`${effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'} font-semibold transition-colors duration-500`}>7+ years</span> in frontend architecture and performance engineering, I now specialise in <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>applied AI systems</span> — multi-agent orchestration, RAG, and async task pipelines.
               </p>
               <p className={`text-lg ${themeStyles.descriptionText} leading-relaxed transition-colors duration-500`}>
-                My core expertise spans the <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>MERN stack</span> (MongoDB, Express, React, Node.js), <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>TypeScript</span>, and modern SSR frameworks like <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>Next.js</span>. I am toolkit-agnostic, selecting the best technology—from Vue.js to lightweight tools like Alpine.js and Tailwind CSS—and guide my team in managing the end-to-end application lifecycle via robust DevOps (CI/CD) pipelines.
+                I built <Link href="/projects/zaytri" className={`${effectiveTheme === 'dark' ? 'text-[#FE7743] hover:text-[#00D9FF]' : 'text-[#E65100] hover:text-[#0288D1]'} font-semibold underline underline-offset-2 transition-colors duration-300`}>Zaytri</Link>, a production-ready AI automation platform with dynamic LLM routing, brand-aware vector search (pgvector), and Celery-based background processing. I bridge product thinking, AI engineering, and scalable architecture — and previously led frontend teams delivering <span className={`${effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'} font-semibold transition-colors duration-500`}>90+ Lighthouse</span> scores.
               </p>
             </motion.div>
           </div>
@@ -165,32 +165,31 @@ export default function AboutPage() {
                 <div>
                   <h4 className={`text-xl font-semibold mb-3 transition-colors duration-500 ${
                     effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'
-                  }`}>Frontend Technologies</h4>
+                  }`}>AI & LLM Systems</h4>
                   <ul className={`space-y-2 ${themeStyles.descriptionText} transition-colors duration-500`}>
-                    <li>• React & Next.js (SSR)</li>
-                    <li>• Vue.js & Nuxt.js</li>
-                    <li>• TypeScript & JavaScript</li>
-                    <li>• HTML5, CSS3, Sass</li>
-                    <li>• Tailwind CSS & Alpine.js</li>
-                    <li>• AngularJS</li>
+                    <li>• Multi-agent AI system design</li>
+                    <li>• LLM orchestration & prompt engineering</li>
+                    <li>• RAG & vector search (pgvector)</li>
+                    <li>• Multi-LLM routing (Ollama, OpenAI, Gemini)</li>
+                    <li>• Cost-optimized hybrid AI (Ollama + cloud)</li>
                   </ul>
                 </div>
                 <div>
                   <h4 className={`text-xl font-semibold mb-3 transition-colors duration-500 ${
                     effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'
-                  }`}>Backend & Full Stack</h4>
+                  }`}>Backend & Infrastructure</h4>
                   <ul className={`space-y-2 ${themeStyles.descriptionText} transition-colors duration-500`}>
-                    <li>• Node.js & Express.js</li>
-                    <li>• MongoDB</li>
-                    <li>• RESTful APIs</li>
-                    <li>• GraphQL</li>
-                    <li>• MERN Stack Architecture</li>
+                    <li>• FastAPI & async Python</li>
+                    <li>• Celery + Redis task pipelines</li>
+                    <li>• PostgreSQL + pgvector</li>
+                    <li>• Docker, CI/CD, AWS</li>
+                    <li>• Next.js, React, TypeScript</li>
                   </ul>
                 </div>
               </div>
             </motion.div>
 
-            {/* Performance Optimization */}
+            {/* AI & Automation Delivery */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -204,40 +203,40 @@ export default function AboutPage() {
             >
               <h3 className={`text-3xl font-bold mb-6 transition-colors duration-500 ${
                 effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'
-              }`}>Performance Optimization</h3>
+              }`}>AI Systems & Observability</h3>
               <p className={`text-lg ${themeStyles.descriptionText} leading-relaxed mb-4 transition-colors duration-500`}>
-                I specialize in performance optimization with a focus on <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>Core Web Vitals</span> and PageSpeed optimization. My approach includes:
+                I ship production AI with clear metrics and reliability:
               </p>
               <ul className={`space-y-3 ${themeStyles.descriptionText} transition-colors duration-500`}>
                 <li className="flex items-start">
                   <span className={`mr-2 transition-colors duration-500 ${
                     effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'
                   }`}>•</span>
-                  <span>Profiling and identifying performance bottlenecks using Chrome DevTools, Lighthouse, and WebPageTest</span>
+                  <span>Designing multi-agent workflows with observability and fallbacks</span>
                 </li>
                 <li className="flex items-start">
                   <span className={`mr-2 transition-colors duration-500 ${
                     effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'
                   }`}>•</span>
-                  <span>Optimizing bundle sizes, code splitting, and lazy loading strategies</span>
+                  <span>RAG pipelines with brand-aware retrieval and tuned embeddings</span>
                 </li>
                 <li className="flex items-start">
                   <span className={`mr-2 transition-colors duration-500 ${
                     effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'
                   }`}>•</span>
-                  <span>Implementing server-side rendering (SSR) and static site generation (SSG) for optimal performance</span>
+                  <span>Async task queues (Celery/Redis) for scalable background processing</span>
                 </li>
                 <li className="flex items-start">
                   <span className={`mr-2 transition-colors duration-500 ${
                     effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'
                   }`}>•</span>
-                  <span>Enhancing Core Web Vitals: LCP, FID, CLS scores to achieve top-tier PageSpeed ratings</span>
+                  <span>Premium dashboards (e.g. Next.js) for AI workflows and cost/latency visibility</span>
                 </li>
                 <li className="flex items-start">
                   <span className={`mr-2 transition-colors duration-500 ${
                     effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'
                   }`}>•</span>
-                  <span>Optimizing images, fonts, and assets for faster load times</span>
+                  <span>Frontend performance: Core Web Vitals, 90+ Lighthouse, SSR/SSG</span>
                 </li>
               </ul>
             </motion.div>
@@ -256,45 +255,39 @@ export default function AboutPage() {
             >
               <h3 className={`text-3xl font-bold mb-6 transition-colors duration-500 ${
                 effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'
-              }`}>Leadership & Team Management</h3>
+              }`}>Leadership & Delivery</h3>
               <p className={`text-lg ${themeStyles.descriptionText} leading-relaxed mb-4 transition-colors duration-500`}>
-                As a team leader, I focus on:
+                I lead teams and ship outcomes across AI and product:
               </p>
               <ul className={`space-y-3 ${themeStyles.descriptionText} transition-colors duration-500`}>
                 <li className="flex items-start">
                   <span className={`mr-2 transition-colors duration-500 ${
                     effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'
                   }`}>•</span>
-                  <span>Leading high-performing front-end development teams</span>
+                  <span>Leading cross-functional delivery of AI and full-stack products</span>
                 </li>
                 <li className="flex items-start">
                   <span className={`mr-2 transition-colors duration-500 ${
                     effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'
                   }`}>•</span>
-                  <span>Mentoring developers on best practices and modern development workflows</span>
+                  <span>Mentoring on applied AI, prompt design, and production ML practices</span>
                 </li>
                 <li className="flex items-start">
                   <span className={`mr-2 transition-colors duration-500 ${
                     effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'
                   }`}>•</span>
-                  <span>Architecting scalable UI solutions that align with business objectives</span>
+                  <span>Architecting scalable systems that align with business and cost goals</span>
                 </li>
                 <li className="flex items-start">
                   <span className={`mr-2 transition-colors duration-500 ${
                     effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'
                   }`}>•</span>
-                  <span>Establishing coding standards and review processes</span>
-                </li>
-                <li className="flex items-start">
-                  <span className={`mr-2 transition-colors duration-500 ${
-                    effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'
-                  }`}>•</span>
-                  <span>Collaborating with cross-functional teams including designers, backend developers, and product managers</span>
+                  <span>Working with product, design, and backend on roadmap and feasibility</span>
                 </li>
               </ul>
             </motion.div>
 
-            {/* DevOps & CI/CD */}
+            {/* DevOps & AI Infrastructure */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -308,45 +301,39 @@ export default function AboutPage() {
             >
               <h3 className={`text-3xl font-bold mb-6 transition-colors duration-500 ${
                 effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'
-              }`}>DevOps & CI/CD</h3>
+              }`}>DevOps & AI Infrastructure</h3>
               <p className={`text-lg ${themeStyles.descriptionText} leading-relaxed mb-4 transition-colors duration-500`}>
-                I guide teams in managing the end-to-end application lifecycle through:
+                I run reliable deployment and observability for AI and web apps:
               </p>
               <ul className={`space-y-3 ${themeStyles.descriptionText} transition-colors duration-500`}>
                 <li className="flex items-start">
                   <span className={`mr-2 transition-colors duration-500 ${
                     effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'
                   }`}>•</span>
-                  <span>Setting up robust CI/CD pipelines using Jenkins, GitHub Actions, and GitLab CI</span>
+                  <span>CI/CD with GitHub Actions, Docker, and AWS</span>
                 </li>
                 <li className="flex items-start">
                   <span className={`mr-2 transition-colors duration-500 ${
                     effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'
                   }`}>•</span>
-                  <span>Deployment strategies using AWS, Docker, and containerization</span>
+                  <span>Deploying FastAPI, Celery workers, and vector DBs (PostgreSQL/pgvector)</span>
                 </li>
                 <li className="flex items-start">
                   <span className={`mr-2 transition-colors duration-500 ${
                     effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'
                   }`}>•</span>
-                  <span>Automated testing and quality assurance workflows</span>
+                  <span>Monitoring, logging, and cost visibility for AI workloads</span>
                 </li>
                 <li className="flex items-start">
                   <span className={`mr-2 transition-colors duration-500 ${
                     effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'
                   }`}>•</span>
-                  <span>Monitoring and logging solutions for production applications</span>
-                </li>
-                <li className="flex items-start">
-                  <span className={`mr-2 transition-colors duration-500 ${
-                    effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'
-                  }`}>•</span>
-                  <span>Infrastructure as Code (IaC) practices</span>
+                  <span>Next.js, Vercel, and front-end performance (Lighthouse, Core Web Vitals)</span>
                 </li>
               </ul>
             </motion.div>
 
-            {/* Toolkit Agnostic Approach */}
+            {/* Approach */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -360,9 +347,9 @@ export default function AboutPage() {
             >
               <h3 className={`text-3xl font-bold mb-6 transition-colors duration-500 ${
                 effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'
-              }`}>Toolkit Agnostic Philosophy</h3>
+              }`}>How I Work</h3>
               <p className={`text-lg ${themeStyles.descriptionText} leading-relaxed transition-colors duration-500`}>
-                I believe in selecting the best technology for each project's unique requirements. Whether it's a heavy-weight framework like <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>Vue.js</span> or <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>React</span>, or lightweight solutions like <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>Alpine.js</span> and <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>Tailwind CSS</span>, I make technology decisions based on project needs, team expertise, and long-term maintainability rather than personal preference.
+                I choose tools and architecture to fit the problem: <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>FastAPI</span> and <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>Celery</span> for AI backends, <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>Next.js</span> or <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>React</span> for interfaces, and the right LLM (Ollama, OpenAI, Gemini) for cost and quality. I focus on product impact, observability, and maintainability rather than a single stack.
               </p>
             </motion.div>
           </div>

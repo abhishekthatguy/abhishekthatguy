@@ -5,144 +5,96 @@ import { useTheme } from '@/hooks/useTheme';
 import themeConfig from '@/config/theme';
 
 const ThemeToggle = () => {
-  const { theme, toggleTheme, getEffectiveTheme, mounted } = useTheme();
-  const [effectiveTheme, setEffectiveTheme] = useState(() => {
-    // Get initial theme from DOM to avoid mismatch
-    if (typeof window !== 'undefined') {
-      return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-    }
-    return 'light';
-  });
+  const { toggleTheme, getEffectiveTheme, mounted } = useTheme();
+  const [effectiveTheme, setEffectiveTheme] = useState('light');
 
-  // Update effective theme reactively
   useEffect(() => {
     if (!mounted) return;
-
     const updateTheme = () => {
-      const isDark = document.documentElement.classList.contains('dark');
-      setEffectiveTheme(isDark ? 'dark' : 'light');
+      setEffectiveTheme(document.documentElement.classList.contains('dark') ? 'dark' : 'light');
     };
-
-    // Update immediately
     updateTheme();
-
-    // Watch for theme changes
-    const observer = new MutationObserver(() => {
-      updateTheme();
-    });
-
+    const observer = new MutationObserver(updateTheme);
     observer.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['class', 'data-theme']
+      attributeFilter: ['class', 'data-theme'],
     });
-
-    const handleThemeChange = () => {
-      setTimeout(updateTheme, 0);
-    };
-    window.addEventListener('themechange', handleThemeChange);
-
+    window.addEventListener('themechange', updateTheme);
     return () => {
       observer.disconnect();
-      window.removeEventListener('themechange', handleThemeChange);
+      window.removeEventListener('themechange', updateTheme);
     };
-  }, [theme, mounted]);
+  }, [mounted]);
 
-  // Don't render until mounted to avoid hydration mismatch
-  if (!mounted) {
-    return null;
-  }
+  if (!mounted) return null;
 
-  // Get position classes based on config
-  const getPositionClasses = () => {
-    const pos = themeConfig.toggleButton.position;
-    
-    const positions = {
-      'top-left': 'top-5 left-5',
-      'top-right': 'top-5 right-5',
-      'bottom-left': 'bottom-5 left-5',
-      'bottom-right': 'bottom-5 right-5',
-      'top-center': 'top-5 left-1/2 -translate-x-1/2',
-      'bottom-center': 'bottom-5 left-1/2 -translate-x-1/2',
-    };
-
-    return positions[pos] || positions['bottom-left'];
-  };
-
-  // Get size classes
-  const getSizeClasses = () => {
-    const size = themeConfig.toggleButton.size;
-    const sizes = {
-      sm: 'w-10 h-10',
-      md: 'w-12 h-12',
-      lg: 'w-14 h-14',
-    };
-    return sizes[size] || sizes.md;
-  };
-
-  const responsiveClasses = themeConfig.toggleButton.showOnMobile 
-    ? '' 
-    : 'hidden md:flex';
-
-  const roundedClass = themeConfig.toggleButton.style || 'rounded-full';
+  const isDark = effectiveTheme === 'dark';
+  const positionClass = 'top-5 right-5';
 
   return (
-    <motion.button
-      onClick={toggleTheme}
-      className={`fixed ${getPositionClasses()} ${getSizeClasses()} ${roundedClass} bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl z-50 flex items-center justify-center transition-all duration-300 group ${responsiveClasses}`}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.9 }}
-      aria-label={`Switch to ${effectiveTheme === 'dark' ? 'light' : 'dark'} mode`}
-      title={`Switch to ${effectiveTheme === 'dark' ? 'light' : 'dark'} mode`}
+    <motion.div
+      className={`fixed ${positionClass} z-50 flex items-center gap-0.5 p-1 rounded-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border border-gray-200 dark:border-gray-700 shadow-lg ${
+        themeConfig.toggleButton.showOnMobile ? '' : 'hidden md:flex'
+      }`}
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      role="switch"
+      aria-checked={isDark}
+      aria-label="Toggle light or dark mode"
     >
-      {/* Sun Icon (Light Mode) */}
-      <motion.svg
-        className="w-6 h-6 text-yellow-500 absolute"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        initial={false}
-        animate={{
-          opacity: effectiveTheme === 'dark' ? 0 : 1,
-          rotate: effectiveTheme === 'dark' ? 90 : 0,
-          scale: effectiveTheme === 'dark' ? 0 : 1,
-        }}
-        transition={{ duration: 0.3 }}
+      {/* Light option */}
+      <motion.button
+        type="button"
+        onClick={() => !isDark || toggleTheme()}
+        className={`relative z-10 w-9 h-9 rounded-full flex items-center justify-center transition-colors duration-200 ${
+          !isDark
+            ? 'text-yellow-600 dark:text-yellow-400'
+            : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
+        }`}
+        aria-label="Light mode"
+        title="Light mode"
       >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-        />
-      </motion.svg>
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+          />
+        </svg>
+      </motion.button>
 
-      {/* Moon Icon (Dark Mode) */}
-      <motion.svg
-        className="w-6 h-6 text-blue-400 absolute"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        initial={false}
-        animate={{
-          opacity: effectiveTheme === 'dark' ? 1 : 0,
-          rotate: effectiveTheme === 'dark' ? 0 : -90,
-          scale: effectiveTheme === 'dark' ? 1 : 0,
-        }}
-        transition={{ duration: 0.3 }}
+      {/* Sliding pill background */}
+      <motion.span
+        className="absolute top-1 left-1 w-9 h-9 rounded-full bg-yellow-100 dark:bg-gray-700 shadow-sm border border-gray-200/50 dark:border-gray-600/50"
+        animate={{ x: isDark ? 38 : 0 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+      />
+
+      {/* Dark option */}
+      <motion.button
+        type="button"
+        onClick={() => isDark || toggleTheme()}
+        className={`relative z-10 w-9 h-9 rounded-full flex items-center justify-center transition-colors duration-200 ${
+          isDark
+            ? 'text-blue-400'
+            : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
+        }`}
+        aria-label="Dark mode"
+        title="Dark mode"
       >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-        />
-      </motion.svg>
-
-      {/* Gradient Ring Effect */}
-      <div className={`absolute inset-0 ${roundedClass} bg-gradient-to-br from-yellow-400/20 via-transparent to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-    </motion.button>
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+          />
+        </svg>
+      </motion.button>
+    </motion.div>
   );
 };
 
 export default ThemeToggle;
-

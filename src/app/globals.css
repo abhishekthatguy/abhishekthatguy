@@ -6,18 +6,26 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 245, 245, 245;
+  /* Match Hero/section background for consistent landing page */
+  --page-bg: #f9fafb; /* gray-50 */
 }
 
 html {
   scroll-behavior: smooth;
 }
 
+/* Same background as Hero and all sections - no gradient, single color */
+html,
+body {
+  min-height: 100vh;
+  background: var(--page-bg);
+  transition: background-color 0.5s ease;
+}
+
+html.dark {
+  --page-bg: #000000;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-    to bottom,
-    rgb(var(--background-start-rgb)),
-    rgb(var(--background-end-rgb))
-  );
-  min-height: 100vh;
 }

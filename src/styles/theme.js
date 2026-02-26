@@ -9,30 +9,33 @@
  * @param {string} effectiveTheme - 'dark' or 'light'
  * @returns {Object} Theme-specific style configurations
  */
+// gray-50 RGB - same as Tailwind bg-gray-50 / page background for consistent hero vs sections
+const GRAY_50_RGB = '249, 250, 251';
+
 export const getThemeStyles = (effectiveTheme) => {
   const isDark = effectiveTheme === 'dark';
   
   return {
-    // Background gradients - Enhanced contrast
+    // Background gradients - use gray-50 in light mode so Hero matches About/other sections
     radialGradient: isDark
       ? 'radial-gradient(ellipse 80% 100% at center right, transparent 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.9) 70%, rgba(0,0,0,1) 100%)'
-      : 'radial-gradient(ellipse 80% 100% at center right, transparent 0%, rgba(255,255,255,0.4) 40%, rgba(255,255,255,0.9) 70%, rgba(255,255,255,1) 100%)',
+      : `radial-gradient(ellipse 80% 100% at center right, transparent 0%, rgba(${GRAY_50_RGB},0.4) 40%, rgba(${GRAY_50_RGB},0.9) 70%, rgba(${GRAY_50_RGB},1) 100%)`,
     
     leftGradient: isDark
       ? 'linear-gradient(to left, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0.95) 60%, rgba(0,0,0,1) 100%)'
-      : 'linear-gradient(to left, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 30%, rgba(255,255,255,0.95) 60%, rgba(255,255,255,1) 100%)',
+      : `linear-gradient(to left, rgba(${GRAY_50_RGB},0) 0%, rgba(${GRAY_50_RGB},0.5) 30%, rgba(${GRAY_50_RGB},0.95) 60%, rgba(${GRAY_50_RGB},1) 100%)`,
     
     bottomGradient: isDark
       ? 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 70%, rgba(0,0,0,0.8) 100%)'
-      : 'linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 30%, rgba(255,255,255,0) 70%, rgba(255,255,255,0.8) 100%)',
+      : `linear-gradient(to bottom, rgba(${GRAY_50_RGB},0.7) 0%, rgba(${GRAY_50_RGB},0) 30%, rgba(${GRAY_50_RGB},0) 70%, rgba(${GRAY_50_RGB},0.8) 100%)`,
     
     centerRadial: isDark
       ? 'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.85) 70%, rgba(0,0,0,0.98) 100%)'
-      : 'radial-gradient(ellipse at center, transparent 0%, rgba(255,255,255,0.5) 40%, rgba(255,255,255,0.85) 70%, rgba(255,255,255,0.98) 100%)',
+      : `radial-gradient(ellipse at center, transparent 0%, rgba(${GRAY_50_RGB},0.5) 40%, rgba(${GRAY_50_RGB},0.85) 70%, rgba(${GRAY_50_RGB},0.98) 100%)`,
     
     overlayGradient: isDark
       ? 'bg-gradient-to-r from-black via-black/90 to-black/70'
-      : 'bg-gradient-to-r from-white via-white/90 to-white/70',
+      : 'bg-gradient-to-r from-gray-50 via-gray-50/90 to-gray-50/70',
     
     // Text gradients - Theme adapted
     abhishekGradient: isDark

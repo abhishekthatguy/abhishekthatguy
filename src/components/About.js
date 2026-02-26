@@ -49,7 +49,7 @@ export default function About() {
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
             <motion.h3
-              className={`text-3xl md:text-4xl font-bold mb-6 ${themeStyles.headingText} transition-colors duration-500`}
+              className={`text-2xl md:text-3xl font-bold mb-6 ${themeStyles.headingText} transition-colors duration-500`}
               variants={fadeInUp}
               initial="hidden"
               whileInView="visible"
@@ -69,13 +69,13 @@ export default function About() {
                 }}
                 animate={gradientAnimation}
               >
-                Senior Frontend
+                AI Systems Engineer
               </motion.span>{" "}
-              <span className={effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'}>Architect</span>
+              <span className={effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'}> & Full-Stack Architect</span>
             </motion.h3>
 
             <motion.div
-              className={`space-y-4 text-lg ${themeStyles.descriptionText} leading-relaxed transition-colors duration-500`}
+              className={`space-y-4 text-base md:text-lg ${themeStyles.descriptionText} leading-relaxed transition-colors duration-500`}
               variants={fadeInUp}
               initial="hidden"
               whileInView="visible"
@@ -83,39 +83,34 @@ export default function About() {
               transition={{ delay: 0.2 }}
             >
               <p>
-                As a{" "}
-                <span className={`${effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'} font-semibold transition-colors duration-500`}>
-                  Senior Frontend Architect
-                </span>
-                , my specialty is twofold: leading high-performing front-end
-                teams and designing high-performance, scalable UI architecture.
-                I have a deep, technical focus on performance optimization,
-                mastering{" "}
-                <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>
-                  Core Web Vitals
-                </span>{" "}
-                and profiling techniques to achieve top-tier PageSpeed scores.
+                I design and build intelligent automation systems that scale. With{" "}
+                <span className={`${effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'} font-semibold transition-colors duration-500`}>7+ years</span>{" "}
+                in frontend architecture and performance engineering, I now specialize in{" "}
+                <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>applied AI systems</span>
+                — including multi-agent orchestration, Retrieval-Augmented Generation (RAG), and async task pipelines.
               </p>
               <p>
-                My core expertise spans the{" "}
-                <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>MERN stack</span>{" "}
-                (MongoDB, Express, React, Node.js),{" "}
-                <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>TypeScript</span>
-                , and modern SSR frameworks like{" "}
-                <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>Next.js</span>. I
-                am toolkit-agnostic, selecting the best technology—from{" "}
-                <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>Vue.js</span> to
-                lightweight tools like{" "}
-                <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>Alpine.js</span>{" "}
-                and{" "}
-                <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>
-                  Tailwind CSS
-                </span>
-                —and guide my team in managing the end-to-end application
-                lifecycle via robust{" "}
-                <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>DevOps</span> (
-                <span className={`${effectiveTheme === 'dark' ? 'text-[#00D9FF]' : 'text-[#0288D1]'} font-semibold transition-colors duration-500`}>CI/CD</span>)
-                pipelines.
+                I built{" "}
+                <Link href="/projects/zaytri" className={`${effectiveTheme === 'dark' ? 'text-[#FE7743] hover:text-[#00D9FF]' : 'text-[#E65100] hover:text-[#0288D1]'} font-semibold underline underline-offset-2 transition-colors duration-300`}>
+                  Zaytri
+                </Link>
+                , a production-ready AI automation platform that coordinates specialized agents through dynamic LLM routing, brand-aware vector search (pgvector), and Celery-based background processing.
+              </p>
+              <p className="font-medium">
+                My expertise spans:
+              </p>
+              <ul className={`space-y-1.5 pl-4 list-disc ${themeStyles.descriptionText}`}>
+                <li>Multi-agent AI system design</li>
+                <li>LLM orchestration & prompt engineering</li>
+                <li>FastAPI + async backend architecture</li>
+                <li>Redis & Celery task pipelines</li>
+                <li>PostgreSQL + vector search</li>
+                <li>Cost-optimized hybrid AI infrastructure (Ollama + OpenAI)</li>
+              </ul>
+              <p>
+                Previously, I led frontend teams and delivered high-performance UI systems achieving{" "}
+                <span className={`${effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'} font-semibold transition-colors duration-500`}>90+ Lighthouse</span>{" "}
+                scores. Today, I bridge product thinking, AI engineering, and scalable architecture.
               </p>
             </motion.div>
 
@@ -141,7 +136,7 @@ export default function About() {
                   }}
                 >
                   <span className="relative z-10 transition-colors duration-500 group-hover:text-white">
-                    Learn More
+                    Full bio & expertise
                   </span>
                   <motion.div
                     className={`absolute inset-0 ${themeStyles.buttonHoverBg} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
@@ -195,7 +190,7 @@ export default function About() {
               >
                 <Image
                   src="/about_profile.png"
-                  alt="Abhishek Singh - Senior Frontend Architect"
+                  alt="Abhishek Singh - AI Systems Engineer & Full-Stack Architect"
                   fill
                   className="object-cover object-top"
                   priority

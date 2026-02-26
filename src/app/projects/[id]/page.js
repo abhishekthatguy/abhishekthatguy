@@ -77,6 +77,36 @@ export default function ProjectDetailPage({ params }) {
         </div>
       </section>
 
+      {/* Key metrics & outcomes */}
+      {project.outcomes && project.outcomes.length > 0 && (
+        <section className="py-8 sm:py-10 bg-black border-t border-gray-800">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5 }}
+              className={`rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border ${project.borderColor} bg-gray-900/40`}
+            >
+              <h2 className="text-xl sm:text-2xl font-bold text-primary mb-4 sm:mb-6 flex items-center gap-2">
+                <span>📊</span> Key metrics & outcomes
+              </h2>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                {project.outcomes.map((outcome, idx) => (
+                  <li
+                    key={idx}
+                    className="flex items-start gap-2 text-muted text-sm sm:text-base leading-relaxed"
+                  >
+                    <span className="text-primary mt-0.5">•</span>
+                    <span>{outcome}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
+        </section>
+      )}
+
       {/* Project Details */}
       <section className="py-12 sm:py-16 lg:py-20 bg-black">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">

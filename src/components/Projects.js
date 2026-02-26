@@ -40,13 +40,6 @@ export default function Projects() {
 
   return (
     <section id="projects" className={`py-12 sm:py-16 lg:py-20 ${themeStyles.sectionBg} relative overflow-hidden transition-all duration-500 ease-in-out`}>
-      {/* Background gradient effect - Theme-aware */}
-      <div className={`absolute inset-0 pointer-events-none transition-all duration-500 ${
-        effectiveTheme === 'dark' 
-          ? 'bg-gradient-to-b from-black via-indigo-900/5 to-black' 
-          : 'bg-gradient-to-b from-gray-50 via-indigo-50/20 to-gray-50'
-      }`}></div>
-      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <motion.h2
           className={`text-3xl sm:text-4xl md:text-5xl font-extrabold text-center mb-4 sm:mb-6 ${themeStyles.headingText} transition-colors duration-500`}
@@ -170,12 +163,23 @@ export default function Projects() {
                       </div>
                     </div>
 
-                    <p className={`mb-3 sm:mb-4 text-sm md:text-base leading-relaxed transition-colors duration-500 ${
+                    <p className={`mb-2 sm:mb-3 text-sm md:text-base leading-relaxed transition-colors duration-500 ${
                       effectiveTheme === 'dark' ? 'text-white/90' : 'text-gray-700'
                     }`}>
                       {project.shortDescription}
                     </p>
-
+                    {project.outcomes && project.outcomes.length > 0 && (
+                      <ul className={`mb-3 sm:mb-4 text-xs sm:text-sm space-y-0.5 transition-colors duration-500 ${
+                        effectiveTheme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                      }`}>
+                        {project.outcomes.slice(0, 3).map((outcome, i) => (
+                          <li key={i} className="flex items-start gap-1.5">
+                            <span className={effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'} aria-hidden>•</span>
+                            <span>{outcome}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                     <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
                       {project.tech.slice(0, 6).map((tech, idx) => (
                         <motion.span

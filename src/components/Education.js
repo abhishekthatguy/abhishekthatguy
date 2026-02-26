@@ -74,13 +74,6 @@ export default function Education() {
 
   return (
     <section id="education" className={`py-20 ${themeStyles.sectionBg} relative overflow-hidden transition-all duration-500 ease-in-out`}>
-      {/* Background gradient effect - Theme-aware */}
-      <div className={`absolute inset-0 pointer-events-none transition-all duration-500 ${
-        effectiveTheme === 'dark' 
-          ? 'bg-gradient-to-b from-black via-blue-900/5 to-black' 
-          : 'bg-gradient-to-b from-gray-50 via-blue-50/20 to-gray-50'
-      }`}></div>
-      
       <div className="max-w-5xl mx-auto px-4 relative z-10">
         <motion.h2
           className={`text-4xl md:text-5xl font-extrabold text-center mb-6 ${themeStyles.headingText} transition-colors duration-500`}

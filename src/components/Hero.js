@@ -489,7 +489,7 @@ export default function Hero() {
         {/* Background Image - Right aligned */}
         <motion.div
           className="absolute inset-0 w-full h-full"
-          animate={{ opacity: effectiveTheme === 'dark' ? [0.25, 0.35, 0.25] : [0.4, 0.5, 0.4], scale: [1, 1.01, 1] }}
+          animate={{ opacity: effectiveTheme === 'dark' ? [0.45, 0.55, 0.45] : [0.6, 0.7, 0.6], scale: [1, 1.01, 1] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           style={{ contain: 'layout style paint', position: 'relative' }}
         >
@@ -502,40 +502,40 @@ export default function Hero() {
             sizes="100vw"
             className="object-contain"
             style={{ 
-              opacity: effectiveTheme === 'dark' ? 0.3 : 0.45,
+              opacity: effectiveTheme === 'dark' ? 0.5 : 0.65,
               objectPosition: 'right top',
               filter: effectiveTheme === 'dark' ? 'brightness(0.6) contrast(1.2)' : 'brightness(1.1) contrast(0.9)'
             }}
           />
           
-          {/* Theme-aware gradient overlays - Enhanced visibility */}
+          {/* Theme-aware gradient overlays - Reduced so hero image is ~10% more visible (both themes) */}
           <div 
             className="absolute inset-0 transition-all duration-500 ease-in-out" 
             style={{ 
               background: themeStyles.radialGradient,
-              opacity: effectiveTheme === 'dark' ? 0.85 : 0.75
+              opacity: effectiveTheme === 'dark' ? 0.65 : 0.55
             }}
           />
           <div 
             className="absolute inset-0 transition-all duration-500 ease-in-out" 
             style={{ 
               background: themeStyles.leftGradient,
-              opacity: effectiveTheme === 'dark' ? 0.9 : 0.8
+              opacity: effectiveTheme === 'dark' ? 0.7 : 0.6
             }}
           />
           <div 
             className="absolute inset-0 transition-all duration-500 ease-in-out" 
             style={{ 
               background: themeStyles.bottomGradient,
-              opacity: effectiveTheme === 'dark' ? 0.8 : 0.7
+              opacity: effectiveTheme === 'dark' ? 0.6 : 0.5
             }}
           />
         </motion.div>
         
-        {/* Gradient Overlay - Theme adapted with better visibility */}
+        {/* Gradient Overlay - Reduced for ~10% more hero image visibility (both themes) */}
         <div 
           className={`absolute inset-0 transition-all duration-500 ease-in-out ${themeStyles.overlayGradient}`}
-          style={{ opacity: effectiveTheme === 'dark' ? 0.7 : 0.6 }}
+          style={{ opacity: effectiveTheme === 'dark' ? 0.5 : 0.4 }}
         />
         
         {/* Center Radial Gradient */}
@@ -543,7 +543,7 @@ export default function Hero() {
           className="absolute inset-0 transition-all duration-500 ease-in-out" 
           style={{ 
             background: themeStyles.centerRadial,
-            opacity: effectiveTheme === 'dark' ? 0.75 : 0.65
+            opacity: effectiveTheme === 'dark' ? 0.55 : 0.45
           }}
         />
       </div>
@@ -554,12 +554,12 @@ export default function Hero() {
       
       {/* Content - Highest z-index for clear visibility */}
       <div className="container mx-auto px-4 sm:px-6 md:px-8 py-6 sm:py-8 md:py-12 text-center relative z-[10]" style={{ contain: 'layout style' }}>
-        {/* Subtle backdrop for text readability */}
+        {/* Subtle backdrop for text readability - gray-50 in light so Hero matches About */}
         <div 
           className={`absolute inset-0 -z-10 transition-all duration-500 ${
             effectiveTheme === 'dark' 
               ? 'bg-gradient-to-b from-black/20 via-transparent to-black/30' 
-              : 'bg-gradient-to-b from-white/30 via-transparent to-white/20'
+              : 'bg-gradient-to-b from-gray-50/30 via-transparent to-gray-50/20'
           }`}
           style={{ 
             backdropFilter: 'blur(1px)',
@@ -658,8 +658,22 @@ export default function Hero() {
             initial={false}
             animate={subtitleLoopAnimation}
           >
-            Senior Frontend Architect & Full-Stack Developer
+            AI Automation Engineer / Applied AI Engineer
           </motion.h2>
+          <motion.p
+            className={`text-sm sm:text-base md:text-lg ${themeStyles.descriptionText} mt-1 sm:mt-2 max-w-2xl mx-auto transition-colors duration-500`}
+            style={{
+              WebkitFontSmoothing: 'antialiased',
+              MozOsxFontSmoothing: 'grayscale',
+              textRendering: 'optimizeLegibility',
+              textShadow: effectiveTheme === 'dark' ? '0 1px 2px rgba(0, 0, 0, 0.5)' : 'none'
+            }}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25, duration: 0.4 }}
+          >
+            Front-end architecture & high-performance systems
+          </motion.p>
         </motion.div>
         
         {/* Tech Stack */}
@@ -683,7 +697,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.4 }}
           >
-            Building high-performance applications with
+            Front-end, AI & LLM systems I work with
           </motion.p>
           <motion.div
             className="flex flex-wrap justify-center gap-2 sm:gap-2.5 md:gap-3 items-center px-2"

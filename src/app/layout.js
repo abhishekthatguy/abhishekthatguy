@@ -123,7 +123,7 @@ export default function RootLayout({ children }) {
                       return stored === 'system' ? getSystemTheme() : stored;
                     }
                   } catch (e) {}
-                  return getSystemTheme();
+                  return 'light';
                 };
                 
                 const theme = getTheme();

@@ -200,13 +200,13 @@ const SocialWidget = () => {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="bg-black/40 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 p-2.5 flex flex-col gap-2 relative overflow-visible">
+        <div className="bg-black/40 backdrop-blur-xl rounded-3xl shadow-lg border border-white/20 p-2.5 flex flex-col gap-2 relative overflow-hidden">
           {/* WhatsApp Icon */}
           <motion.a
             href={socialLinks.whatsapp.url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`group relative w-11 h-11 rounded-xl flex items-center justify-center bg-gradient-to-br ${socialLinks.whatsapp.bgGradient} hover:shadow-2xl transition-all duration-300 border border-white/20 hover:border-white/40 backdrop-blur-sm overflow-visible`}
+            className={`group relative w-11 h-11 rounded-xl flex items-center justify-center bg-gradient-to-br ${socialLinks.whatsapp.bgGradient} hover:shadow-2xl transition-all duration-300 border border-white/20 hover:border-white/40 backdrop-blur-sm overflow-visible cursor-pointer`}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.3 }}
@@ -214,8 +214,8 @@ const SocialWidget = () => {
             whileTap={{ scale: 0.95 }}
             aria-label={socialLinks.whatsapp.label}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-xl"></div>
-            <div className="relative z-10 text-white">
+            <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-xl"></div>
+            <div className="relative z-10 text-white pointer-events-none">
               {socialLinks.whatsapp.icon}
             </div>
           </motion.a>
@@ -231,9 +231,10 @@ const SocialWidget = () => {
           exit={{ opacity: 0, scale: 0.8, y: 20 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="bg-black/40 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 p-3 flex flex-col gap-2 relative overflow-visible">
+          <div className="bg-black/40 backdrop-blur-xl rounded-3xl shadow-lg border border-white/20 p-3 flex flex-col gap-2 relative overflow-visible">
             {/* Expand button - Desktop only */}
             <motion.button
+              type="button"
               onClick={handleExpand}
               className="absolute -top-3 -right-3 w-7 h-7 bg-gradient-to-br from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold transition-all shadow-lg border-2 border-white/20 z-10"
               whileHover={{ scale: 1.1, rotate: 90 }}
@@ -248,9 +249,8 @@ const SocialWidget = () => {
             {/* Mail Icon */}
             <motion.a
               href={socialLinks.mail.url}
-              target="_blank"
               rel="noopener noreferrer"
-              className={`group relative w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br ${socialLinks.mail.bgGradient} hover:shadow-2xl transition-all duration-300 border border-white/20 hover:border-white/40 backdrop-blur-sm overflow-visible`}
+              className={`group relative w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br ${socialLinks.mail.bgGradient} hover:shadow-2xl transition-all duration-300 border border-white/20 hover:border-white/40 backdrop-blur-sm overflow-visible cursor-pointer`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.05, duration: 0.3 }}
@@ -258,11 +258,11 @@ const SocialWidget = () => {
               whileTap={{ scale: 0.95 }}
               aria-label={socialLinks.mail.label}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-2xl"></div>
-              <div className="relative z-10 text-white">
+              <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-2xl"></div>
+              <div className="relative z-10 text-white pointer-events-none">
                 {socialLinks.mail.icon}
               </div>
-              <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 px-3 py-2 bg-gray-900/95 backdrop-blur-sm text-white text-xs font-medium rounded-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible pointer-events-none transition-all duration-200 shadow-xl z-[60] border border-white/10">
+              <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 px-3 py-2 bg-gray-900 text-white text-xs font-medium rounded-lg whitespace-nowrap opacity-0 invisible scale-0 origin-right group-hover:opacity-100 group-hover:visible group-hover:scale-100 shadow-none group-hover:shadow-xl pointer-events-none transition-all duration-200 z-[60] border border-white/10">
                 {socialLinks.mail.label}
                 <div className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-gray-900/95"></div>
               </span>
@@ -273,7 +273,7 @@ const SocialWidget = () => {
               href={socialLinks.whatsapp.url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`group relative w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br ${socialLinks.whatsapp.bgGradient} hover:shadow-2xl transition-all duration-300 border border-white/20 hover:border-white/40 backdrop-blur-sm overflow-visible`}
+              className={`group relative w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br ${socialLinks.whatsapp.bgGradient} hover:shadow-2xl transition-all duration-300 border border-white/20 hover:border-white/40 backdrop-blur-sm overflow-visible cursor-pointer`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.3 }}
@@ -281,11 +281,11 @@ const SocialWidget = () => {
               whileTap={{ scale: 0.95 }}
               aria-label={socialLinks.whatsapp.label}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-2xl"></div>
-              <div className="relative z-10 text-white">
+              <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-2xl"></div>
+              <div className="relative z-10 text-white pointer-events-none">
                 {socialLinks.whatsapp.icon}
               </div>
-              <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 px-3 py-2 bg-gray-900/95 backdrop-blur-sm text-white text-xs font-medium rounded-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible pointer-events-none transition-all duration-200 shadow-xl z-[60] border border-white/10">
+              <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 px-3 py-2 bg-gray-900 text-white text-xs font-medium rounded-lg whitespace-nowrap opacity-0 invisible scale-0 origin-right group-hover:opacity-100 group-hover:visible group-hover:scale-100 shadow-none group-hover:shadow-xl pointer-events-none transition-all duration-200 z-[60] border border-white/10">
                 {socialLinks.whatsapp.label}
                 <div className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-gray-900/95"></div>
               </span>
@@ -300,12 +300,16 @@ const SocialWidget = () => {
               whileHover={{ scale: 1.15, y: -4, rotate: -2 }}
               whileTap={{ scale: 0.95 }}
               title="Chat Bot (Coming Soon)"
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); } }}
+              aria-label="Chat Bot (Coming Soon)"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-2xl"></div>
-              <div className="relative z-10 text-white">
+              <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-2xl"></div>
+              <div className="relative z-10 text-white pointer-events-none">
                 {chatbotIcon}
               </div>
-              <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 px-3 py-2 bg-gray-900/95 backdrop-blur-sm text-white text-xs font-medium rounded-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible pointer-events-none transition-all duration-200 shadow-xl z-[60] border border-white/10">
+              <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 px-3 py-2 bg-gray-900 text-white text-xs font-medium rounded-lg whitespace-nowrap opacity-0 invisible scale-0 origin-right group-hover:opacity-100 group-hover:visible group-hover:scale-100 shadow-none group-hover:shadow-xl pointer-events-none transition-all duration-200 z-[60] border border-white/10">
                 Chat Bot
                 <div className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-gray-900/95"></div>
               </span>
@@ -314,9 +318,8 @@ const SocialWidget = () => {
             {/* Call Icon */}
             <motion.a
               href={socialLinks.call.url}
-              target="_blank"
               rel="noopener noreferrer"
-              className={`group relative w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br ${socialLinks.call.bgGradient} hover:shadow-2xl transition-all duration-300 border border-white/20 hover:border-white/40 backdrop-blur-sm overflow-visible`}
+              className={`group relative w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br ${socialLinks.call.bgGradient} hover:shadow-2xl transition-all duration-300 border border-white/20 hover:border-white/40 backdrop-blur-sm overflow-visible cursor-pointer`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.3 }}
@@ -324,11 +327,11 @@ const SocialWidget = () => {
               whileTap={{ scale: 0.95 }}
               aria-label={socialLinks.call.label}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-2xl"></div>
-              <div className="relative z-10 text-white">
+              <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-2xl"></div>
+              <div className="relative z-10 text-white pointer-events-none">
                 {socialLinks.call.icon}
               </div>
-              <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 px-3 py-2 bg-gray-900/95 backdrop-blur-sm text-white text-xs font-medium rounded-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible pointer-events-none transition-all duration-200 shadow-xl z-[60] border border-white/10">
+              <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 px-3 py-2 bg-gray-900 text-white text-xs font-medium rounded-lg whitespace-nowrap opacity-0 invisible scale-0 origin-right group-hover:opacity-100 group-hover:visible group-hover:scale-100 shadow-none group-hover:shadow-xl pointer-events-none transition-all duration-200 z-[60] border border-white/10">
                 {socialLinks.call.label}
                 <div className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-gray-900/95"></div>
               </span>
@@ -347,9 +350,10 @@ const SocialWidget = () => {
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="bg-black/40 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 p-4 flex flex-row flex-wrap gap-2 sm:gap-2.5 justify-start items-center relative overflow-visible max-w-full">
+            <div className="bg-black/40 backdrop-blur-xl rounded-3xl shadow-lg border border-white/20 p-4 flex flex-row flex-wrap gap-2 sm:gap-2.5 justify-start items-center relative overflow-visible max-w-full">
               {/* Collapse button */}
               <motion.button
+                type="button"
                 onClick={handleCollapse}
                 className="absolute -top-3 -right-3 w-7 h-7 bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 rounded-full flex items-center justify-center text-white text-sm font-bold transition-all shadow-lg border-2 border-white/20 z-10 flex-shrink-0"
                 whileHover={{ scale: 1.1, rotate: 90 }}
@@ -362,13 +366,14 @@ const SocialWidget = () => {
               </motion.button>
 
               {/* Social Icons - horizontal row, wraps by screen size */}
-              {Object.entries(socialLinks).map(([key, link], index) => (
+              {Object.entries(socialLinks).map(([key, link], index) => {
+                const isMailOrTel = link.url.startsWith('mailto:') || link.url.startsWith('tel:');
+                return (
                 <motion.a
                   key={key}
                   href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`group relative w-12 h-12 sm:w-14 sm:h-14 flex-shrink-0 rounded-2xl flex items-center justify-center bg-gradient-to-br ${link.bgGradient} hover:shadow-2xl transition-all duration-300 border border-white/20 hover:border-white/40 backdrop-blur-sm overflow-visible`}
+                  {...(!isMailOrTel && { target: '_blank', rel: 'noopener noreferrer' })}
+                  className={`group relative w-12 h-12 sm:w-14 sm:h-14 flex-shrink-0 rounded-2xl flex items-center justify-center bg-gradient-to-br ${link.bgGradient} hover:shadow-2xl transition-all duration-300 border border-white/20 hover:border-white/40 backdrop-blur-sm overflow-visible cursor-pointer`}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05, duration: 0.3 }}
@@ -376,21 +381,22 @@ const SocialWidget = () => {
                   whileTap={{ scale: 0.95 }}
                   aria-label={link.label}
                 >
-                  {/* Shimmer effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-2xl"></div>
+                  {/* Shimmer effect - pointer-events-none so click goes to anchor */}
+                  <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-2xl"></div>
                   
                   {/* Icon */}
-                  <div className="relative z-10 text-white">
+                  <div className="relative z-10 text-white pointer-events-none">
                     {link.icon}
                   </div>
 
                   {/* Tooltip - positioned above on small screens to avoid overflow */}
-                  <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900/95 backdrop-blur-sm text-white text-xs font-medium rounded-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible pointer-events-none transition-all duration-200 shadow-xl z-[60] border border-white/10">
+                  <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs font-medium rounded-lg whitespace-nowrap opacity-0 invisible scale-0 origin-bottom group-hover:opacity-100 group-hover:visible group-hover:scale-100 shadow-none group-hover:shadow-xl pointer-events-none transition-all duration-200 z-[60] border border-white/10">
                     {link.label}
                     <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900/95"></div>
                   </span>
                 </motion.a>
-              ))}
+              );
+              })}
 
               {/* Chatbot Icon Placeholder */}
               <motion.div
@@ -401,15 +407,19 @@ const SocialWidget = () => {
                 whileHover={{ scale: 1.15, y: -4, rotate: -2 }}
                 whileTap={{ scale: 0.95 }}
                 title="Chat Bot (Coming Soon)"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); } }}
+                aria-label="Chat Bot (Coming Soon)"
               >
                 {/* Shimmer effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-2xl"></div>
+                <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-2xl"></div>
                 
-                <div className="relative z-10 text-white">
+                <div className="relative z-10 text-white pointer-events-none">
                   {chatbotIcon}
                 </div>
                 {/* Tooltip */}
-                <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900/95 backdrop-blur-sm text-white text-xs font-medium rounded-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible pointer-events-none transition-all duration-200 shadow-xl z-[60] border border-white/10">
+                <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs font-medium rounded-lg whitespace-nowrap opacity-0 invisible scale-0 origin-bottom group-hover:opacity-100 group-hover:visible group-hover:scale-100 shadow-none group-hover:shadow-xl pointer-events-none transition-all duration-200 z-[60] border border-white/10">
                   Chat Bot
                   <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900/95"></div>
                 </span>

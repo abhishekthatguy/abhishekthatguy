@@ -6,7 +6,7 @@
 
 export const themeConfig = {
   // Default theme behavior
-  defaultTheme: 'system', // 'light' | 'dark' | 'system'
+  defaultTheme: 'light', // 'light' | 'dark' | 'system'
   
   // Storage key for persisting theme preference
   storageKey: 'theme-preference',
@@ -17,7 +17,7 @@ export const themeConfig = {
   // Theme toggle button configuration
   toggleButton: {
     // Position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'top-center' | 'bottom-center'
-    position: 'bottom-left',
+    position: 'top-right',
     
     // Show on mobile (responsive)
     showOnMobile: true,

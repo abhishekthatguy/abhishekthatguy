@@ -1,4 +1,55 @@
+/**
+ * Skills data — modernized with AI & Automation, Backend + DevOps, and trimmed low-value entries.
+ */
+
 export const skillsCategories = [
+  {
+    id: 'ai-automation',
+    category: 'AI & Automation',
+    emoji: '🤖',
+    description: 'I build and integrate AI systems: multi-agent workflows, RAG pipelines, vector search, and LLM routing. I combine prompt engineering with robust async backends (Celery, Redis) to ship production-grade AI features.',
+    subcategories: [
+      {
+        title: 'AI Systems',
+        items: [
+          { id: 'multi-agent-systems', name: 'Multi-Agent Systems' },
+          { id: 'rag', name: 'RAG (Retrieval-Augmented Generation)' },
+          { id: 'vector-search', name: 'Vector Search' },
+          { id: 'prompt-engineering', name: 'Prompt Engineering' },
+          { id: 'multi-llm-routing', name: 'Multi-LLM Routing' },
+        ]
+      },
+      {
+        title: 'Async & Task Queues',
+        items: [
+          { id: 'celery-redis', name: 'Celery + Redis' },
+        ]
+      },
+    ]
+  },
+  {
+    id: 'backend-devops',
+    category: 'Backend + DevOps',
+    emoji: '⚡',
+    description: 'I design and operate scalable backends and deployment pipelines. FastAPI for APIs, PostgreSQL and pgvector for data and embeddings, with Docker, CI/CD, and AWS for reliable delivery.',
+    subcategories: [
+      {
+        title: 'Backend',
+        items: [
+          { id: 'fastapi', name: 'FastAPI', highlight: true },
+          { id: 'postgresql-pgvector', name: 'PostgreSQL + pgvector' },
+        ]
+      },
+      {
+        title: 'DevOps & Cloud',
+        items: [
+          { id: 'docker', name: 'Docker' },
+          { id: 'cicd', name: 'CI/CD' },
+          { id: 'aws', name: 'AWS' },
+        ]
+      },
+    ]
+  },
   {
     id: 'architecture-strategy',
     category: 'Architecture & Technical Strategy',
@@ -27,21 +78,19 @@ export const skillsCategories = [
         items: [
           { id: 'jest', name: 'Jest' },
           { id: 'vitest', name: 'Vitest' },
-          { id: 'mocha', name: 'Mocha' },
-          { id: 'chai', name: 'Chai' },
           { id: 'react-testing-library', name: 'React Testing Library' },
         ]
       }
     ]
   },
   {
-    id: 'fullstack-development',
-    category: 'Full-Stack Development & Integrations',
+    id: 'frontend-fullstack',
+    category: 'Frontend & Full-Stack',
     emoji: '💻',
-    description: 'I possess end-to-end development capabilities, from crafting pixel-perfect user interfaces to engineering the backend logic, databases, and third-party integrations that power modern applications.',
+    description: 'End-to-end development from pixel-perfect UIs to APIs and integrations. JavaScript/TypeScript, React, Next.js, Vue, and modern UI libraries, with GraphQL, REST, and serverless where it fits.',
     subcategories: [
       {
-        title: 'Frontend Languages',
+        title: 'Languages & Markup',
         items: [
           { id: 'javascript-es6', name: 'JavaScript (ES6+)' },
           { id: 'typescript', name: 'TypeScript' },
@@ -51,7 +100,7 @@ export const skillsCategories = [
         ]
       },
       {
-        title: 'Frontend Frameworks',
+        title: 'Frameworks',
         items: [
           { id: 'nextjs-ssr', name: 'Next.js (SSR)' },
           { id: 'reactjs', name: 'React.js' },
@@ -66,102 +115,69 @@ export const skillsCategories = [
           { id: 'vuetify', name: 'Vuetify' },
           { id: 'ant-design', name: 'Ant Design' },
           { id: 'bulma', name: 'Bulma' },
-          { id: 'metronics', name: 'Metronics (Paid Theme)' },
         ]
       },
       {
-        title: 'Backend Environments',
+        title: 'Backend & Data',
         items: [
           { id: 'nodejs', name: 'Node.js' },
-          { id: 'django', name: 'Python (Django)' },
-          { id: 'flask', name: 'Flask' },
-          { id: 'ruby-on-rails', name: 'Ruby on Rails' },
-          { id: 'dotnet', name: '.NET' },
-          { id: 'java', name: 'JAVA' },
-        ]
-      },
-      {
-        title: 'APIs & Databases',
-        items: [
           { id: 'graphql', name: 'GraphQL' },
           { id: 'postgresql', name: 'PostgreSQL' },
-          { id: 'mysql', name: 'MySQL' },
           { id: 'mongodb', name: 'MongoDB' },
           { id: 'rest-apis', name: 'REST APIs' },
           { id: 'serverless-functions', name: 'Serverless Functions' },
         ]
       },
       {
-        title: 'Third-Party Integrations',
+        title: 'Integrations',
         items: [
           { id: 'stripe', name: 'Stripe' },
           { id: 'razorpay', name: 'Razorpay' },
-          { id: 'payu', name: 'PayU' },
           { id: 'oauth', name: 'OAuth' },
-          { id: 'jwt', name: 'JWT (JSON Web Tokens)' },
-          { id: 'opentok', name: 'OpenTok (Video Streaming)' },
-          { id: 'google-tools', name: 'Google Tools (Analytics, GTM, Pixels)' },
-          { id: 'hubstaff', name: 'Hubstaff' },
-          { id: 'poptin', name: 'Poptin' },
+          { id: 'jwt', name: 'JWT' },
+          { id: 'google-tools', name: 'Google Tools (Analytics, GTM)' },
         ]
       }
     ]
   },
   {
-    id: 'cms-platforms',
-    category: 'CMS, Platforms & Content Strategy',
+    id: 'cms-content',
+    category: 'CMS & Content',
     emoji: '📝',
-    description: 'I have extensive experience building and customizing solutions across a wide range of content management systems, from popular open-source platforms to modern headless CMS.',
+    description: 'Headless CMS and content solutions for modern sites and apps: Strapi, Webflow, and markdown-based setups.',
     subcategories: [
       {
-        title: 'Content Management Systems',
+        title: 'Content & CMS',
         items: [
           { id: 'strapi', name: 'Strapi (Headless CMS)' },
-          { id: 'wordpress', name: 'WordPress' },
-          { id: 'drupal', name: 'Drupal' },
           { id: 'webflow', name: 'Webflow' },
+          { id: 'markdown-blog', name: 'Markdown Blog Setup' },
         ]
       },
-      {
-        title: 'Content Solutions',
-        items: [
-          { id: 'markdown-blog', name: 'Markdown Blog Setup' },
-          { id: 'custom-theme-development', name: 'Custom Theme Development' },
-        ]
-      }
     ]
   },
   {
-    id: 'devops-infrastructure',
-    category: 'Cloud, DevOps & Infrastructure',
+    id: 'cloud-tooling',
+    category: 'Cloud & Tooling',
     emoji: '🔧',
-    description: 'I ensure that applications are deployed, scaled, and maintained efficiently and reliably using modern DevOps practices and cloud infrastructure.',
+    description: 'Hosting, CDN, and developer tooling to keep applications fast, secure, and easy to deploy.',
     subcategories: [
       {
-        title: 'Cloud Platforms',
+        title: 'Hosting & CDN',
         items: [
-          { id: 'aws', name: 'AWS' },
           { id: 'vercel', name: 'Vercel' },
-          { id: 'heroku', name: 'Heroku' },
           { id: 'render', name: 'Render' },
-        ]
-      },
-      {
-        title: 'CI/CD & Version Control',
-        items: [
-          { id: 'jenkins', name: 'Jenkins' },
-          { id: 'github-actions', name: 'GitHub Actions' },
-          { id: 'git', name: 'Git' },
-        ]
-      },
-      {
-        title: 'Infrastructure & Security',
-        items: [
-          { id: 'docker', name: 'Docker' },
           { id: 'nginx', name: 'Nginx' },
           { id: 'cloudflare', name: 'Cloudflare' },
         ]
-      }
+      },
+      {
+        title: 'Version Control & CI',
+        items: [
+          { id: 'git', name: 'Git' },
+          { id: 'github-actions', name: 'GitHub Actions' },
+        ]
+      },
     ]
   },
   {
@@ -205,38 +221,6 @@ export const skillsCategories = [
       }
     ]
   },
-  {
-    id: 'ai-integration',
-    category: 'AI Integration & Development Automation',
-    emoji: '🤖',
-    description: 'I actively leverage artificial intelligence to build smarter product features and create a more efficient development environment.',
-    subcategories: [
-      {
-        title: 'Core AI Tools',
-        items: [
-          { id: 'openai-api', name: 'OpenAI API' },
-          { id: 'chatgpt', name: 'ChatGPT' },
-          { id: 'claude', name: 'Claude' },
-          { id: 'gemini', name: 'Gemini' },
-          { id: 'perplexity', name: 'Perplexity' },
-        ]
-      },
-      {
-        title: 'Development Augmentation',
-        items: [
-          { id: 'cursor-ai', name: 'CursorAI' },
-        ]
-      },
-      {
-        title: 'Applications',
-        items: [
-          { id: 'ai-chatbot-development', name: 'AI Chatbot Development' },
-          { id: 'automated-data-extraction', name: 'Automated Data Extraction' },
-          { id: 'workflow-automation', name: 'Workflow Automation' },
-        ]
-      }
-    ]
-  }
 ];
 
 // Helper function to get all skills as flat array with category info
@@ -267,4 +251,3 @@ export function getSkillById(id) {
 export function getCategoryById(id) {
   return skillsCategories.find(category => category.id === id);
 }
-

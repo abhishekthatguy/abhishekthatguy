@@ -113,7 +113,7 @@ const SkillCard = ({ category, themeStyles, effectiveTheme, item, index }) => {
                 </div>
                 <div className="flex flex-wrap gap-2.5">
                   {subcategory.items.map((skill, skillIdx) => {
-                    // Determine color based on category index
+                    const isHighlight = skill.highlight === true;
                     const getSkillColors = (idx) => {
                       const colors = [
                         { border: 'border-purple-500/30', text: 'text-purple-300', bg: 'bg-purple-500/10', hover: 'hover:bg-purple-500/30', hoverBorder: 'hover:border-purple-400' },
@@ -134,11 +134,15 @@ const SkillCard = ({ category, themeStyles, effectiveTheme, item, index }) => {
                       const scheme = effectiveTheme === 'dark' ? colors[idx % colors.length] : lightColors[idx % lightColors.length];
                       return `${scheme.border} ${scheme.text} ${scheme.bg} ${scheme.hover} ${scheme.hoverBorder} hover:text-white`;
                     };
-                    
+                    const highlightClasses = isHighlight
+                      ? effectiveTheme === 'dark'
+                        ? 'ring-2 ring-teal-400/80 ring-offset-2 ring-offset-gray-900 bg-teal-500/20 border-teal-400/50 text-teal-200 font-bold shadow-lg shadow-teal-500/20'
+                        : 'ring-2 ring-teal-500/80 ring-offset-2 ring-offset-white bg-teal-500/15 border-teal-500/50 text-teal-800 font-bold shadow-lg shadow-teal-500/15'
+                      : '';
                     return (
                       <Link key={skill.id} href={`/skills/${skill.id}`}>
                         <motion.span
-                          className={`px-4 py-2 rounded-lg border-2 transition-all duration-300 text-sm font-semibold cursor-pointer whitespace-nowrap backdrop-blur-sm ${getSkillColors(index)}`}
+                          className={`px-4 py-2 rounded-lg border-2 transition-all duration-300 text-sm font-semibold cursor-pointer whitespace-nowrap backdrop-blur-sm ${isHighlight ? highlightClasses : getSkillColors(index)}`}
                           whileHover={{ scale: 1.05, y: -2 }}
                           whileTap={{ scale: 0.95 }}
                           initial={{ opacity: 0, y: 10 }}
@@ -193,13 +197,6 @@ export default function Skills() {
 
   return (
     <section id="skills" className={`py-20 ${themeStyles.sectionBg} relative overflow-hidden transition-all duration-500 ease-in-out`}>
-      {/* Background gradient effect - Theme-aware */}
-      <div className={`absolute inset-0 pointer-events-none transition-all duration-500 ${
-        effectiveTheme === 'dark' 
-          ? 'bg-gradient-to-b from-black via-purple-900/5 to-black' 
-          : 'bg-gradient-to-b from-gray-50 via-purple-50/20 to-gray-50'
-      }`}></div>
-      
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         <motion.h2
           className={`text-4xl md:text-5xl font-extrabold text-center mb-6 ${themeStyles.headingText} transition-colors duration-500`}

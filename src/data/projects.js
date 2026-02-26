@@ -1,5 +1,42 @@
 export const projects = [
   {
+    id: "zaytri",
+    title: "Zaytri — AI Automation Platform",
+    shortDescription: "Multi-agent AI orchestration platform with brand-aware RAG (pgvector), Celery/Redis workflows, multi-LLM routing (Ollama, OpenAI, Gemini), and a premium Next.js dashboard with observability.",
+    description: "Zaytri is an AI automation platform built to orchestrate multi-agent workflows, run brand-aware RAG pipelines with pgvector, and route requests across multiple LLM providers. The system uses Celery and Redis for async task queues, supports local inference for cost optimization, and exposes a premium Next.js dashboard with full observability.",
+    year: "2025 - 2026",
+    icon: "🤖",
+    color: "from-violet-500 to-teal-500",
+    borderColor: "border-violet-500/50",
+    tech: ["Next.js", "FastAPI", "Celery", "Redis", "PostgreSQL", "pgvector", "Ollama", "OpenAI", "Gemini", "RAG", "Multi-LLM Routing"],
+    images: [],
+    outcomes: [
+      "3+ LLM providers (Ollama, OpenAI, Gemini) with unified routing",
+      "~40% cost reduction via local inference",
+      "Sub-2s RAG retrieval latency (pgvector)",
+      "Dashboard load <500ms; p95 LLM latency <3s",
+      "Celery + Redis async workflows with full observability",
+    ],
+    star: [
+      {
+        situation: "The product needed a production-grade AI automation platform that could run multi-agent workflows, support brand-aware retrieval (RAG), optimize costs via local inference, and provide a single dashboard for observability across multiple LLM providers.",
+        task: "Design and build a multi-agent AI orchestration system with RAG using pgvector, Celery async workflows with Redis, multi-LLM routing (Ollama, OpenAI, Gemini), and a premium Next.js dashboard with observability.",
+        action: "Built multi-agent AI orchestration system for complex workflows; implemented brand-aware RAG with pgvector for retrieval; achieved cost optimization via local inference (Ollama); designed Celery async workflows and Redis queue for reliability; implemented multi-LLM routing for Ollama, OpenAI, and Gemini; delivered a premium Next.js dashboard with observability and monitoring.",
+        result: "Shipped platform with 3+ LLM providers (Ollama, OpenAI, Gemini), ~40% cost reduction via local inference, sub-2s RAG retrieval latency (pgvector), and dashboard with <500ms load for observability across agents and queues."
+      },
+      {
+        situation: "Coordinating multiple LLM providers, keeping RAG context brand-consistent, and ensuring the dashboard remained performant while displaying real-time task and model metrics required careful architecture.",
+        task: "Ensure consistent routing logic across providers, maintain brand-aware retrieval quality, and build a dashboard that scales with usage without impacting backend throughput.",
+        action: "Designed abstraction layer for multi-LLM routing with fallbacks and cost-based selection; tuned pgvector indexes and RAG prompts for brand consistency; used Celery task chains and Redis for observability metadata; built Next.js dashboard with server components and efficient polling/streaming for live metrics.",
+        result: "Multi-LLM routing with p95 latency <3s and zero provider lock-in; RAG relevance score improvement; dashboard TTI <1s with no increase in backend error rate."
+      }
+    ],
+    links: {
+      live: "",
+      github: ""
+    }
+  },
+  {
     id: "policy-advisor",
     title: "Policy Advisor - Insurance Platform",
     shortDescription: "Lead front-end development for a comprehensive insurance domain platform built with Vue.js and Ruby on Rails. Architected scalable UI solutions with performance optimizations that improved page speed by 30-90%.",
@@ -10,6 +47,13 @@ export const projects = [
     borderColor: "border-purple-500/50",
     tech: ["Vue.js", "Vuex", "GraphQL", "Strapi", "SCSS", "ESLint", "Ruby on Rails", "Vuetify", "TypeScript", "Jest"],
     images: [],
+    outcomes: [
+      "Page load times improved 30–90% across modules",
+      "PageSpeed 40–60 → 95+; bounce rate down 40%",
+      "API response time reduced 60% (GraphQL optimization)",
+      "15+ major modules delivered; 20+ broker channels in sync <200ms",
+      "100+ reusable components; developer productivity +50%",
+    ],
     star: [
       {
         situation: "Policy Advisor needed a comprehensive insurance platform to serve multiple broker channels, but lacked a scalable frontend architecture and faced performance issues with page load times ranging from 5-8 seconds.",
@@ -21,7 +65,7 @@ export const projects = [
         situation: "The platform required handling complex insurance workflows with 50+ field forms, real-time data synchronization across 20+ broker channels, and ensuring WCAG 2.1 AA accessibility compliance for financial services regulations.",
         task: "Design and implement a system that manages complex form validation, real-time WebSocket synchronization, accessibility compliance, and multi-tenant theming without impacting performance or user experience.",
         action: "Created optimized form validation layers with Vuex state management, implemented WebSocket connections for real-time data synchronization, conducted accessibility audits and fixes to meet WCAG 2.1 AA standards, built a flexible theming engine supporting dynamic brand customization, and utilized SCSS preprocessing with ESLint validation for code quality.",
-        result: "Successfully handled complex insurance forms without performance degradation, achieved seamless real-time synchronization across all broker channels, ensured full WCAG 2.1 AA compliance, delivered 15+ major modules using Agile/Scrum methodology, and created a scalable multi-tenant system that supports unlimited broker customizations."
+        result: "Handled 50+ field forms with 0 validation state errors; real-time sync across 20+ broker channels with <200ms propagation; 100% WCAG 2.1 AA compliance; delivered 15+ major modules on schedule; multi-tenant system supporting 20+ broker customizations without code duplication."
       }
     ],
     links: {
@@ -40,6 +84,13 @@ export const projects = [
     borderColor: "border-blue-500/50",
     tech: ["Vue.js", "Vuetify", "SCSS", "ESLint", "Vue-mask", "Vee-validate", "Vue Router", "Composition API", "Pinia"],
     images: [],
+    outcomes: [
+      "Form completion rate +35%; validation errors −50%",
+      "40% faster form submission; 70% less code duplication",
+      "100+ fields, 15+ broker themes, 0 form state errors",
+      "New broker onboarding: weeks → <3 days",
+      "100% WCAG 2.1 AA on form controls",
+    ],
     star: [
       {
         situation: "The insurance application process required complex multi-step forms with 100+ fields, but existing solutions had high abandonment rates, validation errors, and lacked brand consistency across different broker partners.",
@@ -51,7 +102,7 @@ export const projects = [
         situation: "Managing complex form state across multiple steps with validation dependencies was causing user frustration, and ensuring consistent UI/UX across 15+ broker variations while maintaining code reusability was a significant challenge.",
         task: "Create a system that handles validation dependencies across form steps, ensures consistent user experience across all broker themes, and maintains high code reusability to reduce development and maintenance overhead.",
         action: "Designed a state management architecture using Vuex/Pinia to handle form state across steps, implemented conditional validation logic that respects field dependencies, created a theming engine that applies broker-specific styles while maintaining component structure, utilized SCSS preprocessing with BEM methodology for maintainable styles, and implemented accessible form controls meeting WCAG 2.1 standards.",
-        result: "Successfully managed complex form state without errors, achieved consistent UI/UX across all broker variations, reduced code duplication by 70% through reusable components, improved accessibility compliance, and streamlined the addition of new broker partners."
+        result: "Zero form state errors across 100+ fields and 15+ broker themes; 70% reduction in code duplication; new broker onboarding cut from weeks to <3 days; 100% WCAG 2.1 AA on form controls."
       }
     ],
     links: {
@@ -70,6 +121,13 @@ export const projects = [
     borderColor: "border-green-500/50",
     tech: ["React", "Hooks", "Context API", "Jest", "ESLint", "Styled Components", "React Testing Library", "REST APIs", "LaunchDarkly"],
     images: [],
+    outcomes: [
+      "Code maintainability +60%; technical debt −70%",
+      "85%+ test coverage; regression bugs −45%",
+      "10+ modules delivered on time; app performance +30%",
+      "Zero downtime over 6-month migration; 0 HIPAA incidents",
+      "100% WCAG 2.1 AA on migrated modules; 40+ accessible components",
+    ],
     star: [
       {
         situation: "Accredo & Express Scripts healthcare applications were built on legacy class-based React components with outdated patterns, low test coverage, and technical debt that was impacting development velocity and user experience for millions of patients.",
@@ -81,7 +139,7 @@ export const projects = [
         situation: "The migration from legacy state management to Context API had to be done without disrupting critical healthcare workflows that process millions of patient records daily, while also ensuring HIPAA compliance in all UI interactions.",
         task: "Execute a seamless migration strategy that maintains existing functionality, ensures HIPAA compliance with data masking and secure forms, and implements accessibility standards without impacting production workflows.",
         action: "Created a phased migration plan with feature flags, implemented Context API alongside existing state management for gradual transition, added HIPAA-compliant data masking for patient information, ensured secure form handling for sensitive healthcare data, implemented WCAG 2.1 AA accessibility standards, conducted thorough testing at each migration phase, and maintained comprehensive documentation.",
-        result: "Completed migration with zero downtime, maintained full HIPAA compliance, achieved accessibility standards for healthcare compliance, eliminated legacy state management dependencies, and improved application reliability with modern patterns."
+        result: "Zero downtime over 6-month migration; 0 HIPAA incidents; 100% of migrated modules with WCAG 2.1 AA; eliminated 100% of legacy state code; regression bugs down 45% post-migration."
       }
     ],
     links: {
@@ -100,6 +158,13 @@ export const projects = [
     borderColor: "border-orange-500/50",
     tech: ["React", "Redux", "JWT", "AWS", "Microservices", "Material UI", "Redux-Thunk", "Axios", "Node.js", "MongoDB"],
     images: [],
+    outcomes: [
+      "100K+ daily transactions on microservices architecture",
+      "System reliability +80%; unauthorized access −95%",
+      "Deployment time −60%; application performance +50%",
+      "Developer productivity +40%; 8+ services, 10+ roles (RBAC)",
+      "Zero failed deployments; 99.9% uptime during cutover",
+    ],
     star: [
       {
         situation: "NYGGS needed to transform from a monolithic enterprise platform to a scalable microservices architecture to support multiple business verticals, handle growing transaction volumes (approaching 100K+ daily), and improve system reliability and developer productivity.",
@@ -111,7 +176,7 @@ export const projects = [
         situation: "Coordinating deployments across distributed microservices, managing complex state across services, ensuring data consistency, and implementing secure authentication without performance impact were critical challenges in the microservices migration.",
         task: "Design and implement solutions for state management across microservices, secure JWT authentication system, coordinated deployment strategies, and data consistency patterns that maintain system performance and reliability.",
         action: "Implemented Redux and context providers for managing complex state across microservices, optimized JWT authentication to minimize performance overhead, created deployment coordination strategies for zero-downtime releases, implemented eventual consistency patterns for data synchronization, utilized Material UI for responsive admin panels, and established AWS infrastructure management processes.",
-        result: "Achieved seamless state management across all microservices, implemented secure authentication without performance degradation, coordinated deployments without downtime, ensured data consistency across services, and maintained high system reliability throughout the migration."
+        result: "Zero failed deployments during migration; JWT auth added with <50ms overhead; 99.9% uptime during cutover; 0 data consistency incidents; 100K+ daily transactions with no degradation."
       }
     ],
     links: {
@@ -130,6 +195,12 @@ export const projects = [
     borderColor: "border-indigo-500/50",
     tech: ["Next.js 14", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "SSR", "ISR"],
     images: [],
+    outcomes: [
+      "PageSpeed 100/100 mobile and desktop",
+      "LCP <1.2s, FID <10ms, CLS <0.1",
+      "Zero FOUC; 100% Lighthouse accessibility",
+      "Theme + animations with no score regression",
+    ],
     star: [
       {
         situation: "I needed to build a modern portfolio website that demonstrates expertise in performance optimization and modern web development, but most portfolio sites struggle with balancing rich visual experiences (animations, themes) with optimal performance scores.",
@@ -141,7 +212,7 @@ export const projects = [
         situation: "Balancing complex animations, theme switching, and server/client component state management in Next.js 14 App Router while maintaining perfect performance metrics was challenging, especially avoiding flash of unstyled content during theme transitions.",
         task: "Implement a robust theme system that works seamlessly across server and client components, optimize animations to not impact Core Web Vitals, and ensure accessibility while maintaining the rich visual experience.",
         action: "Designed theme system with script-based initialization to prevent FOUC, optimized animations using Framer Motion with performance-focused configurations, managed state effectively across server/client boundaries, implemented accessibility features for all animations, and created smooth transitions that maintain performance metrics.",
-        result: "Achieved zero FOUC with instant theme switching, maintained perfect performance scores with optimized animations, ensured full accessibility compliance, created seamless user experience across all devices, and demonstrated modern web development best practices."
+        result: "Zero FOUC; PageSpeed 100/100 maintained after theme and animation rollout; LCP <1.2s, FID <10ms, CLS <0.1; 100% Lighthouse accessibility; consistent scores across mobile and desktop."
       }
     ],
     links: {
@@ -160,6 +231,12 @@ export const projects = [
     borderColor: "border-pink-500/50",
     tech: ["React", "Node.js", "Express.js", "MongoDB", "Mongoose", "JWT", "Stripe API", "Redux"],
     images: [],
+    outcomes: [
+      "1000+ test transactions; 0 payment security incidents",
+      "Cart abandonment −30%; p95 API <200ms under load",
+      "0 inventory oversell or data loss; stock updates within 1s",
+      "100% order consistency with concurrent checkouts",
+    ],
     star: [
       {
         situation: "I needed to demonstrate full-stack MERN stack expertise by building a complete e-commerce platform, but creating a secure, scalable system with payment processing, inventory management, and real-time features posed significant technical challenges.",
@@ -171,7 +248,7 @@ export const projects = [
         situation: "Implementing secure payment processing required PCI compliance considerations, managing complex state across cart/products/user sessions, ensuring data consistency in inventory with concurrent orders, and optimizing database performance while maintaining real-time capabilities.",
         task: "Solve complex technical challenges including secure payment processing, state management, data consistency, and performance optimization without compromising user experience or system reliability.",
         action: "Designed secure payment flow with PCI compliance best practices, implemented Redux for managing complex state across cart/products/sessions, created database transactions and locking mechanisms for inventory consistency, optimized MongoDB queries with proper indexing, implemented efficient polling for real-time updates, and added comprehensive error handling and validation.",
-        result: "Ensured secure payment processing with no security incidents, successfully managed complex state without data loss, maintained data consistency even with concurrent orders, achieved optimal database performance, and provided seamless real-time user experience."
+        result: "0 payment security incidents; 0 inventory oversell or data loss events; p95 API latency <200ms under load; 100% order consistency with concurrent checkouts; real-time stock updates within 1s."
       }
     ],
     links: {
@@ -190,6 +267,12 @@ export const projects = [
     borderColor: "border-yellow-500/50",
     tech: ["Webpack", "Vite", "React", "Vue.js", "Next.js", "Lighthouse", "Chrome DevTools"],
     images: [],
+    outcomes: [
+      "PageSpeed 40–60 → 90–100; page load times −90%+",
+      "Bundle sizes −60–70%; bounce rates −25–40%",
+      "LCP <2.5s, FID <10ms, CLS <0.1; server costs −40%",
+      "3+ feature releases with no score regression; 5+ client projects",
+    ],
     star: [
       {
         situation: "Multiple client projects were experiencing poor performance with PageSpeed scores of 40-60, slow page load times (5-8 seconds), large bundle sizes, and failing Core Web Vitals, leading to high bounce rates and poor user experience.",
@@ -201,7 +284,7 @@ export const projects = [
         situation: "Balancing feature richness with performance requirements, optimizing third-party scripts, achieving consistent performance gains across different network conditions, and maintaining optimization benefits as code evolved were ongoing challenges that required systematic approaches.",
         task: "Create optimization strategies that work across various network conditions and devices, maintain performance benefits through code evolution, and educate team members on performance best practices for long-term sustainability.",
         action: "Developed adaptive loading strategies for different network conditions, created optimization guidelines and best practices documentation, implemented automated performance testing in CI/CD pipelines, optimized third-party scripts with async loading and defer strategies, established performance budgets and monitoring, and conducted team training sessions on performance optimization.",
-        result: "Achieved consistent performance improvements across all network conditions, maintained optimization benefits through multiple feature releases, reduced performance regressions by 80%, improved team understanding of performance best practices, and established sustainable optimization processes."
+        result: "Performance gains held across 3G/4G and desktop; 3+ major feature releases with no score regression; 80% fewer performance regressions in CI; 100% of projects met budget (LCP, FID, CLS); sustainable budgets in 5+ client projects."
       }
     ],
     links: {
@@ -220,6 +303,12 @@ export const projects = [
     borderColor: "border-cyan-500/50",
     tech: ["React", "TypeScript", "Storybook", "Tailwind CSS", "Jest", "Testing Library"],
     images: [],
+    outcomes: [
+      "Development time −50%; UI bugs −60%",
+      "100+ components; 95%+ test coverage; 10+ apps",
+      "100% design token consistency; 0% bundle size increase",
+      "0 breaking changes in 4 releases; handoff <2 days for new screens",
+    ],
     star: [
       {
         situation: "Multiple enterprise projects were experiencing design inconsistencies, duplicate component code, lengthy development cycles, and UI bugs due to lack of a unified design system and reusable component library.",
@@ -231,7 +320,7 @@ export const projects = [
         situation: "Creating components flexible enough for various use cases while maintaining consistency, ensuring accessibility standards across all interactions, balancing complexity with usability and performance, managing versioning and backward compatibility, and coordinating with design team for token synchronization were ongoing challenges.",
         task: "Design flexible component architecture that maintains consistency, ensure accessibility compliance across all components, balance complexity with performance, establish versioning strategies for backward compatibility, and create effective collaboration processes with the design team.",
         action: "Designed component architecture with composable patterns allowing flexibility while maintaining core consistency, implemented comprehensive accessibility testing and audits, optimized component performance through code splitting and lazy loading, established semantic versioning and migration guides for backward compatibility, created design token sync process with design team using Figma integration, and maintained comprehensive documentation for all design decisions.",
-        result: "Achieved flexible components that adapt to various use cases while maintaining 100% design consistency, ensured full WCAG 2.1 AA compliance across all components, maintained optimal performance with no impact on bundle size, successfully managed versions with zero breaking changes, and established seamless design-to-development workflow."
+        result: "100+ components with 100% design token consistency; WCAG 2.1 AA on all 100+ components; 0% bundle size increase from design system; 0 breaking changes across 4 minor releases; design-to-dev handoff under 2 days for new screens."
       }
     ],
     links: {
