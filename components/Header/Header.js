@@ -4,6 +4,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Link from 'next/link';
+import Image from 'next/image';
 import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
@@ -59,12 +60,14 @@ function Header(props) {
     createData(navMenu[4], '#' + navMenu[4], -40),
     createData(navMenu[5], '#' + navMenu[5], -40),
     createData(navMenu[6], '#' + navMenu[6]),
+    // createData(navMenu[7], '#' + navMenu[7]),
   ]);
   const [openDrawer, setOpenDrawer] = useState(false);
   const handleOpenDrawer = () => {
     setOpenDrawer(!openDrawer);
+    console.log('handle click drawer----', openDrawer);
   };
-
+  console.log('open drawer----', openDrawer);
   const handleCloseDrawer = () => {
     setOpenDrawer(false);
   };
@@ -100,12 +103,12 @@ function Header(props) {
                 {invert ? (
                   <Link href={routeLink.profile.home}>
                     <a>
-                      <img src={logo} alt="logo" />
+                      <Image layout="fill" src={logo} alt="logo" />
                     </a>
                   </Link>
                 ) : (
                   <AnchorLink href="#home">
-                    <img src={logo} alt="logo" />
+                    <Image layout="fill" src={logo} alt="logo" />
                   </AnchorLink>
                 )}
               </div>

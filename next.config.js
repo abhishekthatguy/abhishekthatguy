@@ -25,6 +25,7 @@ module.exports = withImages({
       '/': { page: '/' },
       '/about-page': { page: '/about-page' },
       '/blank-page': { page: '/blank-page' },
+      '/youtube-page': { page: '/youtube-page' },
     };
   },
   publicRuntimeConfig: {
