@@ -6,8 +6,19 @@ import themeConfig from '@/config/theme';
  * Custom hook for theme management
  * Handles system theme detection, localStorage persistence, and theme switching
  */
+function getInitialTheme() {
+  if (typeof window === 'undefined') return themeConfig.defaultTheme;
+  try {
+    if (themeConfig.persistPreference) {
+      const stored = localStorage.getItem(themeConfig.storageKey);
+      if (stored && ['light', 'dark', 'system'].includes(stored)) return stored;
+    }
+  } catch (e) {}
+  return themeConfig.defaultTheme;
+}
+
 export const useTheme = () => {
-  const [theme, setTheme] = useState(themeConfig.defaultTheme);
+  const [theme, setTheme] = useState(getInitialTheme);
   const [mounted, setMounted] = useState(false);
 
   // Get system theme preference
@@ -47,11 +58,10 @@ export const useTheme = () => {
     }));
   };
 
-  // Initialize theme on mount
+  // Initialize theme on mount and keep in sync with document (persists across client-side navigation)
   useEffect(() => {
     setMounted(true);
 
-    // Get saved theme preference or use default
     let savedTheme = themeConfig.defaultTheme;
     if (themeConfig.persistPreference && typeof window !== 'undefined') {
       const stored = localStorage.getItem(themeConfig.storageKey);
@@ -60,8 +70,13 @@ export const useTheme = () => {
       }
     }
 
+    // Prefer current document theme so navigation never overwrites it with default
+    const docClass = document.documentElement.classList;
+    const currentEffective = docClass.contains('dark') ? 'dark' : docClass.contains('light') ? 'light' : null;
+    const themeToApply = currentEffective ?? (savedTheme === 'system' ? getSystemTheme() : savedTheme);
+
     setTheme(savedTheme);
-    applyTheme(savedTheme);
+    applyTheme(themeToApply);
 
     // Listen for system theme changes
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');

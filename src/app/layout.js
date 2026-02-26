@@ -13,36 +13,68 @@ const inter = Inter({
   display: "swap",
 });
 
-// Structured data for Person
+// Structured data for Person (SEO)
 const personStructuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Abhishek Singh",
-  "jobTitle": "Senior Software Developer",
+  "jobTitle": "Applied AI Engineer | AI Automation Architect",
   "url": "https://abhishekthatguy.in",
   "sameAs": [
     "https://github.com/abhishekthatguy",
     "https://linkedin.com/in/abhishekthatguy",
-    "https://twitter.com/abhishekthatguy",
-    "https://www.facebook.com/abhishekthatguy"
+    "https://twitter.com/abhishekthatguy"
   ],
   "knowsAbout": [
-    "Vue.js",
+    "Multi-Agent Systems",
+    "RAG",
+    "Vector Search",
+    "pgvector",
+    "LLM Routing",
+    "FastAPI",
+    "Celery",
+    "Redis",
+    "Next.js",
     "React",
-    "JavaScript",
-    "AngularJS",
-    "DevOps",
-    "ERP",
-    "CMS"
+    "Performance Optimization"
   ],
-  "description": "Senior Software Developer specializing in Vue, React, JavaScript, AngularJS, DevOps, ERP, and CMS development."
+  "description": "Applied AI Engineer building production-grade AI systems: multi-agent workflows, RAG pipelines, and cost-optimized LLM infrastructure. AI Automation Architect specializing in Zaytri and high-performance web applications."
+};
+
+// WebSite structured data for sitelinks search
+const websiteStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Abhishek Singh Portfolio",
+  "url": "https://abhishekthatguy.in",
+  "author": { "@type": "Person", "name": "Abhishek Singh" },
+  "description": "Portfolio of Abhishek Singh — Applied AI Engineer, Multi-Agent Systems, AI Automation, RAG, LLM infrastructure."
 };
 
 export const metadata = {
-  title: "Abhishek Singh - Senior Software Developer Portfolio",
-  description: "Portfolio of Abhishek Singh, a Senior Software Developer specializing in Vue, React, JavaScript, AngularJS, DevOps, ERP, and CMS development.",
-  keywords: "Abhishek Singh, Software Developer, Vue.js, React, JavaScript, AngularJS, DevOps, ERP, CMS, Web Development",
-  authors: [{ name: "Abhishek Singh" }],
+  title: {
+    default: "Abhishek Singh | Applied AI Engineer | Multi-Agent Systems | AI Automation",
+    template: "%s | Abhishek Singh",
+  },
+  description: "Applied AI Engineer & AI Automation Architect. Production-grade multi-agent systems, RAG pipelines, pgvector, Celery/Redis, multi-LLM routing. Zaytri AI platform. 90+ Lighthouse performance.",
+  keywords: [
+    "Abhishek Singh",
+    "Applied AI Engineer",
+    "AI Automation Architect",
+    "Multi-Agent Systems",
+    "RAG",
+    "pgvector",
+    "LLM Routing",
+    "FastAPI",
+    "Celery",
+    "Redis",
+    "Next.js",
+    "React",
+    "AI Systems Engineer",
+    "portfolio",
+    "abhishekthatguy",
+  ],
+  authors: [{ name: "Abhishek Singh", url: "https://abhishekthatguy.in" }],
   creator: "Abhishek Singh",
   publisher: "Abhishek Singh",
   formatDetection: {
@@ -50,32 +82,32 @@ export const metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://abhishekthatguy.in'),
+  metadataBase: new URL("https://abhishekthatguy.in"),
   alternates: {
-    canonical: '/',
+    canonical: "/",
   },
   openGraph: {
-    title: "Abhishek Singh - Senior Software Developer Portfolio",
-    description: "Portfolio of Abhishek Singh, a Senior Software Developer specializing in Vue, React, JavaScript, AngularJS, DevOps, ERP, and CMS development.",
-    url: 'https://abhishekthatguy.in',
-    siteName: 'Abhishek Singh Portfolio',
+    title: "Abhishek Singh | Applied AI Engineer | Multi-Agent Systems & AI Automation",
+    description: "Applied AI Engineer building multi-agent workflows, RAG pipelines, and cost-optimized LLM infrastructure. Zaytri AI platform. 90+ Lighthouse.",
+    url: "https://abhishekthatguy.in",
+    siteName: "Abhishek Singh Portfolio",
     images: [
       {
-        url: '/opengraph-image.png', // Add your OG image
+        url: "/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: 'Abhishek Singh - Senior Software Developer',
+        alt: "Abhishek Singh — Applied AI Engineer | AI Automation Architect",
       },
     ],
-    locale: 'en_US',
-    type: 'website',
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: "Abhishek Singh - Senior Software Developer Portfolio",
-    description: "Portfolio of Abhishek Singh, a Senior Software Developer specializing in Vue, React, JavaScript, AngularJS, DevOps, ERP, and CMS development.",
-    images: ['/twitter-image.png'], // Add your Twitter image
-    creator: '@abhishekthatguy',
+    card: "summary_large_image",
+    title: "Abhishek Singh | Applied AI Engineer | AI Automation",
+    description: "Multi-agent systems, RAG, LLM routing. Zaytri AI platform. 90+ Lighthouse.",
+    images: ["/twitter-image.png"],
+    creator: "@abhishekthatguy",
   },
   robots: {
     index: true,
@@ -83,15 +115,21 @@ export const metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   verification: {
-    google: 'your-google-site-verification',
-    yandex: 'your-yandex-verification',
-    yahoo: 'your-yahoo-verification',
+    google: "your-google-site-verification",
+    yandex: "your-yandex-verification",
+    yahoo: "your-yahoo-verification",
+  },
+  category: "technology",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
   },
 };
 
@@ -103,6 +141,9 @@ export default function RootLayout({ children }) {
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="theme-color" content="#000000" />
         <link rel="manifest" href="/manifest.json" />
+        {/* Performance: preconnect to critical origins */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         
         {/* Theme initialization script - prevents flash of unstyled content */}
         <script
@@ -142,6 +183,10 @@ export default function RootLayout({ children }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personStructuredData) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }}
         />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-Q3GB11NJ1S"

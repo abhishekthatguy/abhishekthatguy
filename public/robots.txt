@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://www.abhishekthatguy.in/sitemap.xml
+Sitemap: https://abhishekthatguy.in/sitemap.xml
 
 # Allow all search engine crawlers
 User-agent: Googlebot

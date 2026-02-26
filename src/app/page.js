@@ -11,7 +11,7 @@ import Link from 'next/link'
 export default function Home() {
   return (
     <>
-      <main className="min-h-screen bg-gray-50 dark:bg-black transition-colors duration-500">
+      <main id="main-content" role="main" className="min-h-screen bg-gray-50 dark:bg-black transition-colors duration-500" aria-label="Primary content">
         <Hero />
         <About />
         <Achievements />

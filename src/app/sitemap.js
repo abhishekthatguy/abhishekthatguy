@@ -1,7 +1,7 @@
 import { getAllProjectIds } from '@/data/projects';
 
 export default function sitemap() {
-  const baseUrl = 'https://www.abhishekthatguy.in';
+  const baseUrl = 'https://abhishekthatguy.in';
   const currentDate = new Date();
   
   // Generate project URLs
