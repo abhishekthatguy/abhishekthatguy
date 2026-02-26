@@ -23,17 +23,32 @@ export default function ContactPage() {
     });
   };
 
+  const sendViaMailFallback = async () => {
+    const res = await fetch('/api/send-mail', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(formData),
+    });
+    const data = await res.json().catch(() => ({}));
+    return res.ok && data?.success !== false;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus({ type: 'loading', message: 'Sending message...' });
 
+    const webhookUrl = process.env.NEXT_PUBLIC_WEBHOOK_URL;
+    if (!webhookUrl) {
+      setStatus({ type: 'error', message: 'Webhook URL is not configured. Please set NEXT_PUBLIC_WEBHOOK_URL.' });
+      return;
+    }
+
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api/submit-form';
-      const response = await fetch(apiUrl, {
+      const response = await fetch(webhookUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
+          Accept: 'application/json',
         },
         credentials: 'include',
         body: JSON.stringify(formData),
@@ -43,16 +58,26 @@ export default function ContactPage() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const data = await response.json();
-
-      if (data.success) {
+      const data = await response.json().catch(() => ({}));
+      const success = data?.success !== false && response.ok;
+      if (success) {
         setStatus({ type: 'success', message: 'Message sent successfully! I\'ll get back to you ASAP.' });
         setFormData({ name: '', email: '', subject: '', message: '' });
-      } else {
-        setStatus({ type: 'error', message: data.message || 'Failed to send message.' });
+        return;
       }
-    } catch (error) {
-      setStatus({ type: 'error', message: 'Failed to send message. Please try again or call directly.' });
+      throw new Error(data?.message || 'Webhook returned an error');
+    } catch (webhookError) {
+      try {
+        const mailOk = await sendViaMailFallback();
+        if (mailOk) {
+          setStatus({ type: 'success', message: 'Message sent successfully! I\'ll get back to you ASAP.' });
+          setFormData({ name: '', email: '', subject: '', message: '' });
+        } else {
+          setStatus({ type: 'error', message: 'Could not reach our system. Please try again or email/call directly.' });
+        }
+      } catch (mailError) {
+        setStatus({ type: 'error', message: 'Failed to send message. Please try again or call directly.' });
+      }
     }
   };
 

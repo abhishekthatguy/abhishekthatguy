@@ -337,21 +337,21 @@ const SocialWidget = () => {
         </motion.div>
       )}
 
-      {/* Desktop: Expanded state - full widget */}
+      {/* Desktop: Expanded state - full widget, horizontal with wrap */}
       {isExpanded && (
         <AnimatePresence>
           <motion.div
-            className="hidden md:flex fixed bottom-[100px] right-5 z-50 select-none"
+            className="hidden md:flex fixed bottom-[100px] right-5 z-50 select-none max-w-[calc(100vw-2.5rem)]"
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="bg-black/40 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 p-4 flex flex-col gap-2.5 relative overflow-visible">
+            <div className="bg-black/40 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 p-4 flex flex-row flex-wrap gap-2 sm:gap-2.5 justify-start items-center relative overflow-visible max-w-full">
               {/* Collapse button */}
               <motion.button
                 onClick={handleCollapse}
-                className="absolute -top-3 -right-3 w-7 h-7 bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 rounded-full flex items-center justify-center text-white text-sm font-bold transition-all shadow-lg border-2 border-white/20 z-10"
+                className="absolute -top-3 -right-3 w-7 h-7 bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 rounded-full flex items-center justify-center text-white text-sm font-bold transition-all shadow-lg border-2 border-white/20 z-10 flex-shrink-0"
                 whileHover={{ scale: 1.1, rotate: 90 }}
                 whileTap={{ scale: 0.9 }}
                 aria-label="Collapse widget"
@@ -361,14 +361,14 @@ const SocialWidget = () => {
                 </svg>
               </motion.button>
 
-              {/* Social Icons */}
+              {/* Social Icons - horizontal row, wraps by screen size */}
               {Object.entries(socialLinks).map(([key, link], index) => (
                 <motion.a
                   key={key}
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`group relative w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br ${link.bgGradient} hover:shadow-2xl transition-all duration-300 border border-white/20 hover:border-white/40 backdrop-blur-sm overflow-visible`}
+                  className={`group relative w-12 h-12 sm:w-14 sm:h-14 flex-shrink-0 rounded-2xl flex items-center justify-center bg-gradient-to-br ${link.bgGradient} hover:shadow-2xl transition-all duration-300 border border-white/20 hover:border-white/40 backdrop-blur-sm overflow-visible`}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05, duration: 0.3 }}
@@ -384,18 +384,17 @@ const SocialWidget = () => {
                     {link.icon}
                   </div>
 
-                  {/* Tooltip - positioned to left of icon (towards center) */}
-                  <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 px-3 py-2 bg-gray-900/95 backdrop-blur-sm text-white text-xs font-medium rounded-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible pointer-events-none transition-all duration-200 shadow-xl z-[60] border border-white/10">
+                  {/* Tooltip - positioned above on small screens to avoid overflow */}
+                  <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900/95 backdrop-blur-sm text-white text-xs font-medium rounded-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible pointer-events-none transition-all duration-200 shadow-xl z-[60] border border-white/10">
                     {link.label}
-                    {/* Arrow pointing to icon */}
-                    <div className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-gray-900/95"></div>
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900/95"></div>
                   </span>
                 </motion.a>
               ))}
 
               {/* Chatbot Icon Placeholder */}
               <motion.div
-                className="group relative w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-purple-500 via-pink-500 to-rose-500 hover:from-purple-600 hover:via-pink-600 hover:to-rose-600 transition-all duration-300 cursor-pointer border border-white/20 hover:border-white/40 backdrop-blur-sm hover:shadow-2xl overflow-visible"
+                className="group relative w-12 h-12 sm:w-14 sm:h-14 flex-shrink-0 rounded-2xl flex items-center justify-center bg-gradient-to-br from-purple-500 via-pink-500 to-rose-500 hover:from-purple-600 hover:via-pink-600 hover:to-rose-600 transition-all duration-300 cursor-pointer border border-white/20 hover:border-white/40 backdrop-blur-sm hover:shadow-2xl overflow-visible"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: Object.keys(socialLinks).length * 0.05, duration: 0.3 }}
@@ -409,11 +408,10 @@ const SocialWidget = () => {
                 <div className="relative z-10 text-white">
                   {chatbotIcon}
                 </div>
-                {/* Tooltip - positioned to left of icon (towards center) */}
-                <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 px-3 py-2 bg-gray-900/95 backdrop-blur-sm text-white text-xs font-medium rounded-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible pointer-events-none transition-all duration-200 shadow-xl z-[60] border border-white/10">
+                {/* Tooltip */}
+                <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900/95 backdrop-blur-sm text-white text-xs font-medium rounded-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible pointer-events-none transition-all duration-200 shadow-xl z-[60] border border-white/10">
                   Chat Bot
-                  {/* Arrow pointing to icon */}
-                  <div className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-gray-900/95"></div>
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900/95"></div>
                 </span>
               </motion.div>
             </div>

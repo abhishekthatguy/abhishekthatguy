@@ -124,7 +124,7 @@ export const projects = [
     title: "Personal Portfolio Website",
     shortDescription: "Built a modern, high-performance portfolio website using Next.js 14 with SSR, TypeScript, and advanced animations. Achieved 100/100 PageSpeed scores.",
     description: "A cutting-edge personal portfolio website showcasing modern web development practices. Built with Next.js 14 for optimal performance, featuring server-side rendering, static generation, and advanced client-side animations. The site demonstrates expertise in performance optimization, Core Web Vitals, and modern React patterns.",
-    year: "2024 - 2025",
+    year: "2024 - 2026",
     icon: "💼",
     color: "from-indigo-500 to-purple-500",
     borderColor: "border-indigo-500/50",

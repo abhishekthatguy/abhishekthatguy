@@ -7,7 +7,7 @@ const education = [
   {
     degree: "MBA in Delivery & Operations",
     institution: "Amity Online",
-    period: "2023 - 2025",
+    period: "2023 - 2026",
     year: "2023",
     icon: "🎓",
     color: "from-indigo-500 to-purple-500",
