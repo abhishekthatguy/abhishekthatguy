@@ -34,6 +34,10 @@ const sideNavStyles = makeStyles((theme) => ({
       textTransform: 'Capitalize',
       fontWeight: theme.typography.fontWeightBold,
     },
+    '&:hover': {
+      backgroundColor: 'transparent',
+      boxShadow: 'none',
+    },
   },
   link: {},
   active: {},
@@ -71,6 +75,10 @@ const sideNavStyles = makeStyles((theme) => ({
       transition: 'all 0.3s ease-in',
       position: 'relative',
     },
+  },
+  buttonLabel: {
+    marginRight: theme.spacing(7),
+    padding: theme.spacing(0),
   },
 }));
 

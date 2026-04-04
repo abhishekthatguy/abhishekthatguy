@@ -119,7 +119,7 @@ function Services(props) {
         <Title>
           <strong>{t('common:profile-landing.services_title')}</strong>
         </Title>
-        <Typography className={text.paragraph}>
+        <Typography className={clsx(text.paragraph, classes.servicePara)}>
           {t('common:profile-landing.services_desc')}
         </Typography>
       </div>
