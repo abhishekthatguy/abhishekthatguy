@@ -18,6 +18,8 @@
   [![Portfolio](https://img.shields.io/badge/Portfolio-Live-FF6B35?style=for-the-badge&logo=google-chrome&logoColor=white)](https://abhishekthatguy.in)
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/abhishekthatguy)
   [![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
+  ![Profile Views](https://komarev.com/ghpvc/?username=abhishekthatguy&color=FF6B35&style=for-the-badge&label=Profile+Views)
+  [![Followers](https://img.shields.io/github/followers/abhishekthatguy?style=for-the-badge&color=FF6B35&label=Followers)](https://github.com/abhishekthatguy?tab=followers)
 
 </div>
 
@@ -125,6 +127,48 @@ Docker • CI/CD • Vercel • AWS • Nginx
 | **Accredo & Express Scripts** | Healthcare UI refactor — React, 85%+ test coverage, HIPAA, zero downtime | React, Jest, Context API, LaunchDarkly |
 
 *Full project list and metrics:* [abhishekthatguy.in#projects](https://abhishekthatguy.in#projects)
+
+---
+
+## 📌 Featured Repositories
+
+<div align="center">
+  <a href="https://github.com/abhishekthatguy/zaytri">
+    <img src="https://github-readme-stats.vercel.app/api/pin/?username=abhishekthatguy&repo=zaytri&hide_border=true" alt="Zaytri" />
+  </a>
+  <a href="https://github.com/abhishekthatguy/luxflow-ai">
+    <img src="https://github-readme-stats.vercel.app/api/pin/?username=abhishekthatguy&repo=luxflow-ai&hide_border=true" alt="LexFlow AI" />
+  </a>
+  <a href="https://github.com/abhishekthatguy/clawtbot">
+    <img src="https://github-readme-stats.vercel.app/api/pin/?username=abhishekthatguy&repo=clawtbot&hide_border=true" alt="ClawtBot" />
+  </a>
+  <a href="https://github.com/abhishekthatguy/abhishekthatguy">
+    <img src="https://github-readme-stats.vercel.app/api/pin/?username=abhishekthatguy&repo=abhishekthatguy&hide_border=true" alt="Portfolio Site" />
+  </a>
+</div>
+
+---
+
+## 📊 GitHub Stats
+
+<div align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=abhishekthatguy&show_icons=true&hide_border=true" alt="Abhishek's GitHub stats" height="165" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=abhishekthatguy&layout=compact&hide_border=true" alt="Top Languages" height="165" />
+  <br />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=abhishekthatguy&hide_border=true" alt="GitHub Streak" />
+</div>
+
+---
+
+## 🐍 Contribution Snake
+
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/abhishekthatguy/abhishekthatguy/output/github-contribution-grid-snake-dark.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/abhishekthatguy/abhishekthatguy/output/github-contribution-grid-snake.svg" />
+    <img alt="github contribution grid snake animation" src="https://raw.githubusercontent.com/abhishekthatguy/abhishekthatguy/output/github-contribution-grid-snake.svg" />
+  </picture>
+</div>
 
 ---
 
