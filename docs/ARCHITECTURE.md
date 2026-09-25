@@ -37,7 +37,7 @@ Headers: `Content-Type: application/json`, `Accept: application/json`.
 ### Behaviour
 
 - Form submits to **`NEXT_PUBLIC_WEBHOOK_URL`** (n8n webhook) first.
-- If the variable is not set, the form shows a configuration error and does not send.
+- If the variable is not set, the webhook step is skipped and the form goes straight to the Nodemailer fallback.
 - **If the webhook fails** (network error, non-2xx, or error response), the app falls back to **Nodemailer**: it calls `POST /api/send-mail` with the same form data. If that succeeds, you still get an email notification. Configure `MAIL_*` and `RECIPIENT_EMAIL` in `.env` for the fallback.
 
 ### Fallback: Nodemailer (this repo)

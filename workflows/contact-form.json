@@ -1,0 +1,198 @@
+{
+  "id": "portfolio-contact-form",
+  "name": "Portfolio Contact Form",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "contact",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "a1b2c3d4-0001-4000-8000-000000000001",
+      "name": "Contact Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "webhookId": "c0ffee11-2222-4333-8444-555566667777",
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "email-syntax",
+              "leftValue": "={{ $json.body.email }}",
+              "rightValue": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$",
+              "operator": {
+                "type": "string",
+                "operation": "regex",
+                "name": "filter.operator.string.regex"
+              }
+            },
+            {
+              "id": "email-domain",
+              "leftValue": "={{ $json.body.email }}",
+              "rightValue": "@(?:[^@.]+\\.)*(?:example\\.(?:com|org|net|edu|io)|test\\.(?:com|org|net|dev)|invalid\\.com|localhost|(?:mailinator|guerrillamail|tempmail|temp-mail|10minutemail|yopmail|maildrop|trashmail|fakeinbox|sharklasers|getnada|dispostable|tempinbox|mailnesia|mintemail|throwawaymail|moakt|spamgourmet|mytemp|tempail|emailondeck|mailsac|harakirimail|inboxalias)[^@]*|[^@.]+\\.(?:test|invalid|example|local))$",
+              "operator": {
+                "type": "string",
+                "operation": "notRegex",
+                "name": "filter.operator.string.notRegex"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "a1b2c3d4-0005-4000-8000-000000000005",
+      "name": "Email Valid?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "resource": "email",
+        "operation": "send",
+        "fromEmail": "Abhishek Singh Portfolio <clawtbot@gmail.com>",
+        "toEmail": "abhishekthatguy@gmail.com",
+        "subject": "=[Portfolio] {{ $json.body.subject || 'New contact form message' }}",
+        "emailFormat": "both",
+        "text": "=New message from your portfolio contact form:\n\nName: {{ $json.body.name }}\nEmail: {{ $json.body.email }}\nSubject: {{ $json.body.subject }}\n\nMessage:\n{{ $json.body.message }}",
+        "html": "=<h3>New message from your portfolio contact form</h3><table cellpadding=\"6\" style=\"border-collapse:collapse\"><tr><td><b>Name</b></td><td>{{ $json.body.name }}</td></tr><tr><td><b>Email</b></td><td><a href=\"mailto:{{ $json.body.email }}\">{{ $json.body.email }}</a></td></tr><tr><td><b>Subject</b></td><td>{{ $json.body.subject }}</td></tr></table><p><b>Message:</b></p><p style=\"white-space:pre-wrap\">{{ $json.body.message }}</p>",
+        "options": {
+          "replyTo": "={{ $json.body.email }}",
+          "appendAttribution": false
+        }
+      },
+      "id": "a1b2c3d4-0003-4000-8000-000000000003",
+      "name": "Send Owner Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "credentials": {
+        "smtp": {
+          "id": "gmail-smtp-clawtbot",
+          "name": "Gmail SMTP (clawtbot)"
+        }
+      },
+      "position": [680, 220]
+    },
+    {
+      "parameters": {
+        "resource": "email",
+        "operation": "send",
+        "fromEmail": "Abhishek Singh <clawtbot@gmail.com>",
+        "toEmail": "={{ $json.body.email }}",
+        "subject": "=Thanks for reaching out — Abhishek Singh",
+        "emailFormat": "both",
+        "text": "=Hi {{ $json.body.name }},\n\nThanks for your message — I've received it and will get back to you as soon as possible.\n\nFor anything urgent, you can also reach me directly:\nEmail: abhishekthatguy@gmail.com\nPhone: +91 96214 82434\n\n— Abhishek Singh\nSenior GenAI & Automation Engineer",
+        "html": "=<p>Hi {{ $json.body.name }},</p><p>Thanks for your message — I've received it and will get back to you as soon as possible.</p><p>For anything urgent, you can also reach me directly:<br>Email: <a href=\"mailto:abhishekthatguy@gmail.com\">abhishekthatguy@gmail.com</a><br>Phone: +91 96214 82434</p><p>— Abhishek Singh<br>Senior GenAI &amp; Automation Engineer</p>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "a1b2c3d4-0004-4000-8000-000000000004",
+      "name": "Send Confirmation Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "onError": "continueRegularOutput",
+      "credentials": {
+        "smtp": {
+          "id": "gmail-smtp-clawtbot",
+          "name": "Gmail SMTP (clawtbot)"
+        }
+      },
+      "position": [920, 220]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, message: 'Message received' }) }}"
+      },
+      "id": "a1b2c3d4-0002-4000-8000-000000000002",
+      "name": "Respond Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1160, 220]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: false, message: 'Please provide a valid email address.' }) }}",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "id": "a1b2c3d4-0006-4000-8000-000000000006",
+      "name": "Respond Invalid",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [680, 420]
+    }
+  ],
+  "connections": {
+    "Contact Webhook": {
+      "main": [
+        [
+          {
+            "node": "Email Valid?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Valid?": {
+      "main": [
+        [
+          {
+            "node": "Send Owner Email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond Invalid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Owner Email": {
+      "main": [
+        [
+          {
+            "node": "Send Confirmation Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Confirmation Email": {
+      "main": [
+        [
+          {
+            "node": "Respond Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "pinData": {}
+}

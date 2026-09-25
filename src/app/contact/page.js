@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useThemeStyles } from '@/hooks/useThemeStyles';
 import { gradientAnimation, fadeInDown, fadeInUp } from '@/styles/animations';
+import { isValidEmail } from '@/utils/emailValidation';
 
 export default function ContactPage() {
   const { themeStyles, effectiveTheme } = useThemeStyles();
@@ -35,22 +36,27 @@ export default function ContactPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus({ type: 'loading', message: 'Sending message...' });
 
-    const webhookUrl = process.env.NEXT_PUBLIC_WEBHOOK_URL;
-    if (!webhookUrl) {
-      setStatus({ type: 'error', message: 'Webhook URL is not configured. Please set NEXT_PUBLIC_WEBHOOK_URL.' });
+    if (!isValidEmail(formData.email)) {
+      setStatus({ type: 'error', message: 'Please enter a valid email address.' });
       return;
     }
 
+    setStatus({ type: 'loading', message: 'Sending message...' });
+
+    const webhookUrl = process.env.NEXT_PUBLIC_WEBHOOK_URL;
+
     try {
+      if (!webhookUrl) {
+        throw new Error('Webhook URL is not configured');
+      }
+
       const response = await fetch(webhookUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        credentials: 'include',
         body: JSON.stringify(formData),
       });
 

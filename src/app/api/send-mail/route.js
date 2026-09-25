@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { isValidEmail } from '@/utils/emailValidation';
 
 /**
  * Fallback: send contact form data via email when webhook fails.
@@ -13,6 +14,13 @@ export async function POST(request) {
     if (!name || !email || !message) {
       return NextResponse.json(
         { success: false, message: 'Name, email, and message are required.' },
+        { status: 400 }
+      );
+    }
+
+    if (!isValidEmail(email)) {
+      return NextResponse.json(
+        { success: false, message: 'Please provide a valid email address.' },
         { status: 400 }
       );
     }

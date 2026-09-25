@@ -44,11 +44,11 @@ describe('Contact', () => {
   it('updates form fields when user types', () => {
     render(<Contact />);
     fireEvent.change(screen.getByLabelText(/name/i), { target: { value: 'Jane Doe', name: 'name' } });
-    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'jane@example.com', name: 'email' } });
+    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'jane@gmail.com', name: 'email' } });
     fireEvent.change(screen.getByLabelText(/subject/i), { target: { value: 'Hello', name: 'subject' } });
     fireEvent.change(screen.getByLabelText(/message/i), { target: { value: 'Test message', name: 'message' } });
     expect(screen.getByLabelText(/name/i)).toHaveValue('Jane Doe');
-    expect(screen.getByLabelText(/email/i)).toHaveValue('jane@example.com');
+    expect(screen.getByLabelText(/email/i)).toHaveValue('jane@gmail.com');
     expect(screen.getByLabelText(/message/i)).toHaveValue('Test message');
   });
 
@@ -59,7 +59,7 @@ describe('Contact', () => {
     });
     render(<Contact />);
     fireEvent.change(screen.getByLabelText(/name/i), { target: { value: 'Jane', name: 'name' } });
-    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'jane@example.com', name: 'email' } });
+    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'jane@gmail.com', name: 'email' } });
     fireEvent.change(screen.getByLabelText(/subject/i), { target: { value: 'Hi', name: 'subject' } });
     fireEvent.change(screen.getByLabelText(/message/i), { target: { value: 'Hello', name: 'message' } });
     fireEvent.click(screen.getByRole('button', { name: /send message/i }));
@@ -79,8 +79,26 @@ describe('Contact', () => {
     });
   });
 
-  it('shows error when webhook URL is not configured', async () => {
+  it('falls back to email when webhook URL is not configured', async () => {
     process.env.NEXT_PUBLIC_WEBHOOK_URL = '';
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ success: true }),
+    });
+    render(<Contact />);
+    fireEvent.change(screen.getByLabelText(/name/i), { target: { value: 'Jane', name: 'name' } });
+    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'jane@gmail.com', name: 'email' } });
+    fireEvent.change(screen.getByLabelText(/subject/i), { target: { value: 'Hi', name: 'subject' } });
+    fireEvent.change(screen.getByLabelText(/message/i), { target: { value: 'Hello', name: 'message' } });
+    fireEvent.click(screen.getByRole('button', { name: /send message/i }));
+    await waitFor(() => {
+      expect(screen.getByText(/message sent successfully/i)).toBeInTheDocument();
+    });
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(global.fetch).toHaveBeenCalledWith('/api/send-mail', expect.any(Object));
+  });
+
+  it('shows error and does not submit for fake/disposable email domains', async () => {
     render(<Contact />);
     fireEvent.change(screen.getByLabelText(/name/i), { target: { value: 'Jane', name: 'name' } });
     fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'jane@example.com', name: 'email' } });
@@ -88,7 +106,7 @@ describe('Contact', () => {
     fireEvent.change(screen.getByLabelText(/message/i), { target: { value: 'Hello', name: 'message' } });
     fireEvent.click(screen.getByRole('button', { name: /send message/i }));
     await waitFor(() => {
-      expect(screen.getByText(/webhook url is not configured/i)).toBeInTheDocument();
+      expect(screen.getByText(/please enter a valid email address/i)).toBeInTheDocument();
     });
     expect(global.fetch).not.toHaveBeenCalled();
   });
@@ -102,7 +120,7 @@ describe('Contact', () => {
       .mockResolvedValueOnce({ ok: false });
     render(<Contact />);
     fireEvent.change(screen.getByLabelText(/name/i), { target: { value: 'Jane', name: 'name' } });
-    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'jane@example.com', name: 'email' } });
+    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'jane@gmail.com', name: 'email' } });
     fireEvent.change(screen.getByLabelText(/subject/i), { target: { value: 'Hi', name: 'subject' } });
     fireEvent.change(screen.getByLabelText(/message/i), { target: { value: 'Hello', name: 'message' } });
     fireEvent.click(screen.getByRole('button', { name: /send message/i }));
@@ -124,7 +142,7 @@ describe('Contact', () => {
       });
     render(<Contact />);
     fireEvent.change(screen.getByLabelText(/name/i), { target: { value: 'Jane', name: 'name' } });
-    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'jane@example.com', name: 'email' } });
+    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'jane@gmail.com', name: 'email' } });
     fireEvent.change(screen.getByLabelText(/subject/i), { target: { value: 'Hi', name: 'subject' } });
     fireEvent.change(screen.getByLabelText(/message/i), { target: { value: 'Hello', name: 'message' } });
     fireEvent.click(screen.getByRole('button', { name: /send message/i }));

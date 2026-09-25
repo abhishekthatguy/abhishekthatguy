@@ -12,8 +12,8 @@ describe('getThemeStyles', () => {
   it('returns light theme styles when effectiveTheme is light', () => {
     const styles = getThemeStyles('light');
     expect(styles).toBeDefined();
-    expect(styles.radialGradient).toContain('rgba(255,255,255,');
-    expect(styles.overlayGradient).toContain('white');
+    expect(styles.radialGradient).toContain('rgba(249, 250, 251,');
+    expect(styles.overlayGradient).toContain('gray-50');
   });
 
   it('returns consistent structure for both themes', () => {
