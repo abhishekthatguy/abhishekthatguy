@@ -5,16 +5,6 @@ import { projects } from '@/data/projects';
 import { useThemeStyles } from '@/hooks/useThemeStyles';
 import { gradientAnimation, fadeInDown, fadeInUp } from '@/styles/animations';
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
 const item = {
   hidden: { opacity: 0, x: -50, scale: 0.9 },
   show: { 
@@ -91,14 +81,8 @@ export default function Projects() {
             style={{ originY: 0 }}
           />
 
-          <motion.div
-            variants={container}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="space-y-8 sm:space-y-12 lg:space-y-16"
-          >
-            {projects.map((project, index) => {
+          <div className="space-y-8 sm:space-y-12 lg:space-y-16">
+            {projects.slice(0, 4).map((project, index) => {
               const isEven = index % 2 === 0;
               const variants = isEven ? item : itemRight;
               
@@ -106,6 +90,9 @@ export default function Projects() {
                 <motion.div
                   key={project.id}
                   variants={variants}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.25 }}
                   className={`relative flex flex-col lg:flex-row items-center gap-6 sm:gap-8 lg:gap-12 ${
                     isEven ? 'lg:flex-row-reverse' : ''
                   }`}
@@ -241,6 +228,33 @@ export default function Projects() {
                 </motion.div>
               );
             })}
+          </div>
+
+          {/* View all projects */}
+          <motion.div
+            className="mt-12 sm:mt-16 flex justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <a
+              href="https://portfolio.abhishekthatguy.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group inline-flex flex-col items-center rounded-full border-2 px-8 py-3 transition-all duration-500 hover:scale-105 ${
+                effectiveTheme === 'dark'
+                  ? 'border-teal-300/60 text-white hover:bg-teal-400/10 hover:border-teal-300 hover:shadow-[0_0_30px_rgba(45,212,191,0.3)]'
+                  : 'border-teal-600/60 text-slate-900 hover:bg-teal-500/10 hover:border-teal-600'
+              }`}
+            >
+              <span className="text-base sm:text-lg font-bold">
+                View All Projects <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
+              </span>
+              <span className={`text-[10px] sm:text-xs ${themeStyles.descriptionText}`}>
+                portfolio.abhishekthatguy.in
+              </span>
+            </a>
           </motion.div>
         </div>
       </div>

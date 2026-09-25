@@ -1,876 +1,621 @@
 'use client';
-import { motion } from 'framer-motion';
-import { useMemo, useRef, useEffect } from 'react';
+import { useState } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import Image from 'next/image';
-import { useTheme } from '@/hooks/useTheme';
+import Link from 'next/link';
 import { useThemeStyles } from '@/hooks/useThemeStyles';
-import {
-  container,
-  item,
-  floatingAnimation,
-  titleContainerAnimation,
-  letterContainer,
-  letterAnimation,
-  letterLoopAnimation,
-  singhAnimation,
-  subtitleLoopAnimation,
-  techStackContainer,
-  techStackItem
-} from '@/styles/animations';
-import { techStacks } from '@/constants/techStack';
+import { fadeInDown, fadeInUp } from '@/styles/animations';
 
-// ============================================================================
-// CANVAS COMPONENTS - Water Droplet & Particle Effects
-// ============================================================================
+const NAV_ITEMS = [
+  { label: 'Home', href: '#home' },
+  { label: 'About', href: '#about' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Contact', href: '#contact' },
+];
 
-const WaterDropletEffect = ({ sectionRef }) => {
-  const canvasRef = useRef(null);
-  const ripplesRef = useRef([]);
-  const isReadyRef = useRef(false);
-  const { getEffectiveTheme } = useTheme();
+const SUGGESTIONS = [
+  'What do you work on?',
+  'Tech stack?',
+  'Experience?',
+  "Let's connect",
+];
 
-  const getThemeColors = () => {
-    const theme = getEffectiveTheme();
-    return theme === 'dark'
-      ? { primaryColor: { r: 254, g: 119, b: 67 }, secondaryColor: { r: 0, g: 217, b: 255 } }
-      : { primaryColor: { r: 238, g: 100, b: 50 }, secondaryColor: { r: 0, g: 180, b: 220 } };
-  };
+const QA_RULES = [
+  {
+    match: /work|project|build|do\b/i,
+    answer:
+      'I design and ship AI tools, automation workflows and high-performance applications — multi-agent systems, RAG pipelines and enterprise n8n automations.',
+  },
+  {
+    match: /tech|stack|skill|tool|language/i,
+    answer:
+      'Core stack: Next.js, React, FastAPI, Postgres + pgvector, Redis, n8n, LangGraph and AWS Bedrock. Python and TypeScript daily.',
+  },
+  {
+    match: /experience|year|background|career/i,
+    answer:
+      '8+ years building software, 4+ years deep in LLM/AI systems — 30+ projects delivered across insurance, healthcare and SaaS.',
+  },
+  {
+    match: /connect|contact|hire|call|email|together|collaborate/i,
+    answer:
+      'Easiest ways to reach me: abhishekthatguy@gmail.com or +91 96214 82434 — or drop a note via the contact form below. I respond ASAP.',
+  },
+];
 
-  const vibgyorColors = [
-    { r: 148, g: 0, b: 211 }, { r: 75, g: 0, b: 130 }, { r: 0, g: 0, b: 255 },
-    { r: 0, g: 255, b: 0 }, { r: 255, g: 255, b: 0 }, { r: 255, g: 165, b: 0 }, { r: 255, g: 0, b: 0 }
-  ];
+const DEFAULT_ANSWER =
+  'Good question — the quickest answer is over email: abhishekthatguy@gmail.com. Or scroll down and leave a note in the contact form.';
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const section = sectionRef?.current;
-    if (!canvas || !section) return;
+const STATS = [
+  { value: '8+', label: 'Years Experience' },
+  { value: '4+', label: 'Years in LLM/AI' },
+  { value: '30+', label: 'Projects Delivered' },
+  { value: '∞', label: 'Still Building' },
+];
 
-    const ctx = canvas.getContext('2d');
-    let animationId;
-    let cleanupFn = null;
-    const currentColors = getThemeColors();
+const GHOST_LOGOS = [
+  { text: 'React', top: '8%', left: '30%', size: 'text-4xl', rotate: -8 },
+  { text: 'Next.js', top: '14%', left: '48%', size: 'text-5xl', rotate: 4 },
+  { text: 'Python', top: '6%', left: '62%', size: 'text-3xl', rotate: -6 },
+  { text: 'LangChain', top: '24%', left: '36%', size: 'text-4xl', rotate: -4 },
+  { text: 'Docker', top: '32%', left: '52%', size: 'text-3xl', rotate: 6 },
+  { text: 'TS', top: '38%', left: '42%', size: 'text-4xl', rotate: -3 },
+  { text: 'Postgres', top: '52%', left: '46%', size: 'text-3xl', rotate: 5 },
+];
 
-    function setupCanvas() {
-      const resizeCanvas = () => {
-        const rect = section.getBoundingClientRect();
-        canvas.width = rect.width;
-        canvas.height = rect.height;
-      };
+const TECH_CARDS = [
+  {
+    name: 'OpenAI',
+    sub: 'LLM',
+    className: 'left-[4%] top-[30%]',
+    delay: 0,
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-6 w-6 text-cyan-300" fill="currentColor">
+        <path d="M22.28 9.82a5.98 5.98 0 0 0-.52-4.91 6.05 6.05 0 0 0-6.51-2.9A6.07 6.07 0 0 0 4.98 4.18a5.99 5.99 0 0 0-3.26 2.9 6.05 6.05 0 0 0 .74 7.1 5.98 5.98 0 0 0 .51 4.91 6.05 6.05 0 0 0 6.52 2.9 5.97 5.97 0 0 0 4.5 1.99c2.04 0 3.87-.98 5.01-2.49a5.99 5.99 0 0 0 3.28-2.89 6.05 6.05 0 0 0-.75-7.11zM13.99 21.5c-.4 0-.79-.06-1.16-.19l.06-.03 6.24-3.59a.6.6 0 0 0 .3-.51v-7.7l2.63 1.51a.06.06 0 0 1 .03.05 5.02 5.02 0 0 1-8.1 4.46zm1.22-16.7a5.03 5.03 0 0 1-1.92 9.2l-.05-.02-6.23-3.6a.6.6 0 0 1-.3-.51V2.2a.06.06 0 0 0-.03-.05l2.6 1.5a.6.6 0 0 0 .6 0l5.7-3.28a.6.6 0 0 1 .29.09c.46.14 1.18.2 1.34.34zM7.03 12.5l-6.23-3.59a5.02 5.02 0 0 1 7.74-4.37l.04.02v7.2a.6.6 0 0 1-.6.6l-5.7 3.28a.6.6 0 0 1-.29-.08 4.98 4.98 0 0 1-1.57-1.07.6.6 0 0 0-.17-.37z" transform="scale(0.9) translate(1.3 1.3)" />
+      </svg>
+    ),
+  },
+  {
+    name: 'LangGraph',
+    sub: 'Agents',
+    className: 'left-[58%] top-[8%]',
+    delay: 0.8,
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-6 w-6 text-cyan-300" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <circle cx="6" cy="6" r="2.4" />
+        <circle cx="18" cy="7" r="2.4" />
+        <circle cx="12" cy="18" r="2.4" />
+        <path d="M8.2 6.5l7.4.4M7.3 8.2l3.6 7.6M16.9 9.2l-3.7 6.6" />
+      </svg>
+    ),
+  },
+  {
+    name: 'n8n',
+    sub: 'Automation',
+    className: 'left-[68%] top-[30%]',
+    delay: 1.6,
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-6 w-6 text-pink-400" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <circle cx="5" cy="12" r="2.4" />
+        <circle cx="12" cy="6" r="2.4" />
+        <circle cx="12" cy="18" r="2.4" />
+        <circle cx="19" cy="12" r="2.4" />
+        <path d="M7.1 10.9l3-3.4M7.1 13.1l3 3.4M14.3 7.2l2.7 3M14.3 16.8l2.7-3" />
+      </svg>
+    ),
+  },
+  {
+    name: 'PostgreSQL',
+    sub: 'pgvector',
+    className: 'left-[74%] top-[52%]',
+    delay: 2.4,
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-6 w-6 text-cyan-300" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <ellipse cx="12" cy="6" rx="7" ry="2.8" />
+        <path d="M5 6v12c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8V6" />
+        <path d="M5 12c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8" />
+      </svg>
+    ),
+  },
+  {
+    name: 'aws',
+    sub: 'Bedrock',
+    className: 'left-[66%] top-[72%]',
+    delay: 3.2,
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none">
+        <text x="12" y="11" textAnchor="middle" className="fill-white" fontSize="8" fontWeight="bold">aws</text>
+        <path d="M5 15c2.5 1.8 6.5 2.5 9.5 1.8M17.5 15.8l1.6-.5-.5 1.7" stroke="#fb923c" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+];
 
-      resizeCanvas();
-      
-      let resizeTimeout;
-      const handleResize = () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(resizeCanvas, 250);
-      };
-      window.addEventListener('resize', handleResize, { passive: true });
+const TECH_CHIPS = [
+  { name: 'Python', dot: 'bg-yellow-400', className: 'left-[8%] top-[10%]', delay: 0.4 },
+  { name: 'FastAPI', dot: 'bg-teal-300', className: 'left-[32%] top-[4%]', delay: 1.1 },
+  { name: 'Next.js', dot: 'bg-white', className: 'left-[42%] top-[20%]', delay: 2.0 },
+  { name: 'React', dot: 'bg-cyan-300', className: 'left-[78%] top-[10%]', delay: 0.7 },
+  { name: 'TypeScript', dot: 'bg-blue-400', className: 'left-[90%] top-[38%]', delay: 2.8 },
+  { name: 'Docker', dot: 'bg-blue-300', className: 'left-[6%] top-[48%]', delay: 1.5 },
+  { name: 'Redis', dot: 'bg-red-400', className: 'left-[14%] top-[70%]', delay: 3.4 },
+  { name: 'Celery', dot: 'bg-green-400', className: 'left-[44%] top-[84%]', delay: 2.2 },
+  { name: 'LangChain', dot: 'bg-emerald-300', className: 'left-[86%] top-[64%]', delay: 1.9 },
+  { name: 'Tailwind', dot: 'bg-cyan-400', className: 'left-[62%] top-[20%]', delay: 3.9 },
+  { name: 'Node.js', dot: 'bg-lime-400', className: 'left-[26%] top-[34%]', delay: 4.5 },
+  { name: 'pgvector', dot: 'bg-violet-400', className: 'left-[58%] top-[88%]', delay: 0.9 },
+  { name: 'JFrog', dot: 'bg-green-500', className: 'left-[20%] top-[22%]', delay: 2.6 },
+  { name: 'RAG', dot: 'bg-teal-400', className: 'left-[82%] top-[26%]', delay: 3.1 },
+  { name: 'Agents', dot: 'bg-orange-400', className: 'left-[36%] top-[48%]', delay: 4.1 },
+  { name: 'Devin', dot: 'bg-fuchsia-400', className: 'left-[10%] top-[60%]', delay: 5.0 },
+  { name: 'CursorAI', dot: 'bg-sky-400', className: 'left-[30%] top-[76%]', delay: 4.7 },
+  { name: 'CrewAI', dot: 'bg-rose-400', className: 'left-[80%] top-[78%]', delay: 5.5 },
+];
 
-      class TechParticle {
-        constructor(x, y, color, angle) {
-          this.x = x;
-          this.y = y;
-          this.vx = Math.cos(angle) * (2 + Math.random() * 3);
-          this.vy = Math.sin(angle) * (2 + Math.random() * 3);
-          this.life = 1;
-          this.decay = 0.015 + Math.random() * 0.01;
-          this.size = 2 + Math.random() * 3;
-          this.color = color || (Math.random() > 0.5 ? currentColors.primaryColor : currentColors.secondaryColor);
-        }
-
-        update() {
-          this.x += this.vx;
-          this.y += this.vy;
-          this.life -= this.decay;
-          this.vx *= 0.98;
-          this.vy *= 0.98;
-          return this.life > 0;
-        }
-
-        draw() {
-          const alpha = this.life * 0.8;
-          ctx.shadowBlur = 8;
-          ctx.shadowColor = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${alpha * 0.8})`;
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${alpha})`;
-          ctx.fill();
-          ctx.shadowBlur = 0;
-        }
-      }
-
-      class TechRipple {
-        constructor(x, y, useVibgyor = false) {
-          this.x = x;
-          this.y = y;
-          this.radius = 0;
-          this.maxRadius = Math.max(canvas.width, canvas.height) * 1.2;
-          this.speed = 3 + Math.random() * 2;
-          this.opacity = 0.8;
-          this.useVibgyor = useVibgyor;
-          this.color = useVibgyor ? vibgyorColors[Math.floor(Math.random() * vibgyorColors.length)] : (Math.random() > 0.5 ? currentColors.primaryColor : currentColors.secondaryColor);
-          this.life = 1;
-          this.segments = 6 + Math.floor(Math.random() * 6);
-          this.rotation = Math.random() * Math.PI * 2;
-          this.colorOffset = Math.random() * vibgyorColors.length;
-          this.particles = [];
-          
-          for (let i = 0; i < 8; i++) {
-            const angle = (Math.PI * 2 / 8) * i;
-            const particleColor = useVibgyor 
-              ? vibgyorColors[Math.floor((i + this.colorOffset) % vibgyorColors.length)]
-              : this.color;
-            this.particles.push(new TechParticle(x, y, particleColor, angle));
-          }
-        }
-
-        getRainbowColor(angle) {
-          if (!this.useVibgyor) return this.color;
-          const normalizedAngle = (angle % (Math.PI * 2)) / (Math.PI * 2);
-          const colorIndex = (normalizedAngle * vibgyorColors.length + this.colorOffset) % vibgyorColors.length;
-          const index1 = Math.floor(colorIndex);
-          const index2 = (index1 + 1) % vibgyorColors.length;
-          const t = colorIndex - index1;
-          const c1 = vibgyorColors[index1];
-          const c2 = vibgyorColors[index2];
-          return {
-            r: Math.round(c1.r + (c2.r - c1.r) * t),
-            g: Math.round(c1.g + (c2.g - c1.g) * t),
-            b: Math.round(c1.b + (c2.b - c1.b) * t)
-          };
-        }
-
-        update() {
-          this.radius += this.speed;
-          this.life = 1 - (this.radius / this.maxRadius);
-          this.opacity = this.life * 0.7;
-          this.rotation += 0.02;
-          
-          if (this.useVibgyor) {
-            this.colorOffset += 0.05;
-            if (this.colorOffset >= vibgyorColors.length) this.colorOffset = 0;
-          }
-          
-          this.particles = this.particles.filter(p => p.update());
-          return this.life > 0;
-        }
-
-        drawHexagon(x, y, radius, rotation) {
-          ctx.beginPath();
-          for (let i = 0; i < 6; i++) {
-            const angle = (Math.PI / 3) * i + rotation;
-            const px = x + Math.cos(angle) * radius;
-            const py = y + Math.sin(angle) * radius;
-            if (i === 0) ctx.moveTo(px, py);
-            else ctx.lineTo(px, py);
-          }
-          ctx.closePath();
-        }
-
-        draw() {
-          if (this.opacity <= 0) return;
-
-          const segments = this.segments;
-          const segmentAngle = (Math.PI * 2) / segments;
-          const innerRadius = this.radius * 0.85;
-          
-          for (let i = 0; i < segments; i++) {
-            const angle = segmentAngle * i + this.rotation;
-            const startAngle = angle - segmentAngle / 3;
-            const endAngle = angle + segmentAngle / 3;
-            const segmentColor = this.useVibgyor ? this.getRainbowColor(angle) : this.color;
-            
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, startAngle, endAngle);
-            ctx.strokeStyle = `rgba(${segmentColor.r}, ${segmentColor.g}, ${segmentColor.b}, ${this.opacity})`;
-            ctx.lineWidth = 3;
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = `rgba(${segmentColor.r}, ${segmentColor.g}, ${segmentColor.b}, ${this.opacity * 0.6})`;
-            ctx.stroke();
-            
-            if (this.radius > 30) {
-              const innerColor = this.useVibgyor ? this.getRainbowColor(angle + Math.PI) : this.color;
-              ctx.beginPath();
-              ctx.arc(this.x, this.y, innerRadius, startAngle, endAngle);
-              ctx.strokeStyle = `rgba(${innerColor.r}, ${innerColor.g}, ${innerColor.b}, ${this.opacity * 0.4})`;
-              ctx.lineWidth = 2;
-              ctx.stroke();
-            }
-          }
-          
-          if (this.radius < 80) {
-            const centerColor = this.useVibgyor ? this.getRainbowColor(this.rotation) : this.color;
-            this.drawHexagon(this.x, this.y, Math.min(this.radius * 0.3, 25), this.rotation);
-            ctx.fillStyle = `rgba(${centerColor.r}, ${centerColor.g}, ${centerColor.b}, ${this.opacity * 1.2})`;
-            ctx.shadowBlur = 15;
-            ctx.fill();
-          }
-          
-          this.particles.forEach(p => p.draw());
-          ctx.shadowBlur = 0;
-        }
-      }
-
-      const handleClick = (e) => {
-        const target = e.target;
-        const isButton = target.tagName === 'BUTTON' || target.tagName === 'A' ||
-                        target.closest('a') !== null || target.closest('button') !== null ||
-                        target.classList.contains('cursor-pointer');
-        
-        const useVibgyor = !isButton;
-        const rect = section.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const rippleCount = 1 + Math.floor(Math.random() * 2);
-        for (let i = 0; i < rippleCount; i++) {
-          const offset = (Math.random() - 0.5) * 25;
-          const ripple = new TechRipple(x + offset, y + offset, useVibgyor);
-          if (!useVibgyor) {
-            ripple.color = Math.random() > 0.5 ? currentColors.primaryColor : currentColors.secondaryColor;
-          }
-          ripplesRef.current.push(ripple);
-        }
-      };
-
-      const animate = () => {
-        if (!isReadyRef.current) return;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ripplesRef.current = ripplesRef.current.filter(ripple => {
-          const isAlive = ripple.update();
-          if (isAlive) ripple.draw();
-          return isAlive;
-        });
-        animationId = requestAnimationFrame(animate);
-      };
-
-      animate();
-      section.addEventListener('click', handleClick, { passive: true });
-
-      cleanupFn = () => {
-        window.removeEventListener('resize', handleResize);
-        clearTimeout(resizeTimeout);
-        section.removeEventListener('click', handleClick);
-        if (animationId) cancelAnimationFrame(animationId);
-        ripplesRef.current = [];
-      };
-    }
-
-    const init = () => {
-      if (isReadyRef.current) return;
-      const start = window.requestIdleCallback || ((cb) => setTimeout(cb, 100));
-      start(() => {
-        isReadyRef.current = true;
-        setupCanvas();
-      });
-    };
-
-    if (document.readyState === 'complete') {
-      init();
-    } else {
-      window.addEventListener('load', init, { once: true });
-      setTimeout(init, 200);
-    }
-
-    const observer = new MutationObserver(() => {
-      ripplesRef.current = [];
-    });
-    
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class', 'data-theme']
-    });
-
-    return () => {
-      isReadyRef.current = false;
-      observer.disconnect();
-      if (cleanupFn) cleanupFn();
-    };
-  }, [sectionRef, getEffectiveTheme]);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none z-[6]"
-      style={{ background: 'transparent' }}
-    />
-  );
-};
-
-// Minimal broken star particle effect
-const ParticleAnimation = () => {
-  const canvasRef = useRef(null);
-  const { getEffectiveTheme } = useTheme();
-
-  const getThemeColors = () => {
-    const theme = getEffectiveTheme();
-    return theme === 'dark'
-      ? { primaryColor: { r: 254, g: 119, b: 67 }, secondaryColor: { r: 0, g: 217, b: 255 } }
-      : { primaryColor: { r: 238, g: 100, b: 50 }, secondaryColor: { r: 0, g: 180, b: 220 } };
-  };
-
-  const config = useMemo(() => ({
-    starCount: 8, // Reduced from 30 to minimal effect
-    twinkleSpeed: 0.003,
-    minSize: 1.5,
-    maxSize: 3,
-  }), []);
-
-  const isLoadedRef = useRef(false);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    let stars = [];
-    let animationId;
-
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      // Reinitialize stars on resize
-      stars = [];
-    };
-    
-    resizeCanvas();
-    
-    let resizeTimeout;
-    const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(resizeCanvas, 250);
-    };
-    window.addEventListener('resize', handleResize, { passive: true });
-
-    class BrokenStar {
-      constructor() {
-        this.reset();
-        const colors = getThemeColors();
-        this.color = Math.random() > 0.5 ? colors.primaryColor : colors.secondaryColor;
-      }
-
-      reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = config.minSize + Math.random() * (config.maxSize - config.minSize);
-        this.twinkle = Math.random();
-        this.twinkleSpeed = config.twinkleSpeed * (0.5 + Math.random());
-        // Random rotation for broken appearance
-        this.rotation = Math.random() * Math.PI * 2;
-        this.points = 4 + Math.floor(Math.random() * 3); // 4-6 points for broken star
-      }
-
-      update() {
-        this.twinkle += this.twinkleSpeed;
-        if (this.twinkle > 1) this.twinkle -= 2;
-      }
-
-      draw() {
-        const twinkleIntensity = Math.abs(Math.sin(this.twinkle * Math.PI));
-        const alpha = 0.3 + twinkleIntensity * 0.4; // Subtle visibility
-        
-        ctx.save();
-        ctx.translate(this.x, this.y);
-        ctx.rotate(this.rotation);
-        
-        // Draw broken star shape
-        ctx.beginPath();
-        const outerRadius = this.size;
-        const innerRadius = this.size * 0.4;
-        
-        for (let i = 0; i < this.points * 2; i++) {
-          const angle = (Math.PI * i) / this.points;
-          const radius = i % 2 === 0 ? outerRadius : innerRadius;
-          const x = Math.cos(angle) * radius;
-          const y = Math.sin(angle) * radius;
-          
-          if (i === 0) {
-            ctx.moveTo(x, y);
-          } else {
-            ctx.lineTo(x, y);
-          }
-        }
-        ctx.closePath();
-        
-        ctx.shadowBlur = 4 * twinkleIntensity;
-        ctx.shadowColor = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${alpha * 0.6})`;
-        ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${alpha})`;
-        ctx.fill();
-        
-        // Add subtle glow points
-        ctx.beginPath();
-        ctx.arc(0, 0, this.size * 0.3, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${alpha * 0.5})`;
-        ctx.fill();
-        
-        ctx.restore();
-        ctx.shadowBlur = 0;
-      }
-    }
-
-    const animate = () => {
-      if (!isLoadedRef.current) return;
-      
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      if (stars.length === 0) {
-        stars = Array.from({ length: config.starCount }, () => new BrokenStar());
-      }
-
-      stars.forEach(star => {
-        star.update();
-        star.draw();
-      });
-
-      animationId = requestAnimationFrame(animate);
-    };
-
-    const startAnimation = () => {
-      if (isLoadedRef.current) return;
-      isLoadedRef.current = true;
-      stars = Array.from({ length: config.starCount }, () => new BrokenStar());
-      const start = (window.requestIdleCallback || ((cb) => setTimeout(cb, 50)));
-      start(() => animate());
-    };
-
-    if (document.readyState === 'complete') {
-      startAnimation();
-    } else {
-      window.addEventListener('load', startAnimation, { once: true });
-      setTimeout(startAnimation, 300);
-    }
-
-    const observer = new MutationObserver(() => {
-      if (stars.length > 0) {
-        stars = Array.from({ length: config.starCount }, () => new BrokenStar());
-      }
-    });
-    
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class', 'data-theme']
-    });
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      clearTimeout(resizeTimeout);
-      observer.disconnect();
-      isLoadedRef.current = false;
-      if (animationId) cancelAnimationFrame(animationId);
-    };
-  }, [config, getEffectiveTheme]);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none z-[5] opacity-60"
-      style={{ background: 'transparent' }}
-    />
-  );
-};
-
-// ============================================================================
-// MAIN HERO COMPONENT
-// ============================================================================
+const SOCIALS = [
+  {
+    label: 'GitHub',
+    href: 'https://github.com/abhishekthatguy',
+    icon: (
+      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+    ),
+  },
+  {
+    label: 'LinkedIn',
+    href: 'https://linkedin.com/in/abhishekthatguy',
+    icon: (
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+    ),
+  },
+  {
+    label: 'Twitter/X',
+    href: 'https://twitter.com/abhishekthatguy',
+    icon: (
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    ),
+  },
+  {
+    label: 'Email',
+    href: 'mailto:abhishekthatguy@gmail.com',
+    icon: (
+      <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z" />
+    ),
+  },
+];
 
 export default function Hero() {
-  const sectionRef = useRef(null);
-  const { getEffectiveTheme } = useTheme();
   const { themeStyles, effectiveTheme } = useThemeStyles();
+  const isDark = effectiveTheme === 'dark';
+  const [input, setInput] = useState('');
+  const [messages, setMessages] = useState([]);
+
+  const ask = (question) => {
+    const q = (question || input).trim();
+    if (!q) return;
+    const rule = QA_RULES.find((r) => r.match.test(q));
+    setMessages((prev) => [...prev.slice(-3), { q, a: rule ? rule.answer : DEFAULT_ANSWER }]);
+    setInput('');
+  };
+
+  const muted = isDark ? 'text-slate-400' : 'text-slate-600';
+  const card = isDark
+    ? 'bg-white/[0.04] border-white/10 backdrop-blur-xl'
+    : 'bg-white/70 border-slate-200 backdrop-blur-xl';
+
+  // Mouse-tracked parallax for the portrait + floating layers
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const smx = useSpring(mx, { stiffness: 55, damping: 18 });
+  const smy = useSpring(my, { stiffness: 55, damping: 18 });
+  const floatX = useTransform(smx, (v) => v * -16);
+  const floatY = useTransform(smy, (v) => v * -12);
+  const photoX = useTransform(smx, (v) => v * 9);
+  const photoY = useTransform(smy, (v) => v * 7);
+
+  const handleMouseMove = (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    mx.set((e.clientX - r.left) / r.width - 0.5);
+    my.set((e.clientY - r.top) / r.height - 0.5);
+  };
 
   return (
-    <section 
-      ref={sectionRef}
-      className={`h-screen min-h-[600px] sm:min-h-[700px] md:min-h-screen flex items-center justify-center ${themeStyles.sectionBg} relative overflow-hidden transition-all duration-500 ease-in-out`}
+    <section
+      id="home"
+      onMouseMove={handleMouseMove}
+      className={`relative min-h-screen flex flex-col overflow-hidden transition-colors duration-500 ${
+        themeStyles.sectionBg
+      } ${isDark ? 'text-white' : 'text-slate-900'}`}
     >
-      {/* Background Layers - Clear z-index separation */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none z-[1]" aria-hidden="true">
-        {/* Background Image - Right aligned */}
+      {/* Backdrop */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div
+          className="absolute inset-0"
+          style={{
+            background: isDark
+              ? 'radial-gradient(ellipse 55% 70% at 75% 55%, rgba(234,138,74,0.14) 0%, rgba(45,212,191,0.07) 45%, transparent 75%)'
+              : 'radial-gradient(ellipse 55% 70% at 75% 55%, rgba(234,138,74,0.10) 0%, rgba(45,212,191,0.05) 45%, transparent 75%)',
+          }}
+        />
+
+        {/* Ghost tech logos */}
+        {GHOST_LOGOS.map((g) => (
+          <span
+            key={g.text}
+            className={`absolute font-extrabold tracking-tight select-none blur-[2px] ${g.size} ${
+              isDark ? 'text-white/[0.05]' : 'text-slate-900/[0.05]'
+            }`}
+            style={{ top: g.top, left: g.left, transform: `rotate(${g.rotate}deg)` }}
+          >
+            {g.text}
+          </span>
+        ))}
+
+        {/* Portrait */}
         <motion.div
-          className="absolute inset-0 w-full h-full"
-          animate={{ opacity: effectiveTheme === 'dark' ? [0.45, 0.55, 0.45] : [0.6, 0.7, 0.6], scale: [1, 1.01, 1] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          style={{ contain: 'layout style paint', position: 'relative' }}
+          className={`absolute right-0 bottom-0 h-full w-[56vw] max-w-[880px] transition-opacity duration-500 ${
+            isDark ? 'opacity-40 md:opacity-90' : 'opacity-30 md:opacity-80'
+          }`}
+          style={{ x: photoX, y: photoY }}
         >
+          <div
+            className="absolute inset-0 z-[1]"
+            style={{
+              background: isDark
+                ? 'linear-gradient(to right, #000 0%, rgba(0,0,0,0.75) 28%, transparent 65%), linear-gradient(to top, #000 2%, rgba(0,0,0,0.6) 18%, transparent 45%)'
+                : 'linear-gradient(to right, #f9fafb 0%, rgba(249,250,251,0.75) 28%, transparent 65%), linear-gradient(to top, #f9fafb 2%, rgba(249,250,251,0.6) 18%, transparent 45%)',
+            }}
+          />
           <Image
-            src="/hero-1.webp"
-            alt="Hero background"
+            src="/Editpng-2.png"
+            alt="Abhishek Singh"
             fill
             priority
             quality={85}
-            sizes="100vw"
-            className="object-contain"
-            style={{ 
-              opacity: effectiveTheme === 'dark' ? 0.5 : 0.65,
+            sizes="(max-width: 1200px) 55vw, 880px"
+            className="object-cover"
+            style={{
               objectPosition: 'right top',
-              filter: effectiveTheme === 'dark' ? 'brightness(0.6) contrast(1.2)' : 'brightness(1.1) contrast(0.9)'
-            }}
-          />
-          
-          {/* Theme-aware gradient overlays - Reduced so hero image is ~10% more visible (both themes) */}
-          <div 
-            className="absolute inset-0 transition-all duration-500 ease-in-out" 
-            style={{ 
-              background: themeStyles.radialGradient,
-              opacity: effectiveTheme === 'dark' ? 0.65 : 0.55
-            }}
-          />
-          <div 
-            className="absolute inset-0 transition-all duration-500 ease-in-out" 
-            style={{ 
-              background: themeStyles.leftGradient,
-              opacity: effectiveTheme === 'dark' ? 0.7 : 0.6
-            }}
-          />
-          <div 
-            className="absolute inset-0 transition-all duration-500 ease-in-out" 
-            style={{ 
-              background: themeStyles.bottomGradient,
-              opacity: effectiveTheme === 'dark' ? 0.6 : 0.5
+              WebkitMaskImage:
+                'radial-gradient(ellipse 100% 92% at 68% 58%, black 52%, rgba(0,0,0,0.55) 78%, transparent 96%)',
+              maskImage:
+                'radial-gradient(ellipse 100% 92% at 68% 58%, black 52%, rgba(0,0,0,0.55) 78%, transparent 96%)',
             }}
           />
         </motion.div>
-        
-        {/* Gradient Overlay - Reduced for ~10% more hero image visibility (both themes) */}
-        <div 
-          className={`absolute inset-0 transition-all duration-500 ease-in-out ${themeStyles.overlayGradient}`}
-          style={{ opacity: effectiveTheme === 'dark' ? 0.5 : 0.4 }}
-        />
-        
-        {/* Center Radial Gradient */}
-        <div 
-          className="absolute inset-0 transition-all duration-500 ease-in-out" 
-          style={{ 
-            background: themeStyles.centerRadial,
-            opacity: effectiveTheme === 'dark' ? 0.55 : 0.45
-          }}
-        />
-      </div>
-      
-      {/* Animated Effects - Clear layer separation */}
-      <ParticleAnimation />
-      <WaterDropletEffect sectionRef={sectionRef} />
-      
-      {/* Content - Highest z-index for clear visibility */}
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 py-6 sm:py-8 md:py-12 text-center relative z-[10]" style={{ contain: 'layout style' }}>
-        {/* Subtle backdrop for text readability - gray-50 in light so Hero matches About */}
-        <div 
-          className={`absolute inset-0 -z-10 transition-all duration-500 ${
-            effectiveTheme === 'dark' 
-              ? 'bg-gradient-to-b from-black/20 via-transparent to-black/30' 
-              : 'bg-gradient-to-b from-gray-50/30 via-transparent to-gray-50/20'
-          }`}
-          style={{ 
-            backdropFilter: 'blur(1px)',
-            WebkitBackdropFilter: 'blur(1px)'
-          }}
-        />
-        
-        {/* Title Section */}
-        <motion.div variants={container} initial="hidden" animate="show" className="mb-3 sm:mb-4 md:mb-6 relative z-10">
-          <motion.div
-            variants={item}
-            className="mb-2 sm:mb-3 md:mb-4"
-            animate={floatingAnimation}
-            initial={false}
-          >
-            <motion.h1 
-              className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold mb-0 leading-tight"
-              style={{ lineHeight: "1", overflow: "visible", paddingBottom: "0.05em", contain: 'layout style' }}
-              {...titleContainerAnimation}
-              initial={false}
-            >
-              {/* Abhishek */}
-              <motion.span
-                className="inline-block relative"
-                variants={letterContainer}
-                initial="visible"
-                animate="visible"
-              >
-                {["A", "b", "h", "i", "s", "h", "e", "k"].map((letter, index) => (
-                  <motion.span
-                    key={index}
-                    className="inline-block"
-                    variants={letterAnimation}
-                    style={{
-                      backgroundImage: themeStyles.abhishekGradient,
-                      backgroundSize: "200% auto",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                      backgroundClip: "text",
-                      display: "inline-block",
-                      transition: 'background-image 0.5s ease-in-out'
-                    }}
-                    animate={{
-                      ...letterLoopAnimation,
-                      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                      transition: {
-                        ...letterLoopAnimation.transition,
-                        backgroundPosition: { duration: 5, repeat: Infinity, ease: "linear" },
-                        delay: index * 0.08
-                      }
-                    }}
-                  >
-                    {letter}
-                  </motion.span>
-                ))}
-              </motion.span>
-              {' '}
-              {/* Singh */}
-              <motion.span
-                className="inline-block"
-                style={{
-                  backgroundImage: themeStyles.singhGradient,
-                  backgroundSize: "300% auto",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                  display: "inline-block",
-                  lineHeight: "1",
-                  paddingBottom: "0.1em",
-                  paddingTop: "0.02em",
-                  verticalAlign: "baseline",
-                  overflow: "visible",
-                  transition: 'background-image 0.5s ease-in-out'
-                }}
-                animate={singhAnimation}
-              >
-                Singh
-              </motion.span>
-            </motion.h1>
-          </motion.div>
-          
-          {/* Subtitle */}
-          <motion.h2
-            className={`text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mb-3 sm:mb-4 md:mb-6 relative inline-block px-2 sm:px-4 ${
-              effectiveTheme === 'dark' ? 'drop-shadow-[0_0_15px_rgba(0,0,0,0.8)]' : 'drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]'
-            }`}
-            style={{
-              backgroundImage: themeStyles.subtitleGradient,
-              backgroundSize: "300% auto",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              transition: 'background-image 0.5s ease-in-out',
-              filter: effectiveTheme === 'dark' ? 'drop-shadow(0 0 8px rgba(0,0,0,0.9))' : 'drop-shadow(0 0 6px rgba(255,255,255,0.9))'
-            }}
-            initial={false}
-            animate={subtitleLoopAnimation}
-          >
-            AI Automation Engineer / Applied AI Engineer
-          </motion.h2>
-          <motion.p
-            className={`text-sm sm:text-base md:text-lg ${themeStyles.descriptionText} mt-1 sm:mt-2 max-w-2xl mx-auto transition-colors duration-500`}
-            style={{
-              WebkitFontSmoothing: 'antialiased',
-              MozOsxFontSmoothing: 'grayscale',
-              textRendering: 'optimizeLegibility',
-              textShadow: effectiveTheme === 'dark' ? '0 1px 2px rgba(0, 0, 0, 0.5)' : 'none'
-            }}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.25, duration: 0.4 }}
-          >
-            Front-end architecture & high-performance systems
-          </motion.p>
-        </motion.div>
-        
-        {/* Tech Stack */}
+
+        {/* Orbit arcs */}
+        <svg
+          className="absolute right-0 top-0 h-full w-[58vw] max-w-[920px] hidden lg:block opacity-70"
+          viewBox="0 0 920 900"
+          fill="none"
+          aria-hidden="true"
+        >
+          <defs>
+            <linearGradient id="orbit" x1="0" y1="0" x2="920" y2="900">
+              <stop offset="0%" stopColor="#2dd4bf" stopOpacity="0.6" />
+              <stop offset="60%" stopColor="#fb923c" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#fb923c" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <path d="M120 700 C 200 300, 500 120, 880 60" stroke="url(#orbit)" strokeWidth="1.2" strokeDasharray="2 6" />
+          <path d="M60 500 C 300 200, 600 200, 900 400" stroke="url(#orbit)" strokeWidth="1" strokeDasharray="2 6" />
+          <circle cx="455" cy="305" r="3" fill="#2dd4bf" />
+          <circle cx="700" cy="165" r="3" fill="#fb923c" />
+          <circle cx="590" cy="490" r="2.5" fill="#2dd4bf" />
+        </svg>
+
+        {/* Floating tech cards + chips */}
         <motion.div
-          className="max-w-4xl mx-auto mb-4 sm:mb-6 md:mb-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
+          className="absolute right-20 top-0 h-full w-[52vw] max-w-[840px] hidden lg:block"
+          style={{ x: floatX, y: floatY }}
+          aria-hidden="true"
         >
-          <motion.p
-            className={`text-xs sm:text-sm md:text-base ${themeStyles.descriptionText} mb-3 sm:mb-4 md:mb-6 transition-colors duration-500`}
-            style={{
-              WebkitFontSmoothing: 'antialiased',
-              MozOsxFontSmoothing: 'grayscale',
-              textRendering: 'optimizeLegibility',
-              textShadow: effectiveTheme === 'dark' 
-                ? '0 1px 2px rgba(0, 0, 0, 0.5)' 
-                : 'none'
-            }}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.4 }}
-          >
-            Front-end, AI & LLM systems I work with
-          </motion.p>
-          <motion.div
-            className="flex flex-wrap justify-center gap-2 sm:gap-2.5 md:gap-3 items-center px-2"
-            variants={techStackContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            {techStacks.map((tech) => {
-              // Extract RGB values for premium gradient calculations
-              const colorMatch = tech.color.match(/#([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})/);
-              const r = colorMatch ? parseInt(colorMatch[1], 16) : 79;
-              const g = colorMatch ? parseInt(colorMatch[2], 16) : 195;
-              const b = colorMatch ? parseInt(colorMatch[3], 16) : 247;
-              
-              // Create darker/lighter variants for gradients
-              const darkerR = Math.max(0, r - 20);
-              const darkerG = Math.max(0, g - 20);
-              const darkerB = Math.max(0, b - 20);
-              const lighterR = Math.min(255, r + 30);
-              const lighterG = Math.min(255, g + 30);
-              const lighterB = Math.min(255, b + 30);
-              
-              // Determine text color - white for most colors, dark for very light colors
-              const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-              const textColor = brightness > 180 ? '#1a1a1a' : '#ffffff';
-              
-              return (
-                <motion.div
-                  key={tech.name}
-                  variants={techStackItem}
-                  className="group relative"
-                  whileHover={{ scale: 1.1, y: -4, transition: { duration: 0.25, ease: "easeOut" } }}
-                >
-                  <div
-                    className="relative px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 md:py-2.5 rounded-full backdrop-blur-md border-2 transition-all duration-500"
-                    style={{
-                      background: effectiveTheme === 'dark'
-                        ? `linear-gradient(135deg, rgba(${r}, ${g}, ${b}, 0.85), rgba(${darkerR}, ${darkerG}, ${darkerB}, 0.95))`
-                        : `linear-gradient(135deg, rgba(${r}, ${g}, ${b}, 0.9), rgba(${lighterR}, ${lighterG}, ${lighterB}, 0.95))`,
-                      borderColor: effectiveTheme === 'dark'
-                        ? `rgba(${r}, ${g}, ${b}, 0.4)`
-                        : `rgba(${r}, ${g}, ${b}, 0.6)`,
-                      boxShadow: effectiveTheme === 'dark'
-                        ? `0 4px 20px rgba(0, 0, 0, 0.7), 0 0 30px rgba(${r}, ${g}, ${b}, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15)`
-                        : `0 4px 20px rgba(0, 0, 0, 0.15), 0 2px 12px rgba(${r}, ${g}, ${b}, 0.4), 0 0 35px rgba(${r}, ${g}, ${b}, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3)`,
-                      transition: 'all 0.5s ease',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.boxShadow = effectiveTheme === 'dark'
-                        ? `0 8px 35px rgba(0, 0, 0, 0.9), 0 0 50px rgba(${r}, ${g}, ${b}, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.25)`
-                        : `0 8px 40px rgba(0, 0, 0, 0.2), 0 4px 20px rgba(${r}, ${g}, ${b}, 0.6), 0 0 50px rgba(${r}, ${g}, ${b}, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.4)`;
-                      e.currentTarget.style.borderColor = `rgba(${r}, ${g}, ${b}, ${effectiveTheme === 'dark' ? '0.7' : '0.9'})`;
-                      e.currentTarget.style.transform = 'translateY(-4px)';
-                      e.currentTarget.style.background = effectiveTheme === 'dark'
-                        ? `linear-gradient(135deg, rgba(${r}, ${g}, ${b}, 0.95), rgba(${lighterR}, ${lighterG}, ${lighterB}, 1))`
-                        : `linear-gradient(135deg, rgba(${r}, ${g}, ${b}, 1), rgba(${lighterR}, ${lighterG}, ${lighterB}, 1))`;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.boxShadow = effectiveTheme === 'dark'
-                        ? `0 4px 20px rgba(0, 0, 0, 0.7), 0 0 30px rgba(${r}, ${g}, ${b}, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15)`
-                        : `0 4px 20px rgba(0, 0, 0, 0.15), 0 2px 12px rgba(${r}, ${g}, ${b}, 0.4), 0 0 35px rgba(${r}, ${g}, ${b}, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3)`;
-                      e.currentTarget.style.borderColor = effectiveTheme === 'dark'
-                        ? `rgba(${r}, ${g}, ${b}, 0.4)`
-                        : `rgba(${r}, ${g}, ${b}, 0.6)`;
-                      e.currentTarget.style.transform = '';
-                      e.currentTarget.style.background = effectiveTheme === 'dark'
-                        ? `linear-gradient(135deg, rgba(${r}, ${g}, ${b}, 0.85), rgba(${darkerR}, ${darkerG}, ${darkerB}, 0.95))`
-                        : `linear-gradient(135deg, rgba(${r}, ${g}, ${b}, 0.9), rgba(${lighterR}, ${lighterG}, ${lighterB}, 0.95))`;
-                    }}
-                  >
-                    <span
-                      className="text-[10px] sm:text-xs md:text-sm font-extrabold flex items-center gap-1.5 sm:gap-2 relative z-10 tracking-wide"
-                      style={{ 
-                        color: textColor,
-                        textShadow: effectiveTheme === 'dark'
-                          ? textColor === '#ffffff'
-                            ? `0 1px 2px rgba(0, 0, 0, 0.8), 0 0 8px rgba(${r}, ${g}, ${b}, 0.4)`
-                            : `0 1px 2px rgba(0, 0, 0, 0.6), 0 0 4px rgba(${r}, ${g}, ${b}, 0.3)`
-                          : textColor === '#ffffff'
-                            ? `0 1px 2px rgba(0, 0, 0, 0.5), 0 0 6px rgba(${r}, ${g}, ${b}, 0.4)`
-                            : `0 1px 1px rgba(255, 255, 255, 0.6), 0 0 4px rgba(${r}, ${g}, ${b}, 0.2)`,
-                        transition: 'text-shadow 0.5s ease, color 0.5s ease',
-                        fontWeight: '800',
-                        letterSpacing: '0.025em',
-                        WebkitFontSmoothing: 'antialiased',
-                        MozOsxFontSmoothing: 'grayscale',
-                        textRendering: 'optimizeLegibility'
-                      }}
-                    >
-                      <span className="relative">{tech.name}</span>
-                      {tech.subtitle && (
-                        <span 
-                          className="text-[8px] sm:text-[10px] md:text-xs opacity-95 font-bold"
-                          style={{ 
-                            color: textColor,
-                            textShadow: effectiveTheme === 'dark'
-                              ? textColor === '#ffffff'
-                                ? `0 1px 1px rgba(0, 0, 0, 0.7), 0 0 6px rgba(${r}, ${g}, ${b}, 0.3)`
-                                : `0 1px 1px rgba(0, 0, 0, 0.5), 0 0 3px rgba(${r}, ${g}, ${b}, 0.2)`
-                              : textColor === '#ffffff'
-                                ? `0 1px 1px rgba(0, 0, 0, 0.4), 0 0 5px rgba(${r}, ${g}, ${b}, 0.3)`
-                                : `0 1px 1px rgba(255, 255, 255, 0.5), 0 0 3px rgba(${r}, ${g}, ${b}, 0.15)`,
-                            transition: 'text-shadow 0.5s ease',
-                            WebkitFontSmoothing: 'antialiased',
-                            MozOsxFontSmoothing: 'grayscale',
-                            textRendering: 'optimizeLegibility'
-                          }}
-                        >
-                          ({tech.subtitle})
-                        </span>
-                      )}
-                    </span>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </motion.div>
-        
-        {/* Action Buttons */}
-        <motion.div 
-          className="flex gap-2 sm:gap-3 md:gap-4 justify-center flex-wrap px-2"
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
-        >
-          {[
-            { href: "#contact", label: "Contact Me" },
-            { href: "#projects", label: "View Projects" },
-            { href: "/Abhishek-resume.pdf", label: "Download Resume", download: true }
-          ].map((button) => (
-            <motion.a
-              key={button.label}
-              href={button.href}
-              download={button.download}
-              className={`group relative border-2 ${themeStyles.buttonBorder} ${themeStyles.buttonText} px-4 sm:px-5 md:px-6 lg:px-8 py-2 sm:py-2.5 md:py-3 rounded-full overflow-hidden transition-all duration-500 text-xs sm:text-sm md:text-base cursor-pointer flex items-center gap-2 ${
-                effectiveTheme === 'light' 
-                  ? 'bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-xl' 
-                  : ''
+          {TECH_CHIPS.map((t) => (
+            <motion.span
+              key={t.name}
+              className={`absolute ${t.className} inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[10px] font-semibold shadow-lg ${
+                isDark
+                  ? 'bg-black/60 border-white/15 text-slate-200 backdrop-blur-md'
+                  : 'bg-white/80 border-slate-300 text-slate-700 backdrop-blur-md'
               }`}
-              whileHover={{ 
-                scale: 1.05,
-                boxShadow: effectiveTheme === 'dark' 
-                  ? themeStyles.buttonHoverShadow
-                  : '0 0 35px rgba(230, 81, 0, 0.7), 0 0 70px rgba(230, 81, 0, 0.4), 0 8px 25px rgba(0, 0, 0, 0.25), inset 0 0 20px rgba(230, 81, 0, 0.25)'
-              }}
-              whileTap={{ scale: 0.98 }}
-              style={{ 
-                boxShadow: effectiveTheme === 'dark'
-                  ? themeStyles.buttonShadow
-                  : '0 4px 20px rgba(0, 0, 0, 0.2), 0 2px 10px rgba(230, 81, 0, 0.4), 0 0 25px rgba(230, 81, 0, 0.3)',
-                transition: 'box-shadow 0.5s ease, border-color 0.5s ease, color 0.5s ease, background-color 0.5s ease',
-                borderWidth: effectiveTheme === 'light' ? '3px' : '2px',
-                fontWeight: effectiveTheme === 'light' ? '700' : '600'
-              }}
+              animate={{ y: [0, -8, 0], rotate: [0, 1.5, -1.5, 0] }}
+              transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: t.delay }}
             >
-              {button.label === "Download Resume" && (
-                <svg xmlns="http://www.w3.org/2000/svg" className={`h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 relative z-10 transition-transform duration-300 group-hover:scale-110 ${themeStyles.buttonText}`} viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              )}
-              <span className={`relative z-10 transition-colors duration-500 group-hover:text-white`}>
-                {button.label}
-              </span>
-              <motion.div
-                className={`absolute inset-0 ${themeStyles.buttonHoverBg} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-                initial={false}
-              />
-            </motion.a>
+              <span className={`h-1.5 w-1.5 rounded-full ${t.dot}`} />
+              {t.name}
+            </motion.span>
           ))}
+
+          {TECH_CARDS.map((t) => (
+            <motion.div
+              key={t.name}
+              className={`absolute ${t.className}`}
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: t.delay }}
+            >
+              <div
+                className={`flex flex-col items-center gap-1.5 rounded-2xl border px-5 py-4 shadow-2xl ${
+                  isDark
+                    ? 'bg-black/70 border-cyan-400/30 backdrop-blur-xl shadow-cyan-500/10'
+                    : 'bg-white/80 border-teal-500/30 backdrop-blur-xl'
+                }`}
+              >
+                {t.icon}
+                <span className={`text-xs font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>{t.name}</span>
+                <span className={`text-[9px] uppercase tracking-wider ${muted}`}>{t.sub}</span>
+              </div>
+            </motion.div>
+          ))}
+
+          {/* Handwritten note */}
+          <span
+            className={`absolute right-[6%] top-[14%] text-3xl leading-tight -rotate-6 ${
+              isDark ? 'text-white/85' : 'text-slate-700'
+            }`}
+            style={{ fontFamily: "'Bradley Hand','Segoe Script','Comic Sans MS',cursive" }}
+          >
+            Good Code
+            <br />
+            Better
+            <br />
+            Tomorrow
+          </span>
         </motion.div>
       </div>
+
+      {/* Top bar */}
+      <motion.header
+        className={`fixed top-0 inset-x-0 z-50 flex items-center justify-between px-6 sm:px-10 lg:px-16 pt-4 pb-4 border-b backdrop-blur-xl transition-colors duration-500 ${
+          isDark ? 'bg-black/70 border-white/10' : 'bg-white/70 border-slate-200'
+        }`}
+        variants={fadeInDown}
+        initial="hidden"
+        animate="visible"
+      >
+        <Link href="/" className="group leading-tight">
+          <span className="text-2xl font-extrabold tracking-tight">
+            Abhishek{' '}
+            <span className="bg-gradient-to-r from-cyan-300 to-teal-400 bg-clip-text text-transparent">
+              Singh
+            </span>
+            <span className="ml-1 inline-block h-2.5 w-2.5 rounded-full bg-orange-400 align-middle" />
+          </span>
+          <span className={`block text-[11px] tracking-[0.22em] mt-1.5 ${muted}`}>
+            AI&nbsp;&nbsp;•&nbsp;&nbsp;AUTOMATE&nbsp;&nbsp;•&nbsp;&nbsp;BUILD&nbsp;&nbsp;•&nbsp;&nbsp;REPEAT
+          </span>
+        </Link>
+
+        <nav className="hidden md:flex items-center gap-8 md:pr-20 lg:pr-12">
+          {NAV_ITEMS.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              className={`text-sm font-medium transition-colors ${
+                item.label === 'Home'
+                  ? isDark
+                    ? 'text-white'
+                    : 'text-slate-900'
+                  : isDark
+                  ? 'text-slate-300 hover:text-white'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              {item.label}
+              {item.label === 'Home' && (
+                <span className="block mx-auto mt-1 h-1.5 w-1.5 rounded-full bg-teal-400 shadow-[0_0_8px_rgba(45,212,191,0.8)]" />
+              )}
+            </a>
+          ))}
+          <Link
+            href="/portfolio"
+            className="flex flex-col items-center rounded-full border border-teal-400/60 px-6 py-2 transition-all hover:bg-teal-400/10 hover:border-teal-400"
+          >
+            <span className="text-sm font-semibold">
+              View Projects <span className="align-middle">→</span>
+            </span>
+            <span className={`text-[10px] font-normal leading-none ${muted}`}>
+              portfolio.abhishekthatguy.in
+            </span>
+          </Link>
+        </nav>
+      </motion.header>
+
+      {/* Spacer for fixed header */}
+      <div className="h-20" aria-hidden="true" />
+
+      {/* Main content */}
+      <div className="relative z-10 flex-1 flex items-center px-6 sm:px-10 lg:px-16 xl:pl-24 xl:pr-24">
+        <div className="w-full max-w-3xl pt-4 pb-10">
+          <motion.div variants={fadeInUp} initial="hidden" animate="visible">
+            <p className={`text-sm tracking-[0.4em] mb-5 flex items-center gap-3 ${muted}`}>
+              <span className="h-px w-8 bg-orange-400 inline-block" />
+              HEY,&nbsp;I’M
+            </p>
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.02]">
+              Abhishek
+              <br />
+              <span className="bg-gradient-to-r from-cyan-300 via-teal-300 to-orange-400 bg-clip-text text-transparent">
+                Singh
+              </span>
+            </h1>
+            <h2 className={`mt-5 text-xl sm:text-2xl font-semibold ${isDark ? 'text-white' : 'text-slate-800'}`}>
+              AI Automation Engineer / Applied AI Engineer
+            </h2>
+            <p className={`mt-4 max-w-xl text-base sm:text-lg leading-relaxed ${muted}`}>
+              I build AI tools, automation workflows and high-performance applications that turn
+              complex problems into simple solutions.
+            </p>
+            <div className={`mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-medium tracking-wide ${muted}`}>
+              <span className={`${isDark ? 'text-white' : 'text-slate-900'} border-b-2 border-teal-400 pb-0.5`}>
+                Build
+              </span>
+              <span>•</span>
+              <span>Automate</span>
+              <span>•</span>
+              <span>Scale</span>
+              <span>•</span>
+              <span>Learn</span>
+              <span>•</span>
+              <span>Repeat</span>
+            </div>
+          </motion.div>
+
+          {/* Ask me anything */}
+          <motion.div
+            className={`mt-8 rounded-2xl border p-5 sm:p-6 shadow-2xl max-w-2xl ${card}`}
+            variants={fadeInUp}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.1 }}
+          >
+            <div className="flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-teal-400/15 text-teal-300">
+                <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z" />
+                  <path d="M7 9h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z" />
+                </svg>
+              </span>
+              <div>
+                <p className={`font-semibold ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                  Ask me anything
+                </p>
+                <p className={`text-xs ${muted}`}>About my work, experience, skills, or just say hello!</p>
+              </div>
+            </div>
+
+            {messages.length > 0 && (
+              <div className="mt-4 space-y-3 max-h-40 overflow-y-auto pr-1">
+                {messages.map((m, i) => (
+                  <div key={i} className="space-y-2">
+                    <p className="text-sm font-medium text-teal-300">You: {m.q}</p>
+                    <p className={`text-sm leading-relaxed ${muted}`}>{m.a}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <form
+              className={`mt-4 flex items-center gap-3 rounded-full border pl-5 pr-1.5 py-1.5 ${
+                isDark ? 'border-white/15 bg-black/30' : 'border-slate-300 bg-white/80'
+              }`}
+              onSubmit={(e) => {
+                e.preventDefault();
+                ask();
+              }}
+            >
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Type your question here..."
+                aria-label="Ask me anything"
+                className={`flex-1 bg-transparent text-sm outline-none ${
+                  isDark ? 'placeholder-slate-500 text-white' : 'placeholder-slate-400 text-slate-900'
+                }`}
+              />
+              <button
+                type="submit"
+                aria-label="Send question"
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-orange-500 text-white transition-all hover:bg-orange-400 hover:scale-105 shadow-lg shadow-orange-500/30"
+              >
+                <svg className="h-4 w-4 -rotate-45" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                </svg>
+              </button>
+            </form>
+
+            <div className="mt-4 flex flex-wrap gap-2">
+              {SUGGESTIONS.map((s) => (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => ask(s)}
+                  className={`rounded-full border px-4 py-1.5 text-xs font-medium transition-all hover:border-teal-400 hover:text-teal-300 ${
+                    isDark ? 'border-white/15 text-slate-300' : 'border-slate-300 text-slate-600'
+                  }`}
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div
+            className={`mt-10 grid grid-cols-2 sm:grid-cols-4 divide-x max-w-2xl ${
+              isDark ? 'divide-white/10' : 'divide-slate-300'
+            }`}
+            variants={fadeInUp}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.18 }}
+          >
+            {STATS.map((s, i) => (
+              <div key={s.label} className={i === 0 ? 'pr-4' : 'px-4'}>
+                <p className={`text-3xl font-extrabold ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                  {s.value}
+                </p>
+                <p className={`mt-1 text-xs ${muted}`}>{s.label}</p>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Bottom bar */}
+      <motion.div
+        className={`relative z-20 border-t px-6 sm:px-10 lg:px-16 xl:pr-24 py-4 text-xs ${
+          isDark ? 'border-white/10' : 'border-slate-200'
+        }`}
+        variants={fadeInUp}
+        initial="hidden"
+        animate="visible"
+        transition={{ delay: 0.25 }}
+      >
+        <div className="flex items-center justify-between gap-6">
+          <div className={`flex items-center gap-2 ${muted}`}>
+            <span className="h-2 w-2 rounded-full bg-teal-400 shadow-[0_0_8px_rgba(45,212,191,0.8)]" />
+            <span className={isDark ? 'text-slate-300' : 'text-slate-700'}>Based in Pune, India</span>
+            <span className={`hidden sm:inline pl-3 ml-1 border-l ${isDark ? 'border-white/15' : 'border-slate-300'}`}>
+              Open to exciting opportunities
+            </span>
+          </div>
+
+          <div className={`hidden md:flex flex-col items-center gap-1.5 ${muted}`}>
+            <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <rect x="8" y="2" width="8" height="14" rx="4" />
+              <line x1="12" y1="6" x2="12" y2="9" className="animate-pulse" />
+            </svg>
+            <span className="tracking-[0.3em]">SCROLL DOWN</span>
+          </div>
+
+          <div className="flex items-center gap-5">
+            {SOCIALS.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.label}
+                className={`transition-colors ${muted} hover:text-teal-300`}
+              >
+                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                  {s.icon}
+                </svg>
+              </a>
+            ))}
+            <span
+              className={`hidden lg:flex items-center gap-2 border-l pl-5 tracking-[0.25em] ${
+                isDark ? 'border-white/15' : 'border-slate-300'
+              } ${muted}`}
+            >
+              <span className="h-px w-6 bg-orange-400 inline-block" />
+              TURNING IDEAS INTO IMPACT
+            </span>
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 }

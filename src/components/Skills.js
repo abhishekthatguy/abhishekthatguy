@@ -1,258 +1,214 @@
 'use client';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useState } from 'react';
 import { useThemeStyles } from '@/hooks/useThemeStyles';
-import { gradientAnimation, fadeInDown, fadeInUp } from '@/styles/animations';
+import { fadeInDown, fadeInUp } from '@/styles/animations';
 import { skillsCategories } from '@/data/skills';
 
-const container = {
-  hidden: { opacity: 0 },
+// Top-to-bottom "window" wipe reveal — plays once on first scroll
+const cardVariant = {
+  hidden: { opacity: 0, y: 32, clipPath: 'inset(0% 0% 100% 0%)' },
   show: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 40 },
-  show: { 
-    opacity: 1, 
     y: 0,
-    transition: { duration: 0.7, ease: 'easeOut' }
+    clipPath: 'inset(0% 0% 0% 0%)',
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
-// Category color gradients for visual variety
-const categoryColors = [
-  { gradient: 'from-purple-500 via-pink-500 to-orange-500', bg: 'from-purple-500/10 via-pink-500/10 to-orange-500/10' },
-  { gradient: 'from-blue-500 via-cyan-500 to-teal-500', bg: 'from-blue-500/10 via-cyan-500/10 to-teal-500/10' },
-  { gradient: 'from-green-500 via-emerald-500 to-teal-500', bg: 'from-green-500/10 via-emerald-500/10 to-teal-500/10' },
-  { gradient: 'from-orange-500 via-red-500 to-pink-500', bg: 'from-orange-500/10 via-red-500/10 to-pink-500/10' },
-  { gradient: 'from-indigo-500 via-purple-500 to-pink-500', bg: 'from-indigo-500/10 via-purple-500/10 to-pink-500/10' },
-  { gradient: 'from-yellow-500 via-amber-500 to-orange-500', bg: 'from-yellow-500/10 via-amber-500/10 to-orange-500/10' },
-];
-
-const SkillCard = ({ category, themeStyles, effectiveTheme, item, index }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const initialVisibleSubcategories = 2;
-  const visibleSubcategories = isExpanded 
-    ? category.subcategories 
-    : category.subcategories.slice(0, initialVisibleSubcategories);
-  const hasMore = category.subcategories.length > initialVisibleSubcategories;
-  const colorScheme = categoryColors[index % categoryColors.length];
+const TimelineCard = ({ category, index, isDark }) => {
+  const side = index % 2 === 0 ? 'left' : 'right';
+  const muted = isDark ? 'text-slate-400' : 'text-slate-600';
 
   return (
-    <motion.div
-      key={category.id}
-      variants={item}
-      className={`rounded-3xl shadow-xl p-8 md:p-10 border transition-all duration-500 hover:shadow-2xl group w-full relative overflow-hidden ${
-        effectiveTheme === 'dark' 
-          ? 'bg-gray-900/60 border-gray-800/50 hover:border-[#FE7743]/50' 
-          : 'bg-white/90 border-gray-200/50 hover:border-[#E65100]/50'
-      }`}
+    <div
+      className={`relative grid grid-cols-1 lg:grid-cols-2 lg:gap-24 items-start ${
+        index !== 0 ? 'lg:-mt-6' : ''
+      } mt-14 lg:mt-20 first:mt-0`}
     >
-      {/* Animated background gradient */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${colorScheme.bg} opacity-50 group-hover:opacity-100 transition-opacity duration-500`} />
-      
-      {/* Decorative accent line */}
-      <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${colorScheme.gradient} opacity-60 group-hover:opacity-100 transition-opacity duration-500`} />
+      {/* Timeline node */}
+      <div className="absolute left-5 lg:left-1/2 top-8 -translate-x-1/2 z-10">
+        <motion.div
+          className={`relative flex h-14 w-14 items-center justify-center rounded-2xl border text-2xl shadow-xl ${
+            isDark
+              ? 'bg-black border-teal-300/40 shadow-teal-500/10'
+              : 'bg-white border-teal-500/40 shadow-teal-500/20'
+          }`}
+          animate={{ y: [0, -6, 0] }}
+          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: index * 0.6 }}
+        >
+          <span aria-hidden="true">{category.emoji}</span>
+          <span
+            className={`absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-bold ${
+              isDark ? 'bg-teal-300 text-slate-950' : 'bg-teal-500 text-white'
+            }`}
+          >
+            {String(index + 1).padStart(2, '0')}
+          </span>
+        </motion.div>
+      </div>
 
-      <div className="relative z-10">
-        {/* Category Header */}
-        <div className="flex items-start justify-between mb-6">
-          <div className="flex items-center gap-4 flex-1">
-            <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${colorScheme.gradient} flex items-center justify-center text-3xl shadow-lg group-hover:scale-110 transition-transform duration-500`}>
-              {category.emoji}
-            </div>
-            <div>
-              <h3 className={`text-2xl md:text-3xl font-extrabold mb-2 transition-colors duration-500 ${
-                effectiveTheme === 'dark' ? 'text-white' : 'text-gray-900'
-              }`}>
-                <span className={`bg-gradient-to-r ${colorScheme.gradient} bg-clip-text text-transparent`}>
-                  {category.category}
-                </span>
-              </h3>
-              <p className={`text-sm md:text-base ${themeStyles.descriptionText} max-w-2xl transition-colors duration-500 leading-relaxed`}>
-                {category.description}
-              </p>
-            </div>
-          </div>
-        </div>
+      {/* Card — alternates sides on desktop */}
+      <motion.div
+        animate={{ y: [0, -8, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: index * 0.9 }}
+        className={`ml-14 lg:ml-0 ${side === 'left' ? 'lg:col-start-1 lg:pr-4' : 'lg:col-start-2 lg:pl-4'}`}
+      >
+        <motion.div
+          variants={cardVariant}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.15 }}
+          className={`group relative overflow-hidden rounded-3xl border p-6 sm:p-8 transition-colors duration-500 ${
+            isDark
+              ? 'bg-white/[0.04] border-white/10 backdrop-blur-xl hover:border-teal-300/40'
+              : 'bg-white/70 border-slate-200 backdrop-blur-xl hover:border-teal-500/40'
+          }`}
+        >
+          {/* top accent */}
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-teal-300/70 to-transparent" />
+          <div
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+            style={{
+              background:
+                'radial-gradient(ellipse 60% 50% at 50% 0%, rgba(45,212,191,0.08), transparent 70%)',
+            }}
+          />
 
-        {/* Skills Grid */}
-        <div className="space-y-6 relative">
-          <AnimatePresence>
-            {visibleSubcategories.map((subcategory, subIdx) => (
-              <motion.div 
-                key={`${category.id}-${subIdx}`}
-                className={`rounded-xl p-5 border transition-all duration-500 ${
-                  effectiveTheme === 'dark'
-                    ? 'bg-gray-800/40 border-gray-700/50'
-                    : 'bg-gray-50/80 border-gray-200/50'
-                }`}
-                style={{
-                  borderColor: effectiveTheme === 'dark' 
-                    ? `rgba(147, 51, 234, ${0.3 + (subIdx * 0.1)})`
-                    : `rgba(249, 115, 22, ${0.3 + (subIdx * 0.1)})`
-                }}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.4, delay: subIdx * 0.1 }}
-              >
-                <div className="flex items-center gap-2 mb-4">
-                  <div className={`w-1 h-6 rounded-full bg-gradient-to-b ${colorScheme.gradient}`} />
-                  <h4 className={`text-sm font-bold uppercase tracking-wider transition-colors duration-500 ${
-                    effectiveTheme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    {subcategory.title}
-                  </h4>
-                </div>
-                <div className="flex flex-wrap gap-2.5">
-                  {subcategory.items.map((skill, skillIdx) => {
-                    const isHighlight = skill.highlight === true;
-                    const getSkillColors = (idx) => {
-                      const colors = [
-                        { border: 'border-purple-500/30', text: 'text-purple-300', bg: 'bg-purple-500/10', hover: 'hover:bg-purple-500/30', hoverBorder: 'hover:border-purple-400' },
-                        { border: 'border-blue-500/30', text: 'text-blue-300', bg: 'bg-blue-500/10', hover: 'hover:bg-blue-500/30', hoverBorder: 'hover:border-blue-400' },
-                        { border: 'border-green-500/30', text: 'text-green-300', bg: 'bg-green-500/10', hover: 'hover:bg-green-500/30', hoverBorder: 'hover:border-green-400' },
-                        { border: 'border-orange-500/30', text: 'text-orange-300', bg: 'bg-orange-500/10', hover: 'hover:bg-orange-500/30', hoverBorder: 'hover:border-orange-400' },
-                        { border: 'border-indigo-500/30', text: 'text-indigo-300', bg: 'bg-indigo-500/10', hover: 'hover:bg-indigo-500/30', hoverBorder: 'hover:border-indigo-400' },
-                        { border: 'border-yellow-500/30', text: 'text-yellow-300', bg: 'bg-yellow-500/10', hover: 'hover:bg-yellow-500/30', hoverBorder: 'hover:border-yellow-400' },
-                      ];
-                      const lightColors = [
-                        { border: 'border-purple-500/30', text: 'text-purple-700', bg: 'bg-purple-500/10', hover: 'hover:bg-purple-500/30', hoverBorder: 'hover:border-purple-400' },
-                        { border: 'border-blue-500/30', text: 'text-blue-700', bg: 'bg-blue-500/10', hover: 'hover:bg-blue-500/30', hoverBorder: 'hover:border-blue-400' },
-                        { border: 'border-green-500/30', text: 'text-green-700', bg: 'bg-green-500/10', hover: 'hover:bg-green-500/30', hoverBorder: 'hover:border-green-400' },
-                        { border: 'border-orange-500/30', text: 'text-orange-700', bg: 'bg-orange-500/10', hover: 'hover:bg-orange-500/30', hoverBorder: 'hover:border-orange-400' },
-                        { border: 'border-indigo-500/30', text: 'text-indigo-700', bg: 'bg-indigo-500/10', hover: 'hover:bg-indigo-500/30', hoverBorder: 'hover:border-indigo-400' },
-                        { border: 'border-yellow-500/30', text: 'text-yellow-700', bg: 'bg-yellow-500/10', hover: 'hover:bg-yellow-500/30', hoverBorder: 'hover:border-yellow-400' },
-                      ];
-                      const scheme = effectiveTheme === 'dark' ? colors[idx % colors.length] : lightColors[idx % lightColors.length];
-                      return `${scheme.border} ${scheme.text} ${scheme.bg} ${scheme.hover} ${scheme.hoverBorder} hover:text-white`;
-                    };
-                    const highlightClasses = isHighlight
-                      ? effectiveTheme === 'dark'
-                        ? 'ring-2 ring-teal-400/80 ring-offset-2 ring-offset-gray-900 bg-teal-500/20 border-teal-400/50 text-teal-200 font-bold shadow-lg shadow-teal-500/20'
-                        : 'ring-2 ring-teal-500/80 ring-offset-2 ring-offset-white bg-teal-500/15 border-teal-500/50 text-teal-800 font-bold shadow-lg shadow-teal-500/15'
-                      : '';
-                    return (
+          <div className="relative">
+            <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight">
+              <span className="bg-gradient-to-r from-cyan-300 via-teal-300 to-orange-400 bg-clip-text text-transparent">
+                {category.category}
+              </span>
+            </h3>
+            <p className={`mt-3 text-sm leading-relaxed ${muted}`}>{category.description}</p>
+
+            <div className="mt-6 space-y-5">
+              {category.subcategories.map((sub) => (
+                <div key={sub.title}>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="h-4 w-1 rounded-full bg-gradient-to-b from-cyan-300 to-teal-400" />
+                    <h4 className={`text-[11px] font-bold uppercase tracking-[0.15em] ${muted}`}>
+                      {sub.title}
+                    </h4>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {sub.items.map((skill) => (
                       <Link key={skill.id} href={`/skills/${skill.id}`}>
                         <motion.span
-                          className={`px-4 py-2 rounded-lg border-2 transition-all duration-300 text-sm font-semibold cursor-pointer whitespace-nowrap backdrop-blur-sm ${isHighlight ? highlightClasses : getSkillColors(index)}`}
-                          whileHover={{ scale: 1.05, y: -2 }}
-                          whileTap={{ scale: 0.95 }}
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.2, delay: skillIdx * 0.02 }}
+                          whileHover={{ y: -2 }}
+                          className={`inline-block rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors cursor-pointer ${
+                            skill.highlight
+                              ? isDark
+                                ? 'border-teal-300/60 bg-teal-300/15 text-teal-200 shadow-[0_0_12px_rgba(45,212,191,0.25)]'
+                                : 'border-teal-500/60 bg-teal-500/15 text-teal-700 shadow-[0_0_12px_rgba(45,212,191,0.25)]'
+                              : isDark
+                              ? 'border-white/15 text-slate-300 hover:border-teal-300/60 hover:text-teal-200'
+                              : 'border-slate-300 text-slate-600 hover:border-teal-500/60 hover:text-teal-600'
+                          }`}
                         >
                           {skill.name}
                         </motion.span>
                       </Link>
-                    );
-                  })}
+                    ))}
+                  </div>
                 </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-
-          {/* Show More Button */}
-          {hasMore && (
-            <div className="pt-4">
-              <motion.button
-                onClick={() => setIsExpanded(!isExpanded)}
-                className={`w-full py-3 rounded-xl border-2 transition-all duration-500 font-semibold text-sm flex items-center justify-center gap-2 backdrop-blur-sm ${
-                  effectiveTheme === 'dark'
-                    ? 'border-gray-700/50 text-gray-300 bg-gray-800/40 hover:bg-gray-700/60 hover:border-gray-600 hover:text-white'
-                    : 'border-gray-300/50 text-gray-700 bg-gray-100/80 hover:bg-gray-200/80 hover:border-gray-400 hover:text-gray-900'
-                }`}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <span>{isExpanded ? 'Show Less' : `Show ${category.subcategories.length - initialVisibleSubcategories} More Subcategories`}</span>
-                <motion.svg
-                  className="w-4 h-4 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  animate={{ rotate: isExpanded ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </motion.svg>
-              </motion.button>
+              ))}
             </div>
-          )}
-        </div>
-      </div>
-    </motion.div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </div>
   );
 };
 
 export default function Skills() {
   const { themeStyles, effectiveTheme } = useThemeStyles();
+  const isDark = effectiveTheme === 'dark';
+  const muted = isDark ? 'text-slate-400' : 'text-slate-600';
 
   return (
-    <section id="skills" className={`py-20 ${themeStyles.sectionBg} relative overflow-hidden transition-all duration-500 ease-in-out`}>
-      <div className="max-w-7xl mx-auto px-4 relative z-10">
-        <motion.h2
-          className={`text-4xl md:text-5xl font-extrabold text-center mb-6 ${themeStyles.headingText} transition-colors duration-500`}
+    <section
+      id="skills"
+      className={`relative py-24 overflow-hidden transition-colors duration-500 ${
+        themeStyles.sectionBg
+      } ${isDark ? 'text-white' : 'text-slate-900'}`}
+    >
+      {/* backdrop glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        aria-hidden="true"
+        style={{
+          background: isDark
+            ? 'radial-gradient(ellipse 40% 45% at 85% 20%, rgba(45,212,191,0.06), transparent 70%), radial-gradient(ellipse 40% 45% at 10% 80%, rgba(234,138,74,0.05), transparent 70%)'
+            : 'radial-gradient(ellipse 40% 45% at 85% 20%, rgba(45,212,191,0.05), transparent 70%), radial-gradient(ellipse 40% 45% at 10% 80%, rgba(234,138,74,0.04), transparent 70%)',
+        }}
+      />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 lg:pr-28 xl:pr-32">
+        {/* Header */}
+        <motion.div
+          className="text-center"
           variants={fadeInDown}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <motion.span
-            className="inline-block"
-            style={{
-              backgroundImage: themeStyles.subtitleGradient,
-              backgroundSize: "200% auto",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              display: "inline-block",
-              transition: 'background-image 0.5s ease-in-out'
-            }}
-            animate={gradientAnimation}
-          >
-            My Capabilities
-          </motion.span>{' '}
-          <span className={effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'}>From Architecture to Execution</span>
-        </motion.h2>
+          <p className={`text-xs tracking-[0.45em] mb-4 ${muted}`}>M Y&nbsp;&nbsp;C A P A B I L I T I E S</p>
+          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+            From Architecture{' '}
+            <span className="bg-gradient-to-r from-cyan-300 via-teal-300 to-orange-400 bg-clip-text text-transparent">
+              to Execution
+            </span>
+          </h2>
+        </motion.div>
 
         <motion.p
-          className={`text-lg ${themeStyles.descriptionText} text-center max-w-3xl mx-auto mb-16 transition-colors duration-500`}
+          className={`mt-5 text-base sm:text-lg leading-relaxed text-center max-w-2xl mx-auto ${muted}`}
           variants={fadeInUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.15 }}
         >
-          My expertise is a blend of deep technical skill and strategic business acumen, honed over <span className={`${effectiveTheme === 'dark' ? 'text-[#FE7743]' : 'text-[#E65100]'} font-semibold transition-colors duration-500`}>7+ years</span> of building complex, high-performance applications. I architect and deliver end-to-end solutions, from initial system design to final deployment, ensuring every technical decision aligns with business objectives. Below is a comprehensive overview of my capabilities.
+          A blend of deep technical skill and strategic business acumen, honed over{' '}
+          <span className="text-teal-300 font-semibold">7+ years</span> of building complex,
+          high-performance applications — from system design to final deployment.
         </motion.p>
 
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.1 }}
-          className="space-y-12 md:space-y-16"
-        >
+        {/* Floating timeline */}
+        <div className="relative mt-16">
+          {/* center line — grows top-to-bottom on scroll */}
+          <motion.div
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            style={{ transformOrigin: 'top' }}
+            className={`absolute left-5 lg:left-1/2 top-0 bottom-0 w-px -translate-x-1/2 ${
+              isDark
+                ? 'bg-gradient-to-b from-teal-300/60 via-white/10 to-transparent'
+                : 'bg-gradient-to-b from-teal-500/60 via-slate-300 to-transparent'
+            }`}
+            aria-hidden="true"
+          />
+
+
           {skillsCategories.map((category, index) => (
-            <SkillCard
-              key={category.id}
-              category={category}
-              themeStyles={themeStyles}
-              effectiveTheme={effectiveTheme}
-              item={item}
-              index={index}
-            />
+            <TimelineCard key={category.id} category={category} index={index} isDark={isDark} />
           ))}
-        </motion.div>
+        </div>
+
+        {/* end cap */}
+        <div className="relative flex justify-start lg:justify-center pl-5 lg:pl-0 mt-14">
+          <span
+            className={`h-2.5 w-2.5 -translate-x-1/2 lg:translate-x-0 rounded-full ${
+              isDark ? 'bg-teal-300 shadow-[0_0_12px_rgba(45,212,191,0.8)]' : 'bg-teal-500'
+            }`}
+            aria-hidden="true"
+          />
+        </div>
       </div>
     </section>
   );
-} 
+}
