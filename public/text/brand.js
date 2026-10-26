@@ -47,9 +47,10 @@ const brand = {
     twitter: 'https://twitter.com/abhishekthatguy',
     linkedin: 'https://www.linkedin.com/in/aviibuzz/',
     github: 'https://github.com/abhishekthatguy',
-    youtube: '#',
-    blog: 'https://blog.abhishek.world',
-    skype: 'https://blog.abhishek.world',
+    youtube: 'https://www.youtube.com/@developerwhotravels',
+    blog: 'https://abhishekthatguy.medium.com/',
+    skype: 'skype:live:25e678fec67a5015?chat',
+    // skype: 'https://blog.abhishek.world',
   },
   services: [
     {

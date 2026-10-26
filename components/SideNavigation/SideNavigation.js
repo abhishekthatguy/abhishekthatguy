@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import Image from 'next/image';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Container from '@material-ui/core/Container';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import Scrollspy from 'react-scrollspy';
+import { Button } from '@material-ui/core';
 import logo from '~/public/images/profile-logo.svg';
 import { withTranslation } from '~/i18n';
 import useStyles from './sidenav-style';
 import navMenu from './menu';
+import routeLink from '~/public/text/link';
 
 let counter = 0;
 function createData(name, url, offset) {
@@ -33,13 +36,14 @@ function SideNavigation(props) {
     createData(navMenu[4], '#' + navMenu[4]),
     createData(navMenu[5], '#' + navMenu[5]),
     createData(navMenu[6], '#' + navMenu[6]),
+    // createData(navMenu[7], '#' + navMenu[7]),
   ]);
   return (
     <div className={classes.navigation}>
       <Container fixed>
         <nav className={classes.navMenu}>
           <AnchorLink href="#home" className={classes.logo}>
-            <img src={logo} alt="logo" />
+            <Image layout="fill" src={logo} alt="logo" />
           </AnchorLink>
           <List component="nav" className={classes.menu}>
             <Scrollspy items={navMenu} currentClassName="active">
@@ -58,6 +62,16 @@ function SideNavigation(props) {
                   />
                 </ListItem>
               ))}
+              <ListItem classes={{ root: classes.link }}>
+                <Button
+                  variant="text"
+                  classes={{ root: classes.text, label: classes.buttonLabel }}
+                  target="_blank"
+                  href={routeLink.profile.youtube}
+                >
+                  {t('common:profile-landing.header_youtube')}
+                </Button>
+              </ListItem>
             </Scrollspy>
           </List>
         </nav>

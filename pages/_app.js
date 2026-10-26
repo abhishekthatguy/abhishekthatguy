@@ -28,6 +28,7 @@ import '../vendors/animate-extends.css';
 import '../vendors/page-transition.css';
 import '../vendors/slick/slick.css';
 import '../vendors/slick/slick-theme.css';
+import '../public/style/customStyle.css';
 
 let themeType = 'light';
 if (typeof Storage !== 'undefined') {
