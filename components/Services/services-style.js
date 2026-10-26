@@ -24,7 +24,13 @@ const testiStyles = makeStyles((theme) => ({
     margin: '0px auto 10px',
     [theme.breakpoints.down('sm')]: {
       width: '100%',
-      margin: '20px auto',
+      margin: '0  auto 25px',
+    },
+  },
+  servicePara: {
+    marginTop: theme.spacing(18),
+    [theme.breakpoints.down('sm')]: {
+      margin: theme.spacing(3),
     },
   },
   floatingTitle: {

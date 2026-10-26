@@ -1,4 +1,5 @@
 import React from 'react';
+// import Image from 'next/image';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import HeadComponent from '../components/head';
@@ -22,6 +23,7 @@ class MyDocument extends Document {
             }}
           >
             <img
+              layout="fill"
               style={{
                 opacity: 0.5,
                 position: 'fixed',

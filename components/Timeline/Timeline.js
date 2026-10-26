@@ -48,13 +48,14 @@ function Timeline(props) {
           </Grid>
           <Grid item container spacing={3} md={12} lg={10}>
             <Grid item xs={12}>
-              <div className={classes.history}>
+              <Section />
+              {/* <div className={classes.history}>
                 <ul className={classes.section}>
                   <li>
                     <Section />
                   </li>
                 </ul>
-              </div>
+              </div> */}
             </Grid>
             <Grid item md={5} sm={6} xs={12}>
               <div className={classes.history}>

@@ -1,18 +1,21 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
+import Image from 'next/image';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import IconButton from '@material-ui/core/IconButton';
+// import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ScrollAnimation from 'react-scroll-animation-wrapper';
-import Link from 'next/link';
+// import Link from 'next/link';
+// import { Image } from '@material-ui/icons';
 import brand from '~/public/text/brand';
 import { withTranslation } from '~/i18n';
 import { useText } from '~/theme/common';
 import useStyles from './section-style';
+import SocialMedia from '../SocialMedia/SocialMedia';
 
 function Section() {
   const theme = useTheme();
@@ -28,7 +31,11 @@ function Section() {
           <Grid item lg={4} xs={12}>
             <Paper className={classes.photoReverse}>
               <figure>
-                <img src={brand.profile.avatar3} alt="avatar2" />
+                <Image
+                  layout="fill"
+                  src={brand.profile.avatar3}
+                  alt="avatar2"
+                />
               </figure>
               <span className={classes.frame} />
             </Paper>
@@ -110,7 +117,10 @@ function Section() {
             duration={0.3}
           >
             <Grid item xs={12}>
-              <div className={classes.socmed}>
+              <div className={classes.socmedSpace}>
+                <SocialMedia color="purple" />
+              </div>
+              {/* <div className={classes.socmed}>
                 <Link href={brand?.socialProfile?.facebook} target="_blank">
                   <IconButton
                     aria-label="Delete"
@@ -175,7 +185,7 @@ function Section() {
                     <i className="ion-logo-skype" />
                   </IconButton>
                 </Link>
-              </div>
+              </div> */}
               {/* ended here */}
             </Grid>
           </ScrollAnimation>
@@ -261,7 +271,11 @@ function Section() {
           <Grid item lg={4} xs={12}>
             <Paper className={classes.photo}>
               <figure>
-                <img src={brand.profile.avatar4} alt="avatar2" />
+                <Image
+                  layout="fill"
+                  src={brand.profile.avatar4}
+                  alt="avatar2"
+                />
               </figure>
               <span className={classes.frame} />
             </Paper>

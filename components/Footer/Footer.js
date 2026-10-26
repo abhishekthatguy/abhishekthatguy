@@ -4,16 +4,19 @@ import Container from '@material-ui/core/Container';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+// import Image from 'next/image';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
+// import IconButton from '@material-ui/core/IconButton';
 import Divider from '@material-ui/core/Divider';
-import Link from 'next/link';
+// import Link from 'next/link';
 import { withTranslation } from '~/i18n';
+// import { Image } from '@material-ui/icons';
 import logo from '~/public/images/profile-logo.svg';
 import brand from '~/public/text/brand';
 import { useText } from '~/theme/common';
 import useStyles from './footer-style';
 import ContactForm from '../Contact/Form';
+import SocialMedia from '../SocialMedia/SocialMedia';
 
 function Footer(props) {
   const classes = useStyles();
@@ -41,7 +44,8 @@ function Footer(props) {
                 {brand.profile.title}
               </Typography>
             </div>
-            <div className={classes.socmed}>
+            <SocialMedia color="purple" />
+            {/* <div className={classes.socmed}>
               <Link href={brand?.socialProfile?.facebook} target="_blank">
                 <IconButton
                   aria-label="Delete"
@@ -106,7 +110,7 @@ function Footer(props) {
                   <i className="ion-logo-skype" />
                 </IconButton>
               </Link>
-            </div>
+            </div> */}
             <div className={classes.contact}>
               <Typography className={text.paragraph}>
                 {t('common:profile-landing.footer_contact')}
